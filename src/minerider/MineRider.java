@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package minerider;
 
+import animación.AnimaciónPersonaje;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,18 +10,20 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Nicole
+ * @author Nicole Fonseca, Wilmer Mata
  */
 public class MineRider extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Interfaz.fxml"));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
         stage.show();
+        AnimaciónPersonaje animaciónPersonaje = new AnimaciónPersonaje();
+        animaciónPersonaje.moverPersonaje(scene);
     }
 
     /**
