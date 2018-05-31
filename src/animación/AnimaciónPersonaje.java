@@ -10,8 +10,8 @@ import javafx.scene.input.KeyCode;
  */
 public class AnimaciónPersonaje {
     
-    public void moverPersonaje(Scene scene) {
-        scene.setOnKeyPressed(e -> {
+    public void moverPersonaje(Scene escena) {
+        escena.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) {
                 System.out.println("arriba");
             }
