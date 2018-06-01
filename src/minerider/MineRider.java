@@ -1,6 +1,7 @@
 
 package minerider;
 
+import animación.AnimaciónMonstruos;
 import animación.AnimaciónPersonaje;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,8 +23,7 @@ public class MineRider extends Application {
         
         stage.setScene(scene);
         stage.show();
-        AnimaciónPersonaje animaciónPersonaje = new AnimaciónPersonaje();
-        animaciónPersonaje.moverPersonaje(scene);
+        scene.getRoot().requestFocus();
     }
 
     /**
@@ -31,6 +31,7 @@ public class MineRider extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+
     }
     
 }

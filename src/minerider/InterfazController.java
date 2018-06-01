@@ -2,12 +2,12 @@
 package minerider;
 
 import animación.AnimaciónCueva;
+import animación.AnimaciónPersonaje;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -29,13 +29,15 @@ public class InterfazController implements Initializable {
                 + "-fx-background-position: left top, center;"
                 + "-fx-background-repeat: no-repeat;"
                 + "-fx-background-size: cover, auto;");
-        
+
         //Imagenes tierra
         AnimaciónCueva animaciónCueva = new AnimaciónCueva();
         ImageView[][] cueva = animaciónCueva.matrizCueva("/cueva/tierra.png");
+        AnimaciónPersonaje animaciónPersonaje = new AnimaciónPersonaje();
         GridPane gridPaneCueva = new GridPane();
+        animaciónPersonaje.moverPersonaje(anchorPane);
         gridPaneCueva.setPadding(new Insets(30));
-        
+       
         GridPane.setConstraints(cueva[0][0], 0, 0);
         gridPaneCueva.getChildren().add(cueva[0][0]);
         GridPane.setConstraints(cueva[1][0], 1, 0);
@@ -56,11 +58,6 @@ public class InterfazController implements Initializable {
         gridPaneCueva.getChildren().add(cueva[1][2]); 
         GridPane.setConstraints(cueva[2][2], 2, 2);
         gridPaneCueva.getChildren().add(cueva[2][2]);
-        
-        //Imagen personaje
-        ImageView imageViewPersonaje = new ImageView(new Image("/starlord/derechaEspada.png"));
-        GridPane.setConstraints(imageViewPersonaje, 1, 1);
-        gridPaneCueva.getChildren().add(imageViewPersonaje);
         
         //Agrega el GridPane al AnchorPane
         anchorPane.getChildren().add(gridPaneCueva);
