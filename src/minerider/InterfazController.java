@@ -2,6 +2,7 @@
 package minerider;
 
 import animación.AnimaciónCueva;
+import animación.AnimaciónMonstruos;
 import animación.AnimaciónPersonaje;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,10 +33,13 @@ public class InterfazController implements Initializable {
 
         //Imagenes tierra
         AnimaciónCueva animaciónCueva = new AnimaciónCueva();
-        ImageView[][] cueva = animaciónCueva.matrizCueva("/cueva/tierra.png");
+        AnimaciónMonstruos animaciónMonstruos = new AnimaciónMonstruos();
         AnimaciónPersonaje animaciónPersonaje = new AnimaciónPersonaje();
+        
+        ImageView[][] cueva = animaciónCueva.matrizCueva("/cueva/tierra.png");
         GridPane gridPaneCueva = new GridPane();
         animaciónPersonaje.moverPersonaje(anchorPane);
+        animaciónMonstruos.hiloZombie(anchorPane);
         gridPaneCueva.setPadding(new Insets(30));
        
         GridPane.setConstraints(cueva[0][0], 0, 0);

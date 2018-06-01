@@ -6,6 +6,9 @@ import dominio.Zombie;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 /**
  *
@@ -13,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class AnimaciónMonstruos {
     
-    public void hiloZombie() {
+    public void hiloZombie(AnchorPane anchorPane) {
         ArrayList listaImagenes = new ArrayList();
         listaImagenes.add("/zombie/zombieAbajo.png");
         listaImagenes.add("/zombie/zombieAbajoAtaque.png");
@@ -24,12 +27,14 @@ public class AnimaciónMonstruos {
         listaImagenes.add("/zombie/zombieIzquierda.png");
         listaImagenes.add("/zombie/zombieIzquierdaAtaque.png");
         Zombie zombie = new Zombie(0, 0, listaImagenes);
+        ImageView imageViewZombie = new ImageView(new Image(zombie.getListaUrlImagenes().get(0).toString()));
+        anchorPane.getChildren().add(imageViewZombie);
         
         Runnable runnable = () -> {
             for (int i = 0; i < 5; i++) {
-                try {
+                try {     
+                    
                     Thread.sleep(1000);
-                    System.out.println(zombie.getListaUrlImagenes().toString());
                 } catch (InterruptedException ex) {
                     Logger.getLogger(AnimaciónMonstruos.class.getName()).log(Level.SEVERE, null, ex);
                 }
