@@ -34,13 +34,13 @@ public class InterfazController implements Initializable {
         //Imagenes tierra
         AnimaciónCueva animaciónCueva = new AnimaciónCueva();
         AnimaciónMonstruos animaciónMonstruos = new AnimaciónMonstruos();
-        AnimaciónPersonaje animaciónPersonaje = new AnimaciónPersonaje();
+//        AnimaciónPersonaje animaciónPersonaje = new AnimaciónPersonaje();
         
         ImageView[][] cueva = animaciónCueva.matrizCueva("/cueva/tierra.png");
         GridPane gridPaneCueva = new GridPane();
-        animaciónPersonaje.moverPersonaje(anchorPane);
-        animaciónMonstruos.hiloZombie(anchorPane);
-        gridPaneCueva.setPadding(new Insets(30));
+//        animaciónPersonaje.moverPersonaje(anchorPane);
+//        animaciónMonstruos.hiloZombie(anchorPane);
+//        gridPaneCueva.setPadding(new Insets(30));
        
         GridPane.setConstraints(cueva[0][0], 0, 0);
         gridPaneCueva.getChildren().add(cueva[0][0]);

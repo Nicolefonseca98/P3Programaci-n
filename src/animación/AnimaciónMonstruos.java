@@ -26,9 +26,9 @@ public class AnimaciónMonstruos {
         listaImagenes.add("/zombie/zombieDerechaAtaque.png");
         listaImagenes.add("/zombie/zombieIzquierda.png");
         listaImagenes.add("/zombie/zombieIzquierdaAtaque.png");
-        Zombie zombie = new Zombie(0, 0, listaImagenes);
-        ImageView imageViewZombie = new ImageView(new Image(zombie.getListaUrlImagenes().get(0).toString()));
-        anchorPane.getChildren().add(imageViewZombie);
+//        Zombie zombie = new Zombie(0, 0, listaImagenes);
+//        ImageView imageViewZombie = new ImageView(new Image(zombie.getListaUrlImagenes().get(0).toString()));
+//        anchorPane.getChildren().add(imageViewZombie);
         
         Runnable runnable = () -> {
             for (int i = 0; i < 5; i++) {
@@ -46,22 +46,22 @@ public class AnimaciónMonstruos {
     }
     
     public void hiloQuimera() {
-        ArrayList listaImagenes = new ArrayList();
-        Quimera quimera = new Quimera(0, 0, listaImagenes);
-        
-        Runnable runnable = () -> {
-            for (int i = 0; i < 5; i++) {
-                try {
-                    Thread.sleep(1000);
-                    System.out.println("Quimera");
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(AnimaciónMonstruos.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        };
-    
-        Thread t = new Thread(runnable);
-        t.start();
+//        ArrayList listaImagenes = new ArrayList();
+//        Quimera quimera = new Quimera(0, 0, listaImagenes);
+//        
+//        Runnable runnable = () -> {
+//            for (int i = 0; i < 5; i++) {
+//                try {
+//                    Thread.sleep(1000);
+//                    System.out.println("Quimera");
+//                } catch (InterruptedException ex) {
+//                    Logger.getLogger(AnimaciónMonstruos.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        };
+//    
+//        Thread t = new Thread(runnable);
+//        t.start();
     }
     
 }

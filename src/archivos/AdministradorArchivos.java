@@ -19,15 +19,15 @@ import org.json.simple.parser.ParseException;
 public class AdministradorArchivos {
     
     public void leerArchivo() throws FileNotFoundException, IOException, ParseException {
-        JSONParser parser = new JSONParser();
-        Object obj = parser.parse(new FileReader(".json"));
-        JSONArray jsonArray = (JSONArray) obj;
-        ArrayList<Personaje> list = new ArrayList<>();
-        for (int i = 0; i < jsonArray.size(); i++) {
-            Personaje personaje = new Personaje();
-            JSONObject tempJsonObject = (JSONObject) jsonArray.get(i);
-            list.add(personaje);
-        }
+//        JSONParser parser = new JSONParser();
+//        Object obj = parser.parse(new FileReader(".json"));
+//        JSONArray jsonArray = (JSONArray) obj;
+//        ArrayList<Personaje> list = new ArrayList<>();
+//        for (int i = 0; i < jsonArray.size(); i++) {
+//            Personaje personaje = new Personaje();
+//            JSONObject tempJsonObject = (JSONObject) jsonArray.get(i);
+//            list.add(personaje);
+//        }
 //        return restaurantArray;
 
     }
