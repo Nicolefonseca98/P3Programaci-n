@@ -23,7 +23,7 @@ public class InterfazController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+  
         //Fondo de la ventana
         String backgroundImage = "/cueva/fondo.jpg";
         anchorPane.setStyle("-fx-background-image: url('" + backgroundImage + "'); "
@@ -31,16 +31,16 @@ public class InterfazController implements Initializable {
                 + "-fx-background-repeat: no-repeat;"
                 + "-fx-background-size: cover, auto;");
 
-        //Imagenes tierra
+//        //Imagenes tierra
         AnimaciónCueva animaciónCueva = new AnimaciónCueva();
-        AnimaciónMonstruos animaciónMonstruos = new AnimaciónMonstruos();
-//        AnimaciónPersonaje animaciónPersonaje = new AnimaciónPersonaje();
-        
+//        AnimaciónMonstruos animaciónMonstruos = new AnimaciónMonstruos();
+        AnimaciónPersonaje animaciónPersonaje = new AnimaciónPersonaje();
+//        
         ImageView[][] cueva = animaciónCueva.matrizCueva("/cueva/tierra.png");
         GridPane gridPaneCueva = new GridPane();
-//        animaciónPersonaje.moverPersonaje(anchorPane);
+        animaciónPersonaje.moverPersonaje(anchorPane);
 //        animaciónMonstruos.hiloZombie(anchorPane);
-//        gridPaneCueva.setPadding(new Insets(30));
+        gridPaneCueva.setPadding(new Insets(30));
        
         GridPane.setConstraints(cueva[0][0], 0, 0);
         gridPaneCueva.getChildren().add(cueva[0][0]);
