@@ -4,11 +4,19 @@ package minerider;
 import animación.AnimaciónCueva;
 import animación.AnimaciónMonstruos;
 import animación.AnimaciónPersonaje;
+import dominio.Zombie;
+import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -20,10 +28,49 @@ import javafx.scene.layout.GridPane;
 public class InterfazController implements Initializable {
     
     @FXML private AnchorPane anchorPane;
+    private Canvas canvas;
+    private Zombie zombie;
+
+    public void run() {
+
+        Runnable runnable = () -> {
+        
+        long start;
+        long elapsed;
+        long wait;
+        int fps = 30;
+        long time = 1000/fps;
+
+        while(true){
+            try {
+                start = System.nanoTime();
+                elapsed = System.nanoTime()-start;                    
+                wait = time-elapsed/1000000;
+                Thread.sleep(wait);
+                GraphicsContext gc = this.canvas.getGraphicsContext2D();
+                draw(gc);
+            } 
+            catch (InterruptedException ex) {
+            }
+        }
+ 
+        };
+        Thread t = new Thread(runnable);
+        t.start();
+    }
+    
+    private void draw(GraphicsContext gc){
+        gc.clearRect(0, 0, 250, 250);
+        gc.drawImage(this.zombie.getImage(), this.zombie.getX(), this.zombie.getY());
+    }
+
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-  
+        zombie = new Zombie();
+        this.canvas = new Canvas(250, 250);
+
         //Fondo de la ventana
         String backgroundImage = "/cueva/fondo.jpg";
         anchorPane.setStyle("-fx-background-image: url('" + backgroundImage + "'); "
@@ -65,6 +112,9 @@ public class InterfazController implements Initializable {
         
         //Agrega el GridPane al AnchorPane
         anchorPane.getChildren().add(gridPaneCueva);
+        anchorPane.getChildren().add(canvas);
+        run();
+        zombie.run();
     }    
     
 }

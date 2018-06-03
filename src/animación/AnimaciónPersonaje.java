@@ -29,7 +29,7 @@ public class AnimaciónPersonaje {
                 anchorPane.getChildren().add(imageViewPersonaje1);
             }
             if (e.getCode() == KeyCode.RIGHT) {
-
+               
             }
             if (e.getCode() == KeyCode.LEFT) {
             }

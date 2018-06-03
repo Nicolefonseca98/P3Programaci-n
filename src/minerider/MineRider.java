@@ -4,6 +4,7 @@ package minerider;
 import animación.AnimaciónMonstruos;
 import animación.AnimaciónPersonaje;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,6 +28,11 @@ public class MineRider extends Application {
         stage.setTitle("MineRider");
         stage.getIcons().add(new Image("/starlord/prueba.png")); 
         scene.getRoot().requestFocus();
+        stage.setOnCloseRequest(e -> {
+        Platform.exit();
+        System.exit(0);
+    });
+        
     }
 
     /**
