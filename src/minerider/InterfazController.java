@@ -2,12 +2,11 @@
 package minerider;
 
 import animación.AnimaciónCueva;
-import animación.AnimaciónMonstruos;
+import animación.AnimaciónZombie;
 import animación.AnimaciónPersonaje;
-import dominio.Zombie;
+import animación.AnimaciónQuimera;
 import java.io.FileNotFoundException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -29,47 +27,49 @@ public class InterfazController implements Initializable {
     
     @FXML private AnchorPane anchorPane;
     private Canvas canvas;
-    private Zombie zombie;
-
+    private AnimaciónZombie animaciónZombie;
+    private AnimaciónQuimera animaciónQuimera;
+    
     public void run() {
-
         Runnable runnable = () -> {
-        
-        long start;
-        long elapsed;
-        long wait;
-        int fps = 30;
-        long time = 1000/fps;
+            long inicio;
+            long transcurrido;
+            long tiempoEspera;
+            int fps = 30;
+            long tiempo = 1000 / fps;
 
-        while(true){
-            try {
-                start = System.nanoTime();
-                elapsed = System.nanoTime()-start;                    
-                wait = time-elapsed/1000000;
-                Thread.sleep(wait);
-                GraphicsContext gc = this.canvas.getGraphicsContext2D();
-                draw(gc);
-            } 
-            catch (InterruptedException ex) {
+            while (true) {
+                try {
+                    inicio = System.nanoTime();
+                    transcurrido = System.nanoTime() - inicio;
+                    tiempoEspera = tiempo - transcurrido / 1000000;
+                    Thread.sleep(tiempoEspera);
+                    GraphicsContext graphicsContext = this.canvas.getGraphicsContext2D();
+                    draw(graphicsContext);
+                } catch (InterruptedException ex) {
+                    System.out.println("Exception");
+                }
             }
-        }
- 
         };
-        Thread t = new Thread(runnable);
-        t.start();
+        Thread hilo = new Thread(runnable);
+        hilo.start();
     }
     
-    private void draw(GraphicsContext gc){
-        gc.clearRect(0, 0, 250, 250);
-        gc.drawImage(this.zombie.getImage(), this.zombie.getX(), this.zombie.getY());
+    private void draw(GraphicsContext graphicsContext){
+        graphicsContext.clearRect(0, 0, 800, 500);
+        graphicsContext.drawImage(this.animaciónZombie.getImage(), this.animaciónZombie.getX(), this.animaciónZombie.getY());
+        graphicsContext.drawImage(this.animaciónQuimera.getImage(), this.animaciónQuimera.getX(), this.animaciónQuimera.getY());
     }
 
-    
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        zombie = new Zombie();
-        this.canvas = new Canvas(250, 250);
+        try {
+            animaciónZombie = new AnimaciónZombie(0, 0);
+            animaciónQuimera = new AnimaciónQuimera(0, 0);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(InterfazController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.canvas = new Canvas(800, 500);
 
         //Fondo de la ventana
         String backgroundImage = "/cueva/fondo.jpg";
@@ -78,15 +78,13 @@ public class InterfazController implements Initializable {
                 + "-fx-background-repeat: no-repeat;"
                 + "-fx-background-size: cover, auto;");
 
-//        //Imagenes tierra
+        //Imagenes tierra
         AnimaciónCueva animaciónCueva = new AnimaciónCueva();
-//        AnimaciónMonstruos animaciónMonstruos = new AnimaciónMonstruos();
         AnimaciónPersonaje animaciónPersonaje = new AnimaciónPersonaje();
-//        
-        ImageView[][] cueva = animaciónCueva.matrizCueva("/cueva/tierra.png");
-        GridPane gridPaneCueva = new GridPane();
         animaciónPersonaje.moverPersonaje(anchorPane);
-//        animaciónMonstruos.hiloZombie(anchorPane);
+        
+        ImageView[][] cueva = animaciónCueva.matrizCueva("/cueva/tierra.png");
+        GridPane gridPaneCueva = new GridPane();     
         gridPaneCueva.setPadding(new Insets(30));
        
         GridPane.setConstraints(cueva[0][0], 0, 0);
@@ -111,10 +109,11 @@ public class InterfazController implements Initializable {
         gridPaneCueva.getChildren().add(cueva[2][2]);
         
         //Agrega el GridPane al AnchorPane
-        anchorPane.getChildren().add(gridPaneCueva);
+//        anchorPane.getChildren().add(gridPaneCueva);
         anchorPane.getChildren().add(canvas);
         run();
-        zombie.run();
+        animaciónZombie.hiloZombie();
+        animaciónQuimera.hiloQuimera();
     }    
     
 }

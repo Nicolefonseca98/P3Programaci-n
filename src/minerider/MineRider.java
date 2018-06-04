@@ -1,7 +1,7 @@
 
 package minerider;
 
-import animación.AnimaciónMonstruos;
+import animación.AnimaciónZombie;
 import animación.AnimaciónPersonaje;
 import javafx.application.Application;
 import javafx.application.Platform;

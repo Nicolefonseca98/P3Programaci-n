@@ -13,19 +13,17 @@ public class Personaje {
 
     private int x;
     private int y;
-    private int imgNum;
-    private Image image;
+    private Image imagen;
     private ArrayList<Image> sprite;
 
     public Personaje() {
     }
 
-    public Personaje(int x, int y, int imgNum) {
+    public Personaje(int x, int y) {
         this.x = x;
         this.y = y;
-        this.imgNum = imgNum;
-//        this.image = image;
-        this.sprite = sprite;
+        this.sprite = new ArrayList<>();
+
     }
 
     /**
@@ -57,31 +55,17 @@ public class Personaje {
     }
 
     /**
-     * @return the imgNum
-     */
-    public int getImgNum() {
-        return imgNum;
-    }
-
-    /**
-     * @param imgNum the imgNum to set
-     */
-    public void setImgNum(int imgNum) {
-        this.imgNum = imgNum;
-    }
-
-    /**
      * @return the image
      */
     public Image getImage() {
-        return image;
+        return imagen;
     }
 
     /**
      * @param image the image to set
      */
     public void setImage(Image image) {
-        this.image = image;
+        this.imagen = image;
     }
 
     /**
@@ -100,7 +84,7 @@ public class Personaje {
 
     @Override
     public String toString() {
-        return "Personaje{" + "x=" + x + ", y=" + y + ", imgNum=" + imgNum + ", image=" + image + ", sprite=" + sprite + '}';
+        return "Personaje{" + "x=" + x + ", y=" + y + ", image=" + imagen + ", sprite=" + sprite + '}';
     }
 
 }
