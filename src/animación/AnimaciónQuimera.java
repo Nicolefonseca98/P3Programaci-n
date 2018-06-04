@@ -27,19 +27,19 @@ public class AnimaciónQuimera extends Quimera{
         sprite.add(new Image(new FileInputStream("src/quimera/quimeraDerechaAtaque.png")));
     }
     
-    public void hiloQuimera() {   
+    public void hiloQuimera(int y) {   
         ArrayList<Image> sprite = super.getSprite();
         Runnable runnable = () -> {
             while (true) {
                 try {
                     int j = 0; //Indice en lista de imágenes.
-                    for (int i = 0; i <= 700; i += 10) { //Recorrido de la quimera.
+                    for (int x = 0; x <= 700; x += 10) { //Recorrido de la quimera.
                         if (j >= 2) {
                             j = 0;
                         }
                         super.setImage(sprite.get(j));
-                        super.setX(i);
-                        super.setY(300);
+                        super.setX(x);
+                        super.setY(y);
                         Thread.sleep(500);
                         j++;
                     }
@@ -48,8 +48,8 @@ public class AnimaciónQuimera extends Quimera{
                 }
             }
         };
-        
         Thread hiloQuimera = new Thread(runnable);
         hiloQuimera.start();
     }
+   
 }

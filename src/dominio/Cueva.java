@@ -1,20 +1,27 @@
 
 package dominio;
 
+import javafx.scene.image.Image;
+
 /**
  *
  * @author Nicole Fonseca, Wilmer Mata
  */
 public class Cueva {
     private int tamaño;
-    private String urlImagen;
-
-    public Cueva() {
+    private Image image;
+    
+    private static final Cueva cueva = new Cueva();
+    
+    private Cueva() { }
+    
+    public static Cueva getCueva() {
+        return cueva;
     }
 
-    public Cueva(int tamaño, String urlImagen) {
+    public Cueva(int tamaño, Image image) {
         this.tamaño = tamaño;
-        this.urlImagen = urlImagen;
+        this.image = image;
     }
 
     /**
@@ -32,21 +39,23 @@ public class Cueva {
     }
 
     /**
-     * @return the urlImagen
+     * @return the image
      */
-    public String getUrlImagen() {
-        return urlImagen;
+    public Image getImage() {
+        return image;
     }
 
     /**
-     * @param urlImagen the urlImagen to set
+     * @param image the image to set
      */
-    public void setUrlImagen(String urlImagen) {
-        this.urlImagen = urlImagen;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     @Override
     public String toString() {
-        return "Cueva{" + "tama\u00f1o=" + tamaño + ", urlImagen=" + urlImagen + '}';
+        return "Cueva{" + "tama\u00f1o=" + tamaño + ", image=" + image + '}';
     }
+
+   
 }

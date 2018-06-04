@@ -29,6 +29,7 @@ public class InterfazController implements Initializable {
     private Canvas canvas;
     private AnimaciónZombie animaciónZombie;
     private AnimaciónQuimera animaciónQuimera;
+    private AnimaciónQuimera animaciónQuimera1;
     
     public void run() {
         Runnable runnable = () -> {
@@ -59,6 +60,7 @@ public class InterfazController implements Initializable {
         graphicsContext.clearRect(0, 0, 800, 500);
         graphicsContext.drawImage(this.animaciónZombie.getImage(), this.animaciónZombie.getX(), this.animaciónZombie.getY());
         graphicsContext.drawImage(this.animaciónQuimera.getImage(), this.animaciónQuimera.getX(), this.animaciónQuimera.getY());
+        graphicsContext.drawImage(this.animaciónQuimera1.getImage(), this.animaciónQuimera1.getX(), this.animaciónQuimera1.getY());
     }
 
     @Override
@@ -66,6 +68,7 @@ public class InterfazController implements Initializable {
         try {
             animaciónZombie = new AnimaciónZombie(0, 0);
             animaciónQuimera = new AnimaciónQuimera(0, 0);
+            animaciónQuimera1 = new AnimaciónQuimera(0, 0);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(InterfazController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -113,7 +116,8 @@ public class InterfazController implements Initializable {
         anchorPane.getChildren().add(canvas);
         run();
         animaciónZombie.hiloZombie();
-        animaciónQuimera.hiloQuimera();
+        animaciónQuimera.hiloQuimera(200);
+        animaciónQuimera1.hiloQuimera(300);
     }    
     
 }
