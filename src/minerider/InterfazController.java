@@ -16,6 +16,7 @@ import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
@@ -30,7 +31,8 @@ public class InterfazController implements Initializable {
     private AnimaciónZombie animaciónZombie;
     private AnimaciónQuimera animaciónQuimera;
     private AnimaciónQuimera animaciónQuimera1;
-    
+    private AnimaciónPersonaje animaciónPersonaje;
+
     public void run() {
         Runnable runnable = () -> {
             long inicio;
@@ -61,6 +63,7 @@ public class InterfazController implements Initializable {
         graphicsContext.drawImage(this.animaciónZombie.getImage(), this.animaciónZombie.getX(), this.animaciónZombie.getY());
         graphicsContext.drawImage(this.animaciónQuimera.getImage(), this.animaciónQuimera.getX(), this.animaciónQuimera.getY());
         graphicsContext.drawImage(this.animaciónQuimera1.getImage(), this.animaciónQuimera1.getX(), this.animaciónQuimera1.getY());
+        graphicsContext.drawImage(this.animaciónPersonaje.getImage(), this.animaciónPersonaje.getX(), this.animaciónPersonaje.getY());
     }
 
     @Override
@@ -69,6 +72,8 @@ public class InterfazController implements Initializable {
             animaciónZombie = new AnimaciónZombie(0, 0);
             animaciónQuimera = new AnimaciónQuimera(0, 0);
             animaciónQuimera1 = new AnimaciónQuimera(0, 0);
+            animaciónPersonaje = new AnimaciónPersonaje(0, 0);
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(InterfazController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -83,9 +88,7 @@ public class InterfazController implements Initializable {
 
         //Imagenes tierra
         AnimaciónCueva animaciónCueva = new AnimaciónCueva();
-        AnimaciónPersonaje animaciónPersonaje = new AnimaciónPersonaje();
-        animaciónPersonaje.moverPersonaje(anchorPane);
-        
+   
         ImageView[][] cueva = animaciónCueva.matrizCueva("/cueva/tierra.png");
         GridPane gridPaneCueva = new GridPane();     
         gridPaneCueva.setPadding(new Insets(30));
@@ -118,6 +121,7 @@ public class InterfazController implements Initializable {
         animaciónZombie.hiloZombie();
         animaciónQuimera.hiloQuimera(200);
         animaciónQuimera1.hiloQuimera(300);
+        animaciónPersonaje.hiloPersonaje(0, anchorPane);
     }    
     
 }

@@ -1,8 +1,13 @@
 
 package animación;
 
+import dominio.Personaje;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 
@@ -10,30 +15,74 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author Nicole Fonseca, Wilmer Mata
  */
-public class AnimaciónPersonaje {
-    ImageView imageViewPersonaje1;
-    public void moverPersonaje(AnchorPane anchorPane) {
+public class AnimaciónPersonaje extends Personaje{
 
-        anchorPane.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.UP) {
-                imageViewPersonaje1 = new ImageView(new Image("/starlord/derecha.png"));
-                anchorPane.getChildren().add(imageViewPersonaje1);
-            }
-            if (e.getCode() == KeyCode.RIGHT) {
-               
-            }
-            if (e.getCode() == KeyCode.LEFT) {
-            }
-            if (e.getCode() == KeyCode.A) {
-                System.out.println("espada");
-            }
-            if (e.getCode() == KeyCode.S) {
-                System.out.println("látigo");
-            }
-            if (e.getCode() == KeyCode.D) {
-                System.out.println("pala");
-            }
-        });
+    public AnimaciónPersonaje() {
+    }
 
+    public AnimaciónPersonaje(int x, int y) throws FileNotFoundException {
+        super(x, y);
+        setSprite();
+    }
+    
+    public void setSprite() throws FileNotFoundException {
+        ArrayList<Image> sprite = super.getSprite();
+        sprite.add(new Image(new FileInputStream("src/starlord/derecha.png")));
+        sprite.add(new Image(new FileInputStream("src/starlord/izquierda.png")));
+        sprite.add(new Image(new FileInputStream("src/starlord/derechaEspada.png")));
+        sprite.add(new Image(new FileInputStream("src/starlord/derechaLatigo.png")));
+        sprite.add(new Image(new FileInputStream("src/starlord/derechaPala.png")));
+        sprite.add(new Image(new FileInputStream("src/starlord/izquierdaEspada.png")));
+        sprite.add(new Image(new FileInputStream("src/starlord/izquierdaLatigo.png")));
+        sprite.add(new Image(new FileInputStream("src/starlord/izquierdaPala.png")));
+    }
+    int x = 0;
+    public void hiloPersonaje(int y, AnchorPane anchorPane) {
+    
+        ArrayList<Image> sprite = super.getSprite();
+        Runnable runnable = () -> {
+            anchorPane.setOnKeyPressed(e -> {
+                if (e.getCode() == KeyCode.RIGHT) {
+                    int j = 0; //Indice en lista de imágenes.
+                    if (j >= 1) {
+                        j = 0;
+                    }
+                    super.setImage(sprite.get(j));
+                    super.setX(x += 10);
+                    super.setY(y);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    j++;
+                }
+                if (e.getCode() == KeyCode.LEFT) {
+                    int j = 0; //Indice en lista de imágenes.
+                    super.setImage(sprite.get(1));
+                    super.setX(x -= 10);
+                    super.setY(y);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    j++;
+                
+                }
+                if (e.getCode() == KeyCode.A) {
+                    System.out.println("espada");
+                }
+                if (e.getCode() == KeyCode.S) {
+                    System.out.println("látigo");
+                }
+                if (e.getCode() == KeyCode.D) {
+                    System.out.println("pala");
+                }
+            });
+
+        };
+        Thread hiloQuimera = new Thread(runnable);
+        hiloQuimera.start();
     }
 }
