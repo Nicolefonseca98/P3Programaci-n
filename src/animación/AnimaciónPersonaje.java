@@ -1,6 +1,7 @@
 
 package animación;
 
+import com.sun.javafx.geom.Area;
 import dominio.Personaje;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,6 +11,7 @@ import java.util.logging.Logger;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 /**
  *
@@ -37,11 +39,11 @@ public class AnimaciónPersonaje extends Personaje{
         sprite.add(new Image(new FileInputStream("src/starlord/izquierdaPala.png")));
     }
     int x = 0;
-    public void hiloPersonaje(int y, AnchorPane anchorPane) {
+    public void hiloPersonaje(int y, StackPane stackPane) {
     
         ArrayList<Image> sprite = super.getSprite();
         Runnable runnable = () -> {
-            anchorPane.setOnKeyPressed(e -> {
+            stackPane.setOnKeyPressed(e -> {
                 if (e.getCode() == KeyCode.RIGHT) {
                     int j = 0; //Indice en lista de imágenes.
                     if (j >= 1) {
@@ -72,6 +74,14 @@ public class AnimaciónPersonaje extends Personaje{
                 }
                 if (e.getCode() == KeyCode.A) {
                     System.out.println("espada");
+                    super.setImage(sprite.get(2));
+                    super.setX(x += 10);
+                    super.setY(y);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 if (e.getCode() == KeyCode.S) {
                     System.out.println("látigo");
@@ -83,6 +93,6 @@ public class AnimaciónPersonaje extends Personaje{
 
         };
         Thread hiloQuimera = new Thread(runnable);
-        hiloQuimera.start();
+        hiloQuimera.start(); 
     }
 }
