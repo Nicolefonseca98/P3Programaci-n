@@ -2,6 +2,7 @@
 package minerider;
 
 
+import animación.AnimaciónCueva;
 import animación.AnimaciónPersonaje;
 import animación.AnimaciónQuimera;
 import animación.AnimaciónZombie;
@@ -22,6 +23,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
@@ -45,6 +47,7 @@ public class CuevaController implements Initializable {
     private AnimaciónQuimera animaciónQuimera;
     private AnimaciónQuimera animaciónQuimera1;
     private AnimaciónPersonaje animaciónPersonaje;
+    private AnimaciónCueva animaciónCueva;
     
     public void run() {
         Runnable runnable = () -> {
@@ -92,18 +95,18 @@ public class CuevaController implements Initializable {
 
    @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         cueva1 = new Image("/cueva/cueva1.png");
         background1.setImage(cueva1);
         cueva2 = new Image("/cueva/cueva2.png");
         background2.setImage(cueva2);
-        
+      
         TranslateTransition translateTransition = new TranslateTransition(Duration.millis(10000), background1);
         translateTransition.setFromX(0);
         translateTransition.setToX(-1 * BACKGROUND_WIDTH);
         translateTransition.setInterpolator(Interpolator.LINEAR);
 
-        TranslateTransition translateTransition2
-                = new TranslateTransition(Duration.millis(10000), background2);
+        TranslateTransition translateTransition2 = new TranslateTransition(Duration.millis(10000), background2);
         translateTransition2.setFromX(0);
         translateTransition2.setToX(-1 * BACKGROUND_WIDTH);
         translateTransition2.setInterpolator(Interpolator.LINEAR);
@@ -119,6 +122,12 @@ public class CuevaController implements Initializable {
                 btnControl.setText(">");
             }
         });
+        
+//        if (parallelTransition.getStatus() == Animation.Status.RUNNING) {
+//            pauseAnimation();
+//        } else {
+//            startAmination();
+//        }
         
         try {
             animaciónZombie = new AnimaciónZombie(0, 0);
@@ -136,15 +145,16 @@ public class CuevaController implements Initializable {
         animaciónQuimera.hiloQuimera(265);
         animaciónQuimera1.hiloQuimera(265);
         animaciónPersonaje.hiloPersonaje(315, stackPane);
+      
     }
 
     @FXML
     private void actionB(ActionEvent event) {
-         if (parallelTransition.getStatus() == Animation.Status.RUNNING) {
-            pauseAnimation();
-        } else {
-            startAmination();
-        }
+//         if (parallelTransition.getStatus() == Animation.Status.RUNNING) {
+//            pauseAnimation();
+//        } else {
+//            startAmination();
+//        }
     }
 }
 

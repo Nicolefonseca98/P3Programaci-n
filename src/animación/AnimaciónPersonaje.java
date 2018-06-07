@@ -1,7 +1,6 @@
 
 package animación;
 
-import com.sun.javafx.geom.Area;
 import dominio.Personaje;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 /**
@@ -54,6 +52,7 @@ public class AnimaciónPersonaje extends Personaje{
                     super.setX(x += 10);
                     super.setY(y);
                     j++;
+                    
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException ex) {
