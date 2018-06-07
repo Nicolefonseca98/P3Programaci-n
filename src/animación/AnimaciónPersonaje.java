@@ -29,39 +29,39 @@ public class AnimaciónPersonaje extends Personaje{
     
     public void setSprite() throws FileNotFoundException {
         ArrayList<Image> sprite = super.getSprite();
+        sprite.add(new Image(new FileInputStream("src/starlord/sl1.png")));
         sprite.add(new Image(new FileInputStream("src/starlord/derecha.png")));
+        sprite.add(new Image(new FileInputStream("src/starlord/sl4.png")));
         sprite.add(new Image(new FileInputStream("src/starlord/izquierda.png")));
         sprite.add(new Image(new FileInputStream("src/starlord/derechaEspada.png")));
         sprite.add(new Image(new FileInputStream("src/starlord/derechaLatigo.png")));
         sprite.add(new Image(new FileInputStream("src/starlord/derechaPala.png")));
-        sprite.add(new Image(new FileInputStream("src/starlord/izquierdaEspada.png")));
-        sprite.add(new Image(new FileInputStream("src/starlord/izquierdaLatigo.png")));
-        sprite.add(new Image(new FileInputStream("src/starlord/izquierdaPala.png")));
     }
     int x = 0;
+    int j = 0;
     public void hiloPersonaje(int y, StackPane stackPane) {
-    
+     
+        
         ArrayList<Image> sprite = super.getSprite();
         Runnable runnable = () -> {
+            
             stackPane.setOnKeyPressed(e -> {
-                if (e.getCode() == KeyCode.RIGHT) {
-                    int j = 0; //Indice en lista de imágenes.
-                    if (j >= 1) {
-                        j = 0;
-                    }
+                if (j >= 3) { //Indice en lista de imágenes.
+                    j = 0;
+                }
+                if (e.getCode() == KeyCode.RIGHT) {   
                     super.setImage(sprite.get(j));
                     super.setX(x += 10);
                     super.setY(y);
+                    j++;
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    j++;
                 }
                 if (e.getCode() == KeyCode.LEFT) {
-                    int j = 0; //Indice en lista de imágenes.
-                    super.setImage(sprite.get(1));
+                    super.setImage(sprite.get(3));
                     super.setX(x -= 10);
                     super.setY(y);
                     try {
@@ -69,12 +69,11 @@ public class AnimaciónPersonaje extends Personaje{
                     } catch (InterruptedException ex) {
                         Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    j++;
                 
                 }
                 if (e.getCode() == KeyCode.A) {
                     System.out.println("espada");
-                    super.setImage(sprite.get(2));
+                    super.setImage(sprite.get(4));
                     super.setX(x += 10);
                     super.setY(y);
                     try {
@@ -85,12 +84,28 @@ public class AnimaciónPersonaje extends Personaje{
                 }
                 if (e.getCode() == KeyCode.S) {
                     System.out.println("látigo");
+                    super.setImage(sprite.get(5));
+                    super.setX(x += 10);
+                    super.setY(y);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 if (e.getCode() == KeyCode.D) {
                     System.out.println("pala");
+                    super.setImage(sprite.get(6));
+                    super.setX(x += 10);
+                    super.setY(y);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+               
             });
-
         };
         Thread hiloQuimera = new Thread(runnable);
         hiloQuimera.start(); 
