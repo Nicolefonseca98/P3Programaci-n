@@ -35,14 +35,13 @@ public class AnimaciónPersonaje extends Personaje{
         sprite.add(new Image(new FileInputStream("src/starlord/derechaLatigo.png")));
         sprite.add(new Image(new FileInputStream("src/starlord/derechaPala.png")));
     }
-    int x = 0;
+    
+    int x = 100;
     int j = 0;
     public void hiloPersonaje(int y, StackPane stackPane) {
      
-        
         ArrayList<Image> sprite = super.getSprite();
         Runnable runnable = () -> {
-            
             stackPane.setOnKeyPressed(e -> {
                 if (j >= 3) { //Indice en lista de imágenes.
                     j = 0;

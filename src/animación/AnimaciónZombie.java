@@ -35,14 +35,14 @@ public class AnimaciónZombie extends Zombie{
             while (true) {
                 try {
                     int j = 0; //Indice en lista de imágenes.
-                    for (int x = 0; x <= 700; x += 10) { //Recorrido del zombie.
+                    for (int x = super.getX(); x <= 700; x += 10) { //Recorrido del zombie.
                         if (j >= 2) {
                             j = 0;
                         }
                         super.setImage(sprite.get(j));
                         super.setX(x);
-                        super.setY(100);
-                        Thread.sleep(900);
+                        super.setY(303);
+                        Thread.sleep(1000);
                         j++;
                     }
 
