@@ -40,7 +40,6 @@ public class CuevaController implements Initializable {
     private AnimaciónQuimera animaciónQuimera1;
     private AnimaciónPersonaje animaciónPersonaje;
     private AnimaciónCueva animaciónCueva;
-    int x = 0;
     
     //Hilo principal
     public void run() {
@@ -74,14 +73,14 @@ public class CuevaController implements Initializable {
         graphicsContext.drawImage(this.animaciónZombie.getImage(), this.animaciónZombie.getX(), this.animaciónZombie.getY());
         graphicsContext.drawImage(this.animaciónQuimera.getImage(), this.animaciónQuimera.getX(), this.animaciónQuimera.getY());
         graphicsContext.drawImage(this.animaciónQuimera1.getImage(), this.animaciónQuimera1.getX(), this.animaciónQuimera1.getY());
-        graphicsContext.drawImage(this.animaciónPersonaje.getImage(), this.animaciónPersonaje.getX(), this.animaciónPersonaje.getY());
+//        graphicsContext.drawImage(this.animaciónPersonaje.getImage(), this.animaciónPersonaje.getX(), this.animaciónPersonaje.getY());
     }
    
    @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Audio
-        AudioClip note = new AudioClip(this.getClass().getResource("/music/contra.mp3").toString());
-        note.play();
+//        AudioClip note = new AudioClip(this.getClass().getResource("/music/contra.mp3").toString());
+//        note.play();
         //Imagen de fondo
         cueva1 = new Image("/cueva/cueva1.png");
         background1.setImage(cueva1);
@@ -101,29 +100,14 @@ public class CuevaController implements Initializable {
         stackPane.getChildren().add(canvas);
   
         //Movimiento personaje
-        GridPane gridPane = new GridPane();
-        ImageView imageView = new ImageView();
-        imageView.setImage(animaciónPersonaje.getSprite().get(0));
-        
-        gridPane.add(imageView, x, 63);
-        gridPane.setHgap(20);
-        gridPane.setVgap(5);
-        x++;
-        stackPane.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.RIGHT) {
-                gridPane.getChildren().clear();
-                gridPane.add(imageView, x, 63);
-                x++;
-            }
-            
-        });
+        GridPane gridPane = animaciónPersonaje.hiloPersonaje(stackPane);
+
         stackPane.getChildren().add(gridPane);
         //Hilos
         run();
         animaciónZombie.hiloZombie();
         animaciónQuimera.hiloQuimera(265);
         animaciónQuimera1.hiloQuimera(265);
-//        animaciónPersonaje.hiloPersonaje(315, stackPane);
       
     }
 

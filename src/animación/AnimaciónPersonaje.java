@@ -8,8 +8,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
 
 /**
  *
@@ -36,76 +39,50 @@ public class AnimaciónPersonaje extends Personaje{
         sprite.add(new Image(new FileInputStream("src/starlord/derechaPala.png")));
     }
     
-    int x = 100;
+    int x = 0;
     int j = 0;
-    public void hiloPersonaje(int y, StackPane stackPane) {
-     
+    public GridPane hiloPersonaje(StackPane stackPane) {
+        GridPane gridPane = new GridPane();
+        ImageView imageView = new ImageView();
+        imageView.setImage(super.getSprite().get(0));
+        gridPane.add(imageView, x, 63);
+        gridPane.setHgap(20);
+        gridPane.setVgap(5);
+        x++;
+        
         ArrayList<Image> sprite = super.getSprite();
-        Runnable runnable = () -> {
             stackPane.setOnKeyPressed(e -> {
-                if (j >= 3) { //Indice en lista de imágenes.
-                    j = 0;
-                }
-                if (e.getCode() == KeyCode.RIGHT) {   
-                    super.setImage(sprite.get(j));
-                    super.setX(x += 10);
-                    super.setY(y);
-                    j++;
-                    
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+//                if (j >= 3) { //Indice en lista de imágenes.
+//                    j = 0;
+//                }
+                if (e.getCode() == KeyCode.RIGHT) {
+                    gridPane.getChildren().clear();
+                    gridPane.add(imageView, x, 63);
+                    x++;
                 }
                 if (e.getCode() == KeyCode.LEFT) {
-                    super.setImage(sprite.get(3));
-                    super.setX(x -= 10);
-                    super.setY(y);
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    
                 
                 }
                 if (e.getCode() == KeyCode.A) {
                     System.out.println("espada");
-                    super.setImage(sprite.get(4));
-                    super.setX(x += 10);
-                    super.setY(y);
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+//                    AudioClip note = new AudioClip(this.getClass().getResource("/music/espada.wav").toString());
+//                    note.play();
+                    
                 }
                 if (e.getCode() == KeyCode.S) {
                     System.out.println("látigo");
-                    super.setImage(sprite.get(5));
-                    super.setX(x += 10);
-                    super.setY(y);
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+//                    AudioClip note = new AudioClip(this.getClass().getResource("/music/latigo.wav").toString());
+//                    note.play();
+                    
                 }
                 if (e.getCode() == KeyCode.D) {
                     System.out.println("pala");
-                    super.setImage(sprite.get(6));
-                    super.setX(x += 10);
-                    super.setY(y);
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+//                    AudioClip note = new AudioClip(this.getClass().getResource("/music/pala.mp3").toString());
+//                    note.play();
                 }
                
             });
-        };
-        Thread hiloQuimera = new Thread(runnable);
-        hiloQuimera.start(); 
+            return gridPane;
     }
 }
