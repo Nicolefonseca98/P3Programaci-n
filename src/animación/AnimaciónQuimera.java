@@ -33,14 +33,14 @@ public class AnimaciónQuimera extends Quimera{
             while (true) {
                 try {
                     int j = 0; //Indice en lista de imágenes.
-                    for (int x = 1000; x >= 100; x -= 10) { //Recorrido de la quimera.
+                    for (int x = 1000; x >= 100; x -= 30) { //Recorrido de la quimera.
                         if (j >= 2) {
                             j = 0;
                         }
                         super.setImage(sprite.get(j));
                         super.setX(x);
                         super.setY(y);
-                        Thread.sleep(500);
+                        Thread.sleep(1000);
                         j++;
                     }
 

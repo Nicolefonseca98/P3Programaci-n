@@ -17,6 +17,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
@@ -39,6 +40,7 @@ public class CuevaController implements Initializable {
     private AnimaciónQuimera animaciónQuimera1;
     private AnimaciónPersonaje animaciónPersonaje;
     private AnimaciónCueva animaciónCueva;
+    int x = 0;
     
     //Hilo principal
     public void run() {
@@ -98,16 +100,30 @@ public class CuevaController implements Initializable {
         this.canvas = new Canvas(813, 400);
         stackPane.getChildren().add(canvas);
   
+        //Movimiento personaje
         GridPane gridPane = new GridPane();
-        stackPane.getChildren().add(gridPane);
-//        gridPane
+        ImageView imageView = new ImageView();
+        imageView.setImage(animaciónPersonaje.getSprite().get(0));
         
+        gridPane.add(imageView, x, 63);
+        gridPane.setHgap(20);
+        gridPane.setVgap(5);
+        x++;
+        stackPane.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.RIGHT) {
+                gridPane.getChildren().clear();
+                gridPane.add(imageView, x, 63);
+                x++;
+            }
+            
+        });
+        stackPane.getChildren().add(gridPane);
         //Hilos
         run();
         animaciónZombie.hiloZombie();
         animaciónQuimera.hiloQuimera(265);
         animaciónQuimera1.hiloQuimera(265);
-        animaciónPersonaje.hiloPersonaje(315, stackPane);
+//        animaciónPersonaje.hiloPersonaje(315, stackPane);
       
     }
 
