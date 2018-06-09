@@ -48,7 +48,7 @@ public class AnimaciónPersonaje extends Personaje{
                     j = 0;
                 }
                 super.setImage(sprite.get(j));
-                super.setX(x += 10);
+                super.setX(x += 6);
                 super.setY(y);
                 j++;
                 try {
@@ -60,7 +60,7 @@ public class AnimaciónPersonaje extends Personaje{
             }
             if (e.getCode() == KeyCode.LEFT) {
                 super.setImage(sprite.get(3));
-                super.setX(x -= 10);
+                super.setX(x -= 6);
                 super.setY(y);
                 try {
                     Thread.sleep(500);
@@ -70,7 +70,7 @@ public class AnimaciónPersonaje extends Personaje{
             }
             if (e.getCode() == KeyCode.A) {
                 super.setImage(sprite.get(4));
-                super.setX(x += 10);
+                super.setX(x += 6);
                 super.setY(y);
                 try {
                         Thread.sleep(500);
@@ -83,7 +83,7 @@ public class AnimaciónPersonaje extends Personaje{
             }
             if (e.getCode() == KeyCode.S) {
                 super.setImage(sprite.get(5));
-                super.setX(x += 10);
+                super.setX(x += 6);
                 super.setY(y);
                 try {
                         Thread.sleep(500);
@@ -95,7 +95,7 @@ public class AnimaciónPersonaje extends Personaje{
             }
             if (e.getCode() == KeyCode.D) {
                 super.setImage(sprite.get(6));
-                super.setX(x += 10);
+                super.setX(x += 6);
                 super.setY(y);
                 try {
                         Thread.sleep(500);

@@ -32,7 +32,12 @@ public class CuevaController implements Initializable {
  
     @FXML private StackPane stackPane;
     @FXML private ImageView background1;
-    private Image cueva1;
+    @FXML private ImageView corazon1;
+    @FXML private ImageView corazon2;
+    @FXML private ImageView corazon3;
+    private Image cueva;
+    private Image corazonLleno;
+    private Image corazonVacio;
     private Canvas canvas;
     private AnimaciónZombie animaciónZombie;
     private AnimaciónZombie animaciónZombie1;
@@ -84,8 +89,14 @@ public class CuevaController implements Initializable {
 //        AudioClip note = new AudioClip(this.getClass().getResource("/music/contra.mp3").toString());
 //        note.play();
         //Imagen de fondo
-        cueva1 = new Image("/cueva/cueva1.png");
-        background1.setImage(cueva1);
+        cueva = new Image("/cueva/cueva1.png");
+        background1.setImage(cueva);
+        
+        corazonLleno = new Image("/starlord/heart.png");
+        corazonVacio = new Image("/starlord/emptyHeart.png");
+        corazon1.setImage(corazonLleno);
+        corazon2.setImage(corazonLleno);
+        corazon3.setImage(corazonLleno);
         
         //Personajes
         try {
@@ -116,7 +127,8 @@ public class CuevaController implements Initializable {
     public void prueba() throws InterruptedException {
         int a = this.animaciónZombie.getX() + 8;
         int b = this.animaciónQuimera.getX() - 8;
-        if (a == b) {
+        int c = this.animaciónPersonaje.getX() + 8; 
+        if (c == a || c == b) {
             System.out.println("chocaron");
  
         }

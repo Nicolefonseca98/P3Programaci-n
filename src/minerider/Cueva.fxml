@@ -9,6 +9,9 @@
       <Pane prefHeight="379.0" prefWidth="816.0">
          <children>
             <ImageView fx:id="background1" fitHeight="393.0" fitWidth="1043.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="corazon1" fitHeight="32.0" fitWidth="32.0" layoutX="21.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="corazon2" fitHeight="32.0" fitWidth="32.0" layoutX="53.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="corazon3" fitHeight="32.0" fitWidth="32.0" layoutX="85.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
    </children>
