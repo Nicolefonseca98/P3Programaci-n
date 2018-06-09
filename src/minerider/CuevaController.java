@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -56,7 +57,6 @@ public class CuevaController implements Initializable {
                     tiempoEspera = tiempo - transcurrido / 1000000;
                     prueba();
                     Thread.sleep(tiempoEspera);
-                    
                     GraphicsContext graphicsContext = this.canvas.getGraphicsContext2D();
                     draw(graphicsContext);
                 } catch (InterruptedException ex) {
@@ -75,6 +75,7 @@ public class CuevaController implements Initializable {
         graphicsContext.drawImage(this.animaciónZombie1.getImage(), this.animaciónZombie1.getX(), this.animaciónZombie1.getY());
         graphicsContext.drawImage(this.animaciónQuimera.getImage(), this.animaciónQuimera.getX(), this.animaciónQuimera.getY());
 //        graphicsContext.drawImage(this.animaciónQuimera1.getImage(), this.animaciónQuimera1.getX(), this.animaciónQuimera1.getY());
+        graphicsContext.drawImage(this.animaciónPersonaje.getImage(), this.animaciónPersonaje.getX(), animaciónPersonaje.getY());
     }
    
    @Override
@@ -92,7 +93,7 @@ public class CuevaController implements Initializable {
             animaciónZombie1 = new AnimaciónZombie(100, 100);
             animaciónQuimera = new AnimaciónQuimera(300, 260);
 //            animaciónQuimera1 = new AnimaciónQuimera(0,300);
-            animaciónPersonaje = new AnimaciónPersonaje(0, 0);
+            animaciónPersonaje = new AnimaciónPersonaje(50, 0);
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(CuevaController.class.getName()).log(Level.SEVERE, null, ex);
@@ -102,11 +103,6 @@ public class CuevaController implements Initializable {
         this.canvas = new Canvas(813, 400);
         stackPane.getChildren().add(canvas);
   
-        //Movimiento personaje
-        GridPane gridPane = animaciónPersonaje.hiloPersonaje(stackPane);
-        stackPane.getChildren().add(gridPane);
-//        gridPane = animaciónQuimera.hiloQuimera();
-//        stackPane.getChildren().add(gridPane);
         
         //Hilos
         run();
@@ -114,14 +110,17 @@ public class CuevaController implements Initializable {
         animaciónZombie1.hiloZombie();
         animaciónQuimera.hiloQuimera();
 //        animaciónQuimera1.hiloQuimera();
+        animaciónPersonaje.hiloPersonaje(stackPane, 310);
     }
     
     public void prueba() throws InterruptedException {
-        int a = this.animaciónZombie.getX();
-        int b = this.animaciónQuimera.getX();
+        int a = this.animaciónZombie.getX() + 8;
+        int b = this.animaciónQuimera.getX() - 8;
         if (a == b) {
             System.out.println("chocaron");
+ 
         }
+
     }
 
 }

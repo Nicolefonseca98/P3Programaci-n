@@ -33,30 +33,21 @@ public class AnimaciónQuimera extends Quimera{
     }
 
     public void hiloQuimera()  {
-        ArrayList<Image> sprite = super.getSprite();
-        int[][] matriz = new int[5][5];
+       ArrayList<Image> sprite = super.getSprite();
         Runnable runnable = () -> {
             while (true) {
                 try {
-                    System.out.println("hola");
-//                    int j = 0; //Indice en lista de imágenes.
-//                    for (int x = super.getX(); x >= 0; x -= 2) { //Recorrido del zombie.
-//                        if (j >= 2) {
-//                            j = 0;
-//                        }
-//                        super.setImage(sprite.get(j));
-//                        super.setX(x);
-//                        super.setY(super.getY());
-//                        for (int i = 0; i < matriz.length; i++) {
-//                            for (int j = 0; j < matriz[0].length; j++) {
-//                                System.out.println(matriz[i][j]);
-//                            }
-//                            
-//                    }
-                        
-                        Thread.sleep(400);
-//                        j++;
-//                    }
+                    int j = 0; //Indice en lista de imágenes.
+                    for (int x = super.getX(); x >= 0; x -= 2) { //Recorrido de la quimera.
+                        if (j >= 2) {
+                            j = 0;
+                        }
+                        super.setImage(sprite.get(j));
+                        super.setX(x);
+                        super.setY(super.getY());
+                        Thread.sleep(1000);
+                        j++;
+                    }
 
                 } catch (InterruptedException ex) {
                 }

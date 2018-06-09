@@ -53,7 +53,6 @@ public class AnimaciónZombie extends Zombie{
         
         Thread hiloZombie = new Thread(runnable);
         hiloZombie.start();
-       
     }
     
 }
