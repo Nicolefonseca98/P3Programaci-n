@@ -52,32 +52,36 @@ public class AnimaciónPersonaje extends Personaje{
         
         ArrayList<Image> sprite = super.getSprite();
             stackPane.setOnKeyPressed(e -> {
-//                if (j >= 3) { //Indice en lista de imágenes.
-//                    j = 0;
-//                }
+                if (j >= 3) { //Indice en lista de imágenes.
+                    j = 0;
+                }
                 if (e.getCode() == KeyCode.RIGHT) {
                     gridPane.getChildren().clear();
+                    imageView.setImage(super.getSprite().get(j));
                     gridPane.add(imageView, x, 63);
                     x++;
+                    j++;
                 }
                 if (e.getCode() == KeyCode.LEFT) {
-                    
-                
+                    gridPane.getChildren().clear();
+                    imageView.setImage(super.getSprite().get(3));
+                    gridPane.add(imageView, x, 63);
+                    x--;
                 }
                 if (e.getCode() == KeyCode.A) {
-                    System.out.println("espada");
+                    imageView.setImage(super.getSprite().get(4));
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/espada.wav").toString());
 //                    note.play();
                     
                 }
                 if (e.getCode() == KeyCode.S) {
-                    System.out.println("látigo");
+                    imageView.setImage(super.getSprite().get(5));
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/latigo.wav").toString());
 //                    note.play();
                     
                 }
                 if (e.getCode() == KeyCode.D) {
-                    System.out.println("pala");
+                    imageView.setImage(super.getSprite().get(6));
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/pala.mp3").toString());
 //                    note.play();
                 }

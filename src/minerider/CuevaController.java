@@ -1,7 +1,6 @@
 
 package minerider;
 
-
 import animación.AnimaciónCueva;
 import animación.AnimaciónPersonaje;
 import animación.AnimaciónQuimera;
@@ -17,7 +16,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
@@ -36,6 +34,7 @@ public class CuevaController implements Initializable {
     private Image cueva1;
     private Canvas canvas;
     private AnimaciónZombie animaciónZombie;
+    private AnimaciónZombie animaciónZombie1;
     private AnimaciónQuimera animaciónQuimera;
     private AnimaciónQuimera animaciónQuimera1;
     private AnimaciónPersonaje animaciónPersonaje;
@@ -55,7 +54,9 @@ public class CuevaController implements Initializable {
                     inicio = System.nanoTime();
                     transcurrido = System.nanoTime() - inicio;
                     tiempoEspera = tiempo - transcurrido / 1000000;
+                    prueba();
                     Thread.sleep(tiempoEspera);
+                    
                     GraphicsContext graphicsContext = this.canvas.getGraphicsContext2D();
                     draw(graphicsContext);
                 } catch (InterruptedException ex) {
@@ -71,9 +72,9 @@ public class CuevaController implements Initializable {
     private void draw(GraphicsContext graphicsContext){
         graphicsContext.clearRect(0, 0, 813, 400);
         graphicsContext.drawImage(this.animaciónZombie.getImage(), this.animaciónZombie.getX(), this.animaciónZombie.getY());
+        graphicsContext.drawImage(this.animaciónZombie1.getImage(), this.animaciónZombie1.getX(), this.animaciónZombie1.getY());
         graphicsContext.drawImage(this.animaciónQuimera.getImage(), this.animaciónQuimera.getX(), this.animaciónQuimera.getY());
-        graphicsContext.drawImage(this.animaciónQuimera1.getImage(), this.animaciónQuimera1.getX(), this.animaciónQuimera1.getY());
-//        graphicsContext.drawImage(this.animaciónPersonaje.getImage(), this.animaciónPersonaje.getX(), this.animaciónPersonaje.getY());
+//        graphicsContext.drawImage(this.animaciónQuimera1.getImage(), this.animaciónQuimera1.getX(), this.animaciónQuimera1.getY());
     }
    
    @Override
@@ -87,28 +88,40 @@ public class CuevaController implements Initializable {
         
         //Personajes
         try {
-            animaciónZombie = new AnimaciónZombie(100, 100);
-            animaciónQuimera = new AnimaciónQuimera(0, 0);
-            animaciónQuimera1 = new AnimaciónQuimera(0, 0);
+            animaciónZombie = new AnimaciónZombie(100, 300);
+            animaciónZombie1 = new AnimaciónZombie(100, 100);
+            animaciónQuimera = new AnimaciónQuimera(300, 260);
+//            animaciónQuimera1 = new AnimaciónQuimera(0,300);
             animaciónPersonaje = new AnimaciónPersonaje(0, 0);
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(CuevaController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         //Canvas
         this.canvas = new Canvas(813, 400);
         stackPane.getChildren().add(canvas);
   
         //Movimiento personaje
         GridPane gridPane = animaciónPersonaje.hiloPersonaje(stackPane);
-
         stackPane.getChildren().add(gridPane);
+//        gridPane = animaciónQuimera.hiloQuimera();
+//        stackPane.getChildren().add(gridPane);
+        
         //Hilos
         run();
         animaciónZombie.hiloZombie();
-        animaciónQuimera.hiloQuimera(265);
-        animaciónQuimera1.hiloQuimera(265);
-      
+        animaciónZombie1.hiloZombie();
+        animaciónQuimera.hiloQuimera();
+//        animaciónQuimera1.hiloQuimera();
+    }
+    
+    public void prueba() throws InterruptedException {
+        int a = this.animaciónZombie.getX();
+        int b = this.animaciónQuimera.getX();
+        if (a == b) {
+            System.out.println("chocaron");
+        }
     }
 
 }

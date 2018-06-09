@@ -5,7 +5,12 @@ import dominio.Quimera;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 
 /**
  *
@@ -26,23 +31,32 @@ public class AnimaciónQuimera extends Quimera{
         sprite.add(new Image(new FileInputStream("src/quimera/quimeraIzquierda.png")));
         sprite.add(new Image(new FileInputStream("src/quimera/quimeraIzquierdaAtaque.png")));
     }
-    
-    public void hiloQuimera(int y) {   
+
+    public void hiloQuimera()  {
         ArrayList<Image> sprite = super.getSprite();
+        int[][] matriz = new int[5][5];
         Runnable runnable = () -> {
             while (true) {
                 try {
-                    int j = 0; //Indice en lista de imágenes.
-                    for (int x = 1000; x >= 100; x -= 30) { //Recorrido de la quimera.
-                        if (j >= 2) {
-                            j = 0;
-                        }
-                        super.setImage(sprite.get(j));
-                        super.setX(x);
-                        super.setY(y);
-                        Thread.sleep(1000);
-                        j++;
-                    }
+                    System.out.println("hola");
+//                    int j = 0; //Indice en lista de imágenes.
+//                    for (int x = super.getX(); x >= 0; x -= 2) { //Recorrido del zombie.
+//                        if (j >= 2) {
+//                            j = 0;
+//                        }
+//                        super.setImage(sprite.get(j));
+//                        super.setX(x);
+//                        super.setY(super.getY());
+//                        for (int i = 0; i < matriz.length; i++) {
+//                            for (int j = 0; j < matriz[0].length; j++) {
+//                                System.out.println(matriz[i][j]);
+//                            }
+//                            
+//                    }
+                        
+                        Thread.sleep(400);
+//                        j++;
+//                    }
 
                 } catch (InterruptedException ex) {
                 }

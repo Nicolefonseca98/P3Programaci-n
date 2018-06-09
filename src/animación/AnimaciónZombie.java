@@ -35,13 +35,13 @@ public class AnimaciónZombie extends Zombie{
             while (true) {
                 try {
                     int j = 0; //Indice en lista de imágenes.
-                    for (int x = super.getX(); x <= 700; x += 3) { //Recorrido del zombie.
+                    for (int x = super.getX(); x <= 700; x += 2) { //Recorrido del zombie.
                         if (j >= 2) {
                             j = 0;
                         }
                         super.setImage(sprite.get(j));
                         super.setX(x);
-                        super.setY(303);
+                        super.setY(super.getY());
                         Thread.sleep(400);
                         j++;
                     }
@@ -53,6 +53,7 @@ public class AnimaciónZombie extends Zombie{
         
         Thread hiloZombie = new Thread(runnable);
         hiloZombie.start();
+       
     }
     
 }

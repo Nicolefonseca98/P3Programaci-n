@@ -28,6 +28,7 @@ public class MineRider extends Application {
         stage.setTitle("MineRider");
         stage.getIcons().add(new Image("/starlord/prueba.png")); 
         scene.getRoot().requestFocus();
+        stage.setResizable(false);
         stage.setOnCloseRequest(e -> {
         Platform.exit();
         System.exit(0);
