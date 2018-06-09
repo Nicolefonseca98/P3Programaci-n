@@ -74,7 +74,7 @@ public class CuevaController implements Initializable {
         graphicsContext.drawImage(this.animaciónZombie.getImage(), this.animaciónZombie.getX(), this.animaciónZombie.getY());
         graphicsContext.drawImage(this.animaciónZombie1.getImage(), this.animaciónZombie1.getX(), this.animaciónZombie1.getY());
         graphicsContext.drawImage(this.animaciónQuimera.getImage(), this.animaciónQuimera.getX(), this.animaciónQuimera.getY());
-//        graphicsContext.drawImage(this.animaciónQuimera1.getImage(), this.animaciónQuimera1.getX(), this.animaciónQuimera1.getY());
+        graphicsContext.drawImage(this.animaciónQuimera1.getImage(), this.animaciónQuimera1.getX(), this.animaciónQuimera1.getY());
         graphicsContext.drawImage(this.animaciónPersonaje.getImage(), this.animaciónPersonaje.getX(), animaciónPersonaje.getY());
     }
    
@@ -90,9 +90,9 @@ public class CuevaController implements Initializable {
         //Personajes
         try {
             animaciónZombie = new AnimaciónZombie(100, 300);
-            animaciónZombie1 = new AnimaciónZombie(100, 100);
-            animaciónQuimera = new AnimaciónQuimera(300, 260);
-//            animaciónQuimera1 = new AnimaciónQuimera(0,300);
+            animaciónZombie1 = new AnimaciónZombie(150, 300);
+            animaciónQuimera = new AnimaciónQuimera(300, 272);
+            animaciónQuimera1 = new AnimaciónQuimera(350,272);
             animaciónPersonaje = new AnimaciónPersonaje(50, 0);
             
         } catch (FileNotFoundException ex) {
@@ -109,7 +109,7 @@ public class CuevaController implements Initializable {
         animaciónZombie.hiloZombie();
         animaciónZombie1.hiloZombie();
         animaciónQuimera.hiloQuimera();
-//        animaciónQuimera1.hiloQuimera();
+        animaciónQuimera1.hiloQuimera();
         animaciónPersonaje.hiloPersonaje(stackPane, 310);
     }
     

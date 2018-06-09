@@ -60,7 +60,7 @@ public class AnimaciónPersonaje extends Personaje{
             }
             if (e.getCode() == KeyCode.LEFT) {
                 super.setImage(sprite.get(3));
-                super.setX(x += 10);
+                super.setX(x -= 10);
                 super.setY(y);
                 try {
                     Thread.sleep(500);
