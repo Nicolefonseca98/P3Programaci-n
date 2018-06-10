@@ -103,7 +103,7 @@ public class CuevaController implements Initializable {
             animaciónZombie = new AnimaciónZombie(100, 300);
             animaciónZombie1 = new AnimaciónZombie(150, 300);
             animaciónQuimera = new AnimaciónQuimera(300, 272);
-            animaciónQuimera1 = new AnimaciónQuimera(350,272);
+            animaciónQuimera1 = new AnimaciónQuimera(400,272);
             animaciónPersonaje = new AnimaciónPersonaje(50, 0);
             
         } catch (FileNotFoundException ex) {
@@ -124,11 +124,13 @@ public class CuevaController implements Initializable {
         animaciónPersonaje.hiloPersonaje(stackPane, 310);
     }
     
-    public void prueba() throws InterruptedException {
+    public void prueba()  {
         int a = this.animaciónZombie.getX() + 8;
-        int b = this.animaciónQuimera.getX() - 8;
-        int c = this.animaciónPersonaje.getX() + 8; 
-        if (c == a || c == b) {
+        int b = this.animaciónZombie1.getX() + 8;
+        int c = this.animaciónQuimera.getX() - 8;
+        int d = this.animaciónQuimera1.getX() - 8;
+        int e = this.animaciónPersonaje.getX() + 8; 
+        if (e == a || e == b || e == c || e == d) {
             System.out.println("chocaron");
  
         }

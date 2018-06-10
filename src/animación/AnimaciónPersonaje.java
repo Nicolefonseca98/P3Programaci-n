@@ -48,7 +48,7 @@ public class AnimaciónPersonaje extends Personaje{
                     j = 0;
                 }
                 super.setImage(sprite.get(j));
-                super.setX(x += 6);
+                super.setX(x += 8);
                 super.setY(y);
                 j++;
                 try {
