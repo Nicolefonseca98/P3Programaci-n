@@ -5,8 +5,6 @@ import dominio.Personaje;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
@@ -47,61 +45,41 @@ public class AnimaciónPersonaje extends Personaje{
                 if (j >= 3) {
                     j = 0;
                 }
+                if(x <= 783 && x >= 0) {
                 super.setImage(sprite.get(j));
-                super.setX(x += 8);
-                super.setY(y);
-                j++;
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
+                super.setX(x += 10);
+                super.setY(y); 
                 }
+                j++;
 
             }
-            if (e.getCode() == KeyCode.LEFT) {
+            if (e.getCode() == KeyCode.LEFT) { 
+                if(x > 0) {
                 super.setImage(sprite.get(3));
-                super.setX(x -= 6);
+                super.setX(x -= 10);
                 super.setY(y);
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
                 }
+         
             }
             if (e.getCode() == KeyCode.A) {
                 super.setImage(sprite.get(4));
-                super.setX(x += 6);
+                super.setX(x);
                 super.setY(y);
-                try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
-                    }
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/espada.wav").toString());
 //                    note.play();
 
             }
             if (e.getCode() == KeyCode.S) {
                 super.setImage(sprite.get(5));
-                super.setX(x += 6);
+                super.setX(x);
                 super.setY(y);
-                try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
-                    }
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/latigo.wav").toString());
 //                    note.play();
             }
             if (e.getCode() == KeyCode.D) {
                 super.setImage(sprite.get(6));
-                super.setX(x += 6);
+                super.setX(x);
                 super.setY(y);
-                try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(AnimaciónPersonaje.class.getName()).log(Level.SEVERE, null, ex);
-                    }
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/pala.mp3").toString());
 //                    note.play();
             }

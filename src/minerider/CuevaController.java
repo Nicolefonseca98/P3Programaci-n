@@ -125,11 +125,11 @@ public class CuevaController implements Initializable {
     }
     
     public void prueba()  {
-        int a = this.animaciónZombie.getX() + 8;
-        int b = this.animaciónZombie1.getX() + 8;
-        int c = this.animaciónQuimera.getX() - 8;
-        int d = this.animaciónQuimera1.getX() - 8;
-        int e = this.animaciónPersonaje.getX() + 8; 
+        int a = this.animaciónZombie.getX();
+        int b = this.animaciónZombie1.getX();
+        int c = this.animaciónQuimera.getX();
+        int d = this.animaciónQuimera1.getX();
+        int e = this.animaciónPersonaje.getX(); 
         if (e == a || e == b || e == c || e == d) {
             System.out.println("chocaron");
  
