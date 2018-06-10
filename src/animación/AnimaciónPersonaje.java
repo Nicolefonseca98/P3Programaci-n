@@ -40,8 +40,8 @@ public class AnimaciónPersonaje extends Personaje{
 
     public void hiloPersonaje(StackPane stackPane, int y) {
         ArrayList<Image> sprite = super.getSprite();
-        stackPane.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.RIGHT) {
+        stackPane.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.RIGHT) {
                 if (j >= 3) {
                     j = 0;
                 }
@@ -53,15 +53,32 @@ public class AnimaciónPersonaje extends Personaje{
                 j++;
 
             }
-            if (e.getCode() == KeyCode.LEFT) { 
+            
+            if (event.getCode() == KeyCode.LEFT) { 
                 if(x > 0) {
                 super.setImage(sprite.get(3));
                 super.setX(x -= 10);
                 super.setY(y);
                 }
-         
             }
-            if (e.getCode() == KeyCode.A) {
+            
+            if (event.getCode() == KeyCode.UP) {
+                if (!super.getImage().equals(sprite.get(3))) {
+                    super.setImage(sprite.get(0));
+                    super.setX(x);
+                    int auxY = y;
+                    auxY -= 90;
+                    super.setY(auxY);
+                } else {
+                    super.setImage(sprite.get(3));
+                    super.setX(x);
+                    int auxY = y;
+                    auxY -= 90;
+                    super.setY(auxY);
+                }
+            }
+            
+            if (event.getCode() == KeyCode.A) {
                 super.setImage(sprite.get(4));
                 super.setX(x);
                 super.setY(y);
@@ -69,21 +86,37 @@ public class AnimaciónPersonaje extends Personaje{
 //                    note.play();
 
             }
-            if (e.getCode() == KeyCode.S) {
+            
+            if (event.getCode() == KeyCode.S) {
                 super.setImage(sprite.get(5));
                 super.setX(x);
                 super.setY(y);
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/latigo.wav").toString());
 //                    note.play();
             }
-            if (e.getCode() == KeyCode.D) {
+            
+            if (event.getCode() == KeyCode.D) {
                 super.setImage(sprite.get(6));
                 super.setX(x);
                 super.setY(y);
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/pala.mp3").toString());
 //                    note.play();
             }
+        });
+        
+        stackPane.setOnKeyReleased(event -> {
+            if (event.getCode() == KeyCode.UP) {
+                if (!super.getImage().equals(sprite.get(3))) {
+                    super.setImage(sprite.get(0));
+                    super.setX(x += 35);
+                    super.setY(y);
 
+                } else {
+                    super.setImage(sprite.get(3));
+                    super.setX(x -= 35);
+                    super.setY(y);
+                }
+            }
         });
     }
 }
