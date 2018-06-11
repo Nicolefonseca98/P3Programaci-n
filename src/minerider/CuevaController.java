@@ -145,8 +145,15 @@ public class CuevaController implements Initializable {
     }
 
     public void colision() throws InterruptedException {
+       int counter = 0;
         if (obstaculo()) {
             System.out.println("colision");
+            counter ++;
+            
+          if (counter < 2){
+              System.out.println("mori");
+          }
+            System.out.println(counter);
         }
     }
 

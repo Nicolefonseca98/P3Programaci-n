@@ -1,4 +1,3 @@
-
 package animación;
 
 import dominio.Personaje;
@@ -15,8 +14,8 @@ import minerider.CuevaController;
  *
  * @author Nicole Fonseca, Wilmer Mata
  */
-public class AnimaciónPersonaje extends Personaje{
-
+public class AnimaciónPersonaje extends Personaje {
+  long time;
     public AnimaciónPersonaje() {
     }
 
@@ -24,7 +23,7 @@ public class AnimaciónPersonaje extends Personaje{
         super(x, y);
         setSprite();
     }
-    
+
     public void setSprite() throws FileNotFoundException {
         ArrayList<Image> sprite = super.getSprite();
         sprite.add(new Image(new FileInputStream("src/starlord/sl1.png")));
@@ -35,51 +34,64 @@ public class AnimaciónPersonaje extends Personaje{
         sprite.add(new Image(new FileInputStream("src/starlord/derechaLatigo.png")));
         sprite.add(new Image(new FileInputStream("src/starlord/derechaPala.png")));
     }
-  
+
     int x = 0;
     int j = 0;
 
     public void movimientPersonaje(StackPane stackPane, int y) {
         ArrayList<Image> sprite = super.getSprite();
         
-        stackPane.setOnKeyPressed(event -> {  
+       
+        stackPane.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.RIGHT) {
                 if (j >= 3) {
                     j = 0;
                 }
-                if(x <= 783 && x >= 0) {
-                super.setImage(sprite.get(j));
-                super.setX(x += 10);
-                super.setY(y); 
+                if (x <= 783 && x >= 0) {
+                    super.setImage(sprite.get(j));
+                    super.setX(x += 10);
+                    super.setY(y);
                 }
                 j++;
-   
+
             }
-            
-            if (event.getCode() == KeyCode.LEFT) { 
-                if(x > 0) {
-                super.setImage(sprite.get(3));
-                super.setX(x -= 10);
-                super.setY(y);
+
+            if (event.getCode() == KeyCode.LEFT) {
+                if (x > 0) {
+                    super.setImage(sprite.get(3));
+                    super.setX(x -= 10);
+                    super.setY(y);
                 }
             }
-            
+     time = System.currentTimeMillis();
             if (event.getCode() == KeyCode.UP) {
+                              
+//                 long longN =  Long.parseLong("1528702234404");
                 if (!super.getImage().equals(sprite.get(3))) {
                     super.setImage(sprite.get(0));
                     super.setX(x);
                     int auxY = y;
                     auxY -= 90;
                     super.setY(auxY);
+
+
+                    if(time == 3000){
+                        System.out.println(time);
+                   
+                }
                 } else {
                     super.setImage(sprite.get(3));
                     super.setX(x);
                     int auxY = y;
                     auxY -= 90;
                     super.setY(auxY);
+
                 }
+                     AudioClip note = new AudioClip(this.getClass().getResource("/music/jump.mp3").toString());
+                    note.play();
+
             }
-            
+
             if (event.getCode() == KeyCode.A) {
                 super.setImage(sprite.get(4));
                 super.setX(x);
@@ -88,7 +100,7 @@ public class AnimaciónPersonaje extends Personaje{
 //                    note.play();
 
             }
-            
+
             if (event.getCode() == KeyCode.S) {
                 super.setImage(sprite.get(5));
                 super.setX(x);
@@ -96,7 +108,7 @@ public class AnimaciónPersonaje extends Personaje{
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/latigo.wav").toString());
 //                    note.play();
             }
-            
+
             if (event.getCode() == KeyCode.D) {
                 super.setImage(sprite.get(6));
                 super.setX(x);
@@ -104,9 +116,13 @@ public class AnimaciónPersonaje extends Personaje{
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/pala.mp3").toString());
 //                    note.play();
             }
-        });
-        
-        stackPane.setOnKeyReleased(event -> {
+
+        }
+        );
+
+        stackPane.setOnKeyReleased(event
+                -> {
+
             if (event.getCode() == KeyCode.UP) {
                 if (!super.getImage().equals(sprite.get(3))) {
                     super.setImage(sprite.get(0));
@@ -119,7 +135,8 @@ public class AnimaciónPersonaje extends Personaje{
                     super.setY(y);
                 }
             }
-        });
+        }
+        );
     }
-    
+
 }
