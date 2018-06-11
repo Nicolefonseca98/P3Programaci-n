@@ -5,6 +5,8 @@ import animación.AnimaciónCueva;
 import animación.AnimaciónPersonaje;
 import animación.AnimaciónQuimera;
 import animación.AnimaciónZombie;
+import java.awt.Rectangle;
+import java.awt.geom.Area;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,14 +14,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
+//import javafx.scene.shape.Rectangle;
 
 /**
  * FXML Controller class
@@ -45,6 +46,8 @@ public class CuevaController implements Initializable {
     private AnimaciónQuimera animaciónQuimera1;
     private AnimaciónPersonaje animaciónPersonaje;
     private AnimaciónCueva animaciónCueva;
+    private Area personaje;
+    private Area cuerpo;
     
     //Hilo principal
     public void run() {
@@ -60,7 +63,7 @@ public class CuevaController implements Initializable {
                     inicio = System.nanoTime();
                     transcurrido = System.nanoTime() - inicio;
                     tiempoEspera = tiempo - transcurrido / 1000000;
-                    prueba();
+                    colision();
                     Thread.sleep(tiempoEspera);
                     GraphicsContext graphicsContext = this.canvas.getGraphicsContext2D();
                     draw(graphicsContext);
@@ -100,6 +103,7 @@ public class CuevaController implements Initializable {
         
         //Personajes
         try {
+         
             animaciónZombie = new AnimaciónZombie(100, 300);
             animaciónZombie1 = new AnimaciónZombie(150, 300);
             animaciónQuimera = new AnimaciónQuimera(300, 272);
@@ -114,27 +118,36 @@ public class CuevaController implements Initializable {
         this.canvas = new Canvas(813, 400);
         stackPane.getChildren().add(canvas);
   
-        
         //Hilos
         run();
         animaciónZombie.hiloZombie();
         animaciónZombie1.hiloZombie();
         animaciónQuimera.hiloQuimera();
         animaciónQuimera1.hiloQuimera();
-        animaciónPersonaje.hiloPersonaje(stackPane, 310);
+        animaciónPersonaje.movimientPersonaje(stackPane, 310);
+        
     }
     
-    public void prueba()  {
-        int a = this.animaciónZombie.getX();
-        int b = this.animaciónZombie1.getX();
-        int c = this.animaciónQuimera.getX();
-        int d = this.animaciónQuimera1.getX();
-        int e = this.animaciónPersonaje.getX(); 
-        if (e == a || e == b || e == c || e == d) {
-            System.out.println("chocaron");
- 
-        }
+    public Boolean obstaculo() {
+        Rectangle forma1 = new Rectangle(animaciónQuimera.getX(), animaciónQuimera.getY(), 38, 40);
+        Area area = new Area(forma1);
+        area.intersect(getBounds());
+        return !area.isEmpty();
+    }
 
+    public Area getBounds() {
+        Rectangle forma1 = new Rectangle(animaciónPersonaje.getX(), animaciónPersonaje.getY(), 38, 40);
+        cuerpo = new Area(forma1);
+        personaje = cuerpo;
+        personaje.add(cuerpo);
+
+        return personaje;
+    }
+
+    public void colision() throws InterruptedException {
+        if (obstaculo()) {
+            System.out.println("colision");
+        }
     }
 
 }

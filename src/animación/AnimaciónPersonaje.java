@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
+import minerider.CuevaController;
 
 /**
  *
@@ -38,9 +39,10 @@ public class AnimaciónPersonaje extends Personaje{
     int x = 0;
     int j = 0;
 
-    public void hiloPersonaje(StackPane stackPane, int y) {
+    public void movimientPersonaje(StackPane stackPane, int y) {
         ArrayList<Image> sprite = super.getSprite();
-        stackPane.setOnKeyPressed(event -> {
+        
+        stackPane.setOnKeyPressed(event -> {  
             if (event.getCode() == KeyCode.RIGHT) {
                 if (j >= 3) {
                     j = 0;
@@ -51,7 +53,7 @@ public class AnimaciónPersonaje extends Personaje{
                 super.setY(y); 
                 }
                 j++;
-
+   
             }
             
             if (event.getCode() == KeyCode.LEFT) { 
@@ -119,4 +121,5 @@ public class AnimaciónPersonaje extends Personaje{
             }
         });
     }
+    
 }
