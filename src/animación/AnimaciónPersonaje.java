@@ -40,8 +40,6 @@ public class AnimaciónPersonaje extends Personaje {
 
     public void movimientPersonaje(StackPane stackPane, int y) {
         ArrayList<Image> sprite = super.getSprite();
-        
-       
         stackPane.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.RIGHT) {
                 if (j >= 3) {
@@ -53,7 +51,6 @@ public class AnimaciónPersonaje extends Personaje {
                     super.setY(y);
                 }
                 j++;
-
             }
 
             if (event.getCode() == KeyCode.LEFT) {
@@ -63,33 +60,27 @@ public class AnimaciónPersonaje extends Personaje {
                     super.setY(y);
                 }
             }
-     time = System.currentTimeMillis();
+
             if (event.getCode() == KeyCode.UP) {
-                              
-//                 long longN =  Long.parseLong("1528702234404");
                 if (!super.getImage().equals(sprite.get(3))) {
-                    super.setImage(sprite.get(0));
-                    super.setX(x);
-                    int auxY = y;
-                    auxY -= 90;
-                    super.setY(auxY);
-
-
-                    if(time == 3000){
-                        System.out.println(time);
-                   
-                }
+                    if (x > 0 && x < 765) {
+                        super.setImage(sprite.get(0));
+                        super.setX(x);
+                        int auxY = y;
+                        auxY -= 90;
+                        super.setY(auxY);
+                    }
                 } else {
-                    super.setImage(sprite.get(3));
-                    super.setX(x);
-                    int auxY = y;
-                    auxY -= 90;
-                    super.setY(auxY);
-
+                    if (x > 25) {
+                        super.setImage(sprite.get(3));
+                        super.setX(x);
+                        int auxY = y;
+                        auxY -= 90;
+                        super.setY(auxY);
+                    }
+//                    AudioClip note = new AudioClip(this.getClass().getResource("/music/jump.mp3").toString());
+//                    note.play();
                 }
-                     AudioClip note = new AudioClip(this.getClass().getResource("/music/jump.mp3").toString());
-                    note.play();
-
             }
 
             if (event.getCode() == KeyCode.A) {
@@ -98,7 +89,6 @@ public class AnimaciónPersonaje extends Personaje {
                 super.setY(y);
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/espada.wav").toString());
 //                    note.play();
-
             }
 
             if (event.getCode() == KeyCode.S) {
@@ -116,27 +106,25 @@ public class AnimaciónPersonaje extends Personaje {
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/pala.mp3").toString());
 //                    note.play();
             }
+        });
 
-        }
-        );
-
-        stackPane.setOnKeyReleased(event
-                -> {
-
+        stackPane.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.UP) {
                 if (!super.getImage().equals(sprite.get(3))) {
-                    super.setImage(sprite.get(0));
-                    super.setX(x += 35);
-                    super.setY(y);
-
+                    if (x > 0 && x < 765) {
+                        super.setImage(sprite.get(0));
+                        super.setX(x += 30);
+                        super.setY(y);
+                    }
                 } else {
-                    super.setImage(sprite.get(3));
-                    super.setX(x -= 35);
-                    super.setY(y);
+                    if (x > 25) {
+                        super.setImage(sprite.get(3));
+                        super.setX(x -= 30);
+                        super.setY(y);
+                    }
                 }
             }
-        }
-        );
+        });
     }
 
 }
