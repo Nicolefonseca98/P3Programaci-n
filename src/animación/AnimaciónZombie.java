@@ -18,8 +18,8 @@ public class AnimaciónZombie extends Zombie{
     public AnimaciónZombie() {
     }
 
-    public AnimaciónZombie(int x, int y) throws FileNotFoundException {
-        super(x, y);
+    public AnimaciónZombie(int x, int y, int heart) throws FileNotFoundException {
+        super(x, y, heart);
         setSprite();
     }
     

@@ -15,12 +15,15 @@ import minerider.CuevaController;
  * @author Nicole Fonseca, Wilmer Mata
  */
 public class AnimaciónPersonaje extends Personaje {
-  long time;
+
+    long time;
+
     public AnimaciónPersonaje() {
     }
 
     public AnimaciónPersonaje(int x, int y) throws FileNotFoundException {
-        super(x, y);
+     
+        super(x, y, 3);
         setSprite();
     }
 
@@ -40,6 +43,9 @@ public class AnimaciónPersonaje extends Personaje {
 
     public void movimientPersonaje(StackPane stackPane, int y) {
         ArrayList<Image> sprite = super.getSprite();
+        super.setImage(sprite.get(0));
+        super.setX(x);
+        super.setY(y);
         stackPane.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.RIGHT) {
                 if (j >= 3) {

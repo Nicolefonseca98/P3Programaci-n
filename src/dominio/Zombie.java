@@ -13,8 +13,8 @@ public class Zombie extends Personaje{
     public Zombie() {
     }
 
-    public Zombie(int x, int y) throws FileNotFoundException {
-        super(x, y);
+    public Zombie(int x, int y, int heart) throws FileNotFoundException {
+        super(x, y, heart);
     }
    
 }

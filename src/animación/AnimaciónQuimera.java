@@ -21,8 +21,8 @@ public class AnimaciónQuimera extends Quimera{
     public AnimaciónQuimera() {
     }
 
-    public AnimaciónQuimera(int x, int y) throws FileNotFoundException {
-        super(x, y);
+    public AnimaciónQuimera(int x, int y, int heart) throws FileNotFoundException {
+        super(x, y, heart);
         setSprite();
     }
     
