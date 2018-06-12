@@ -15,7 +15,7 @@ import minerider.CuevaController;
  * @author Nicole Fonseca, Wilmer Mata
  */
 public class AnimaciónPersonaje extends Personaje {
-
+    CuevaController cuevaController = new CuevaController();
     long time;
 
     public AnimaciónPersonaje() {
@@ -23,7 +23,7 @@ public class AnimaciónPersonaje extends Personaje {
 
     public AnimaciónPersonaje(int x, int y) throws FileNotFoundException {
      
-        super(x, y, 3);
+        super(x, y);
         setSprite();
     }
 
@@ -93,6 +93,8 @@ public class AnimaciónPersonaje extends Personaje {
                 super.setImage(sprite.get(4));
                 super.setX(x);
                 super.setY(y);
+                int a= 1;
+                cuevaController.detectaArma(a);
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/espada.wav").toString());
 //                    note.play();
             }
@@ -101,6 +103,7 @@ public class AnimaciónPersonaje extends Personaje {
                 super.setImage(sprite.get(5));
                 super.setX(x);
                 super.setY(y);
+                cuevaController.detectaArma(2);
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/latigo.wav").toString());
 //                    note.play();
             }
@@ -109,6 +112,7 @@ public class AnimaciónPersonaje extends Personaje {
                 super.setImage(sprite.get(6));
                 super.setX(x);
                 super.setY(y);
+                cuevaController.detectaArma(3);
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/pala.mp3").toString());
 //                    note.play();
             }

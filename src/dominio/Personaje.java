@@ -20,10 +20,9 @@ public class Personaje {
     public Personaje() {
     }
 
-    public Personaje(int x, int y , int heart) {
+    public Personaje(int x, int y) {
         this.x = x;
         this.y = y;
-        this.heart = heart;
         this.sprite = new ArrayList<>();
 
     }
@@ -56,13 +55,6 @@ public class Personaje {
         this.y = y;
     }
     
-    public int getHeart(){
-       return heart;
-    }
-
-    public void setHeart(int heart){
-        this.heart = heart;
-    }
     /**
      * @return the image
      */

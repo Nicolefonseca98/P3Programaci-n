@@ -105,10 +105,10 @@ public class CuevaController implements Initializable {
         //Personajes
         try {
 
-            animaciónZombie = new AnimaciónZombie(100, 300, 3);
-            animaciónZombie1 = new AnimaciónZombie(225, 300, 3);
-            animaciónQuimera = new AnimaciónQuimera(500, 272, 3);
-            animaciónQuimera1 = new AnimaciónQuimera(700, 272, 3);
+            animaciónZombie = new AnimaciónZombie(100, 300);
+            animaciónZombie1 = new AnimaciónZombie(225, 300);
+            animaciónQuimera = new AnimaciónQuimera(500, 272);
+            animaciónQuimera1 = new AnimaciónQuimera(700, 272);
             animaciónPersonaje = new AnimaciónPersonaje(50, 0);
 
         } catch (FileNotFoundException ex) {
@@ -166,6 +166,9 @@ public class CuevaController implements Initializable {
         if (obstaculo()) {
             corazonPersonaje++;
             System.out.println("golpe");
+//            if(detectaArma()){
+                
+//            }
         }
         switch (corazonPersonaje) {
             case 0:
@@ -189,5 +192,15 @@ public class CuevaController implements Initializable {
                 corazon3.setImage(corazonVacio);
                 break;
         }
+    }
+    public int detectaArma(int arma){
+        if (arma==1) {
+            return 1;
+        } else if(arma == 2){
+            return 2;
+        } else if(arma == 3){
+            return 3;
+        }
+        return 0;
     }
 }
