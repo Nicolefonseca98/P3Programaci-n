@@ -15,6 +15,7 @@ import minerider.CuevaController;
  * @author Nicole Fonseca, Wilmer Mata
  */
 public class AnimaciónPersonaje extends Personaje {
+
     CuevaController cuevaController = new CuevaController();
     long time;
 
@@ -22,7 +23,7 @@ public class AnimaciónPersonaje extends Personaje {
     }
 
     public AnimaciónPersonaje(int x, int y) throws FileNotFoundException {
-     
+
         super(x, y);
         setSprite();
     }
@@ -40,8 +41,9 @@ public class AnimaciónPersonaje extends Personaje {
 
     int x = 450;
     int j = 0;
-    int arma = 0; 
-    public int movimientPersonaje(StackPane stackPane, int y) {
+    int arma = 0;
+
+    public void movimientPersonaje(StackPane stackPane, int y) {
         ArrayList<Image> sprite = super.getSprite();
         super.setImage(sprite.get(0));
         super.setX(x);
@@ -57,6 +59,7 @@ public class AnimaciónPersonaje extends Personaje {
                     super.setY(y);
                 }
                 j++;
+                arma = 0;
             }
 
             if (event.getCode() == KeyCode.LEFT) {
@@ -65,6 +68,7 @@ public class AnimaciónPersonaje extends Personaje {
                     super.setX(x -= 10);
                     super.setY(y);
                 }
+                arma = 0;
             }
 
             if (event.getCode() == KeyCode.UP) {
@@ -87,13 +91,14 @@ public class AnimaciónPersonaje extends Personaje {
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/jump.mp3").toString());
 //                    note.play();
                 }
+                arma = 0;
             }
 
             if (event.getCode() == KeyCode.A) {
                 super.setImage(sprite.get(4));
                 super.setX(x);
                 super.setY(y);
-                int a= 1;
+                int a = 1;
                 arma = 1;
 
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/espada.wav").toString());
@@ -138,7 +143,17 @@ public class AnimaciónPersonaje extends Personaje {
                 }
             }
         });
-           return arma;
+    }
+
+    public int arma() {
+        if (arma == 1) {
+            return 1;
+        } else if (arma == 2) {
+            return 2;
+        } else if (arma == 3) {
+            return 3;
+        }
+        return 0;
     }
 
 }

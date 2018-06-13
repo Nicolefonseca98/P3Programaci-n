@@ -1,4 +1,3 @@
-
 package animación;
 
 import dominio.Quimera;
@@ -16,7 +15,9 @@ import javafx.scene.layout.GridPane;
  *
  * @author Nicole Fonseca, Wilmer Mata
  */
-public class AnimaciónQuimera extends Quimera{
+public class AnimaciónQuimera extends Quimera {
+  Thread hiloQuimera;
+    int j = 0; //Indice en lista de imágenes.
 
     public AnimaciónQuimera() {
     }
@@ -25,19 +26,19 @@ public class AnimaciónQuimera extends Quimera{
         super(x, y);
         setSprite();
     }
-    
+
     public void setSprite() throws FileNotFoundException {
         ArrayList<Image> sprite = super.getSprite();
         sprite.add(new Image(new FileInputStream("src/quimera/quimeraIzquierda.png")));
         sprite.add(new Image(new FileInputStream("src/quimera/quimeraIzquierdaAtaque.png")));
     }
 
-    public void hiloQuimera()  {
-       ArrayList<Image> sprite = super.getSprite();
+    public void hiloQuimera() {
+        ArrayList<Image> sprite = super.getSprite();
         Runnable runnable = () -> {
             while (true) {
                 try {
-                    int j = 0; //Indice en lista de imágenes.
+
                     for (int x = super.getX(); x >= 0; x -= 15) { //Recorrido de la quimera.
                         if (j >= 2) {
                             j = 0;
@@ -53,8 +54,20 @@ public class AnimaciónQuimera extends Quimera{
                 }
             }
         };
-        Thread hiloQuimera = new Thread(runnable);
+        hiloQuimera = new Thread(runnable);
         hiloQuimera.start();
     }
-   
+    
+    public void duermeQuimera() throws InterruptedException{
+        Thread.currentThread().getName();
+    }
+
+    public Boolean llamarada() {
+        if (j == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

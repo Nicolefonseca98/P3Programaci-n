@@ -79,7 +79,7 @@ public class CuevaController implements Initializable {
                 }
             }
         };
-        
+
         Thread hilo = new Thread(runnable);
         hilo.start();
     }
@@ -170,9 +170,8 @@ public class CuevaController implements Initializable {
      * Detecta si hay una colisión entre el personaje y algún monstruo.
      *
      */
-    public void colisión() throws FileNotFoundException {
+    public void colisión() throws FileNotFoundException, InterruptedException {
 
-        int arma = animaciónPersonaje.movimientPersonaje(stackPane, 310);
         Boolean obstaculo = false;
         corazonLleno = new Image("/starlord/heart.png");
         corazonVacio = new Image("/starlord/emptyHeart.png");
@@ -189,26 +188,21 @@ public class CuevaController implements Initializable {
             }
         }
         for (int i = 0; i < arrayListZombie.size(); i++) {
-                Area areaZombie = null;
+            Area areaZombie = null;
             AnimaciónZombie auxAnimaciónZombie = arrayListZombie.get(i);
             Rectangle zombie = new Rectangle(auxAnimaciónZombie.getX(), auxAnimaciónZombie.getY(), 38, 40);
             areaZombie = new Area(zombie);
             areaZombie.intersect(getBounds());
-            if(!areaZombie.isEmpty()){
+            if (!areaZombie.isEmpty()) {
                 obstaculo = true;
             }
         }
 
         if (obstaculo == true) {
-            if (arma == 1){
-            corazonPersonaje++;
-            System.out.println("Quita vida");
-            }
-//            if(detectaArma()){
-//                
-//            }
-        }
-        switch (corazonPersonaje) {
+            animaciónQuimera.duermeQuimera();
+            if (animaciónQuimera.llamarada() == true || animaciónZombie.muerdeCerebro() == true) {
+                corazonPersonaje++;
+                  switch (corazonPersonaje) {
             case 0:
                 corazon1.setImage(corazonLleno);
                 corazon2.setImage(corazonLleno);
@@ -230,6 +224,20 @@ public class CuevaController implements Initializable {
                 corazon3.setImage(corazonVacio);
                 break;
         }
+                System.out.println("Rawr");
+            } else if (animaciónPersonaje.arma() == 1) {
+
+                System.out.println("Ataco quimera");
+            } else if (animaciónPersonaje.arma() == 2) {
+                System.out.println("Latigazo");
+            } else if (animaciónPersonaje.arma() == 3) {
+                System.out.println("Palazo");
+            } else {
+                System.out.println("Desarmado");
+            }
+
+        }
+      
     }
 
 }
