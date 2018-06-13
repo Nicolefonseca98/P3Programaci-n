@@ -79,6 +79,7 @@ public class CuevaController implements Initializable {
                 }
             }
         };
+        
         Thread hilo = new Thread(runnable);
         hilo.start();
     }
