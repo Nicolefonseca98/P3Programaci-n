@@ -51,6 +51,8 @@ public class CuevaController implements Initializable {
     private Area personaje;
     private Area cuerpo;
     private int corazonPersonaje = 0;
+    private int vidasQuimera = 0;
+    private int vidasZombie = 0;
     static ArrayList<AnimaciónQuimera> arrayListQuimera = new ArrayList<>();
     static ArrayList<AnimaciónZombie> arrayListZombie = new ArrayList<>();
 
@@ -178,9 +180,10 @@ public class CuevaController implements Initializable {
 
         Area areaQuimera = null;
         AnimaciónQuimera auxAnimaciónQuimera = null;
+        Rectangle quimera = null;
         for (int i = 0; i < arrayListQuimera.size(); i++) {
             auxAnimaciónQuimera = arrayListQuimera.get(i);
-            Rectangle quimera = new Rectangle(auxAnimaciónQuimera.getX(), auxAnimaciónQuimera.getY(), 38, 40);
+            quimera = new Rectangle(auxAnimaciónQuimera.getX(), auxAnimaciónQuimera.getY(), 38, 40);
             areaQuimera = new Area(quimera);
             areaQuimera.intersect(getBounds());
             if (!areaQuimera.isEmpty()) {
@@ -199,7 +202,6 @@ public class CuevaController implements Initializable {
         }
 
         if (obstaculo == true) {
-            animaciónQuimera.duermeQuimera();
             if (animaciónQuimera.llamarada() == true || animaciónZombie.muerdeCerebro() == true) {
                 corazonPersonaje++;
                   switch (corazonPersonaje) {
@@ -226,7 +228,22 @@ public class CuevaController implements Initializable {
         }
                 System.out.println("Rawr");
             } else if (animaciónPersonaje.arma() == 1) {
-
+                vidasQuimera++;
+                switch(vidasQuimera) {
+                    case 0:
+                        System.out.println("3 vidas");
+                        break;
+                    case 5:
+                        System.out.println("2 vidas");
+                        break;
+                    case 8:
+                        System.out.println("1 vida");
+                        break;
+                    case 12:
+                        canvas.getGraphicsContext2D().clearRect(this.animaciónQuimera.getX(), this.animaciónQuimera.getY(), 38, 40);
+                        System.out.println("*************Murió quimera******************");
+                        break;
+                }
                 System.out.println("Ataco quimera");
             } else if (animaciónPersonaje.arma() == 2) {
                 System.out.println("Latigazo");

@@ -34,15 +34,21 @@ public class AnimaciónPersonaje extends Personaje {
         sprite.add(new Image(new FileInputStream("src/starlord/derecha.png")));
         sprite.add(new Image(new FileInputStream("src/starlord/sl4.png")));
         sprite.add(new Image(new FileInputStream("src/starlord/izquierda.png")));
+        sprite.add(new Image(new FileInputStream("src/starlord/SLI3.png")));
+        sprite.add(new Image(new FileInputStream("src/starlord/SLI4.png")));
         sprite.add(new Image(new FileInputStream("src/starlord/derechaEspada.png")));
         sprite.add(new Image(new FileInputStream("src/starlord/derechaLatigo.png")));
         sprite.add(new Image(new FileInputStream("src/starlord/derechaPala.png")));
+        sprite.add(new Image(new FileInputStream("src/starlord/izquierdaEspada.png")));
+        sprite.add(new Image(new FileInputStream("src/starlord/izquierdaLatigo.png")));
+        sprite.add(new Image(new FileInputStream("src/starlord/izquierdaPala.png")));
     }
 
     int x = 450;
     int j = 0;
     int arma = 0;
-
+    int indice = 3;
+    
     public void movimientPersonaje(StackPane stackPane, int y) {
         ArrayList<Image> sprite = super.getSprite();
         super.setImage(sprite.get(0));
@@ -61,18 +67,24 @@ public class AnimaciónPersonaje extends Personaje {
                 j++;
                 arma = 0;
             }
-
+            
+            
             if (event.getCode() == KeyCode.LEFT) {
                 if (x > 0) {
-                    super.setImage(sprite.get(3));
+                    if(indice >= 6) {
+                        indice = 3;
+                    }
+                    super.setImage(sprite.get(indice));
                     super.setX(x -= 10);
                     super.setY(y);
+                    indice++;
                 }
                 arma = 0;
             }
 
             if (event.getCode() == KeyCode.UP) {
-                if (!super.getImage().equals(sprite.get(3))) {
+                if (super.getImage().equals(sprite.get(0)) || super.getImage().equals(sprite.get(1)) || super.getImage().equals(sprite.get(2))
+                        || super.getImage().equals(sprite.get(6)) || super.getImage().equals(sprite.get(7)) || super.getImage().equals(sprite.get(8))) {
                     if (x > 0 && x < 765) {
                         super.setImage(sprite.get(0));
                         super.setX(x);
@@ -82,11 +94,14 @@ public class AnimaciónPersonaje extends Personaje {
                     }
                 } else {
                     if (x > 25) {
-                        super.setImage(sprite.get(3));
-                        super.setX(x);
-                        int auxY = y;
-                        auxY -= 90;
-                        super.setY(auxY);
+                        if (super.getImage().equals(sprite.get(3)) || super.getImage().equals(sprite.get(4)) || super.getImage().equals(sprite.get(5))
+                                || super.getImage().equals(sprite.get(9)) || super.getImage().equals(sprite.get(10)) || super.getImage().equals(sprite.get(11))) {
+                            super.setImage(sprite.get(3));
+                            super.setX(x);
+                            int auxY = y;
+                            auxY -= 90;
+                            super.setY(auxY);
+                        }
                     }
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/jump.mp3").toString());
 //                    note.play();
@@ -95,10 +110,17 @@ public class AnimaciónPersonaje extends Personaje {
             }
 
             if (event.getCode() == KeyCode.A) {
-                super.setImage(sprite.get(4));
-                super.setX(x);
-                super.setY(y);
-                int a = 1;
+                if (super.getImage().equals(sprite.get(0))|| super.getImage().equals(sprite.get(1)) || super.getImage().equals(sprite.get(2))
+                        || super.getImage().equals(sprite.get(7)) || super.getImage().equals(sprite.get(8))) {
+                    super.setImage(sprite.get(6));
+                    super.setX(x);
+                    super.setY(y);
+                } else if (super.getImage().equals(sprite.get(3)) || super.getImage().equals(sprite.get(4)) || super.getImage().equals(sprite.get(5))
+                        || super.getImage().equals(sprite.get(10)) || super.getImage().equals(sprite.get(11))){
+                    super.setImage(sprite.get(9));
+                    super.setX(x);
+                    super.setY(y);
+                }
                 arma = 1;
 
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/espada.wav").toString());
@@ -106,9 +128,17 @@ public class AnimaciónPersonaje extends Personaje {
             }
 
             if (event.getCode() == KeyCode.S) {
-                super.setImage(sprite.get(5));
-                super.setX(x);
-                super.setY(y);
+                if (super.getImage().equals(sprite.get(0))|| super.getImage().equals(sprite.get(1)) || super.getImage().equals(sprite.get(2))
+                        || super.getImage().equals(sprite.get(6)) || super.getImage().equals(sprite.get(8))) {
+                    super.setImage(sprite.get(7));
+                    super.setX(x);
+                    super.setY(y);
+                } else if (super.getImage().equals(sprite.get(3)) || super.getImage().equals(sprite.get(4)) || super.getImage().equals(sprite.get(5))
+                        || super.getImage().equals(sprite.get(9)) || super.getImage().equals(sprite.get(11))){ 
+                    super.setImage(sprite.get(10));
+                    super.setX(x);
+                    super.setY(y);
+                }
                 arma = 2;
 
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/latigo.wav").toString());
@@ -116,9 +146,18 @@ public class AnimaciónPersonaje extends Personaje {
             }
 
             if (event.getCode() == KeyCode.D) {
-                super.setImage(sprite.get(6));
-                super.setX(x);
-                super.setY(y);
+                if (super.getImage().equals(sprite.get(0)) || super.getImage().equals(sprite.get(1)) || super.getImage().equals(sprite.get(2))
+                        || super.getImage().equals(sprite.get(6)) || super.getImage().equals(sprite.get(7))) {
+                    super.setImage(sprite.get(8));
+                    super.setX(x);
+                    super.setY(y);
+                } else if (super.getImage().equals(sprite.get(3)) || super.getImage().equals(sprite.get(4)) || super.getImage().equals(sprite.get(5))
+                        || super.getImage().equals(sprite.get(9)) || super.getImage().equals(sprite.get(10))) {
+                    super.setImage(sprite.get(11));
+                    super.setX(x);
+                    super.setY(y);
+                    
+                }
                 arma = 3;
 
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/pala.mp3").toString());
@@ -128,17 +167,21 @@ public class AnimaciónPersonaje extends Personaje {
 
         stackPane.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.UP) {
-                if (!super.getImage().equals(sprite.get(3))) {
+                if (super.getImage().equals(sprite.get(0)) || super.getImage().equals(sprite.get(1)) || super.getImage().equals(sprite.get(2))
+                        || super.getImage().equals(sprite.get(6)) || super.getImage().equals(sprite.get(7)) || super.getImage().equals(sprite.get(8))) {
                     if (x > 0 && x < 765) {
                         super.setImage(sprite.get(0));
-                        super.setX(x += 50);
+                        super.setX(x += 85);
                         super.setY(y);
                     }
                 } else {
                     if (x > 25) {
-                        super.setImage(sprite.get(3));
-                        super.setX(x -= 50);
-                        super.setY(y);
+                        if (super.getImage().equals(sprite.get(3)) || super.getImage().equals(sprite.get(4)) || super.getImage().equals(sprite.get(5))
+                               || super.getImage().equals(sprite.get(9)) || super.getImage().equals(sprite.get(10)) || super.getImage().equals(sprite.get(11))) {
+                            super.setImage(sprite.get(3));
+                            super.setX(x -= 85);
+                            super.setY(y);
+                        }
                     }
                 }
             }

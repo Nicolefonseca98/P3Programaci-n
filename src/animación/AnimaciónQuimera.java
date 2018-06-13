@@ -8,15 +8,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 
 /**
  *
  * @author Nicole Fonseca, Wilmer Mata
  */
 public class AnimaciónQuimera extends Quimera {
-  Thread hiloQuimera;
+    Thread hiloQuimera;
     int j = 0; //Indice en lista de imágenes.
 
     public AnimaciónQuimera() {
@@ -38,7 +36,6 @@ public class AnimaciónQuimera extends Quimera {
         Runnable runnable = () -> {
             while (true) {
                 try {
-
                     for (int x = super.getX(); x >= 0; x -= 15) { //Recorrido de la quimera.
                         if (j >= 2) {
                             j = 0;
@@ -56,6 +53,7 @@ public class AnimaciónQuimera extends Quimera {
         };
         hiloQuimera = new Thread(runnable);
         hiloQuimera.start();
+
     }
     
     public void duermeQuimera() throws InterruptedException{
