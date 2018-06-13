@@ -19,7 +19,7 @@ public class MineRider extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Cueva.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("VentanaInicio.fxml"));
         
         Scene scene = new Scene(root);
         

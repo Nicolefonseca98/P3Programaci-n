@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
+import minerider.CuevaController;
 
 /**
  *
@@ -46,7 +47,6 @@ public class AnimaciónQuimera extends Quimera {
                         Thread.sleep(1000);
                         j++;
                     }
-
                 } catch (InterruptedException ex) {
                 }
             }
@@ -54,10 +54,6 @@ public class AnimaciónQuimera extends Quimera {
         hiloQuimera = new Thread(runnable);
         hiloQuimera.start();
 
-    }
-    
-    public void duermeQuimera() throws InterruptedException{
-        Thread.currentThread().getName();
     }
 
     public Boolean llamarada() {

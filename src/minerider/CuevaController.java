@@ -8,19 +8,27 @@ import dominio.Quimera;
 import java.awt.Rectangle;
 import java.awt.geom.Area;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
+import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 //import javafx.scene.shape.Rectangle;
 
 /**
@@ -55,7 +63,7 @@ public class CuevaController implements Initializable {
     private int vidasZombie = 0;
     static ArrayList<AnimaciónQuimera> arrayListQuimera = new ArrayList<>();
     static ArrayList<AnimaciónZombie> arrayListZombie = new ArrayList<>();
-
+    
     //Hilo principal
     public void run() {
         Runnable runnable = () -> {
@@ -77,6 +85,8 @@ public class CuevaController implements Initializable {
                 } catch (InterruptedException ex) {
                     System.out.println("Exception");
                 } catch (FileNotFoundException ex) {
+                    Logger.getLogger(CuevaController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
                     Logger.getLogger(CuevaController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -171,8 +181,10 @@ public class CuevaController implements Initializable {
     /**
      * Detecta si hay una colisión entre el personaje y algún monstruo.
      *
+     * @throws java.io.FileNotFoundException
+     * @throws java.lang.InterruptedException
      */
-    public void colisión() throws FileNotFoundException, InterruptedException {
+    public void colisión() throws FileNotFoundException, InterruptedException, IOException {
 
         Boolean obstaculo = false;
         corazonLleno = new Image("/starlord/heart.png");
@@ -202,6 +214,7 @@ public class CuevaController implements Initializable {
         }
 
         if (obstaculo == true) {
+            
             if (animaciónQuimera.llamarada() == true || animaciónZombie.muerdeCerebro() == true) {
                 corazonPersonaje++;
                   switch (corazonPersonaje) {
@@ -224,6 +237,7 @@ public class CuevaController implements Initializable {
                 corazon1.setImage(corazonVacio);
                 corazon2.setImage(corazonVacio);
                 corazon3.setImage(corazonVacio);
+                System.out.println("¡¡¡¡¡¡Juego terminado!!!!!");
                 break;
         }
                 System.out.println("Rawr");
@@ -240,7 +254,6 @@ public class CuevaController implements Initializable {
                         System.out.println("1 vida");
                         break;
                     case 12:
-                        canvas.getGraphicsContext2D().clearRect(this.animaciónQuimera.getX(), this.animaciónQuimera.getY(), 38, 40);
                         System.out.println("*************Murió quimera******************");
                         break;
                 }
@@ -252,9 +265,7 @@ public class CuevaController implements Initializable {
             } else {
                 System.out.println("Desarmado");
             }
-
         }
-      
     }
-
+    
 }
