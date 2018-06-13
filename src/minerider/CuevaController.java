@@ -30,11 +30,16 @@ import javafx.scene.media.AudioClip;
  */
 public class CuevaController implements Initializable {
 
-    @FXML private StackPane stackPane;
-    @FXML private ImageView background1;
-    @FXML private ImageView corazon1;
-    @FXML private ImageView corazon2;
-    @FXML private ImageView corazon3;
+    @FXML
+    private StackPane stackPane;
+    @FXML
+    private ImageView background1;
+    @FXML
+    private ImageView corazon1;
+    @FXML
+    private ImageView corazon2;
+    @FXML
+    private ImageView corazon3;
     private Image cueva;
     private Image corazonLleno;
     private Image corazonVacio;
@@ -66,9 +71,11 @@ public class CuevaController implements Initializable {
                     colisión();
                     Thread.sleep(tiempoEspera);
                     GraphicsContext graphicsContext = this.canvas.getGraphicsContext2D();
-                    dibujarPersonajes(graphicsContext); 
+                    dibujarPersonajes(graphicsContext);
                 } catch (InterruptedException ex) {
                     System.out.println("Exception");
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(CuevaController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         };
@@ -81,16 +88,15 @@ public class CuevaController implements Initializable {
         graphicsContext.clearRect(0, 0, 813, 400);
         for (int i = 0; i < arrayListZombie.size(); i++) {
             AnimaciónZombie auxAnimaciónZombie = arrayListZombie.get(i);
-            graphicsContext.drawImage(auxAnimaciónZombie.getImage(), auxAnimaciónZombie.getX(), auxAnimaciónZombie.getY());           
+            graphicsContext.drawImage(auxAnimaciónZombie.getImage(), auxAnimaciónZombie.getX(), auxAnimaciónZombie.getY());
         }
-        
+
         for (int i = 0; i < arrayListQuimera.size(); i++) {
             AnimaciónQuimera auxAnimaciónQuimera = arrayListQuimera.get(i);
             graphicsContext.drawImage(auxAnimaciónQuimera.getImage(), auxAnimaciónQuimera.getX(), auxAnimaciónQuimera.getY());
         }
         graphicsContext.drawImage(this.animaciónPersonaje.getImage(), this.animaciónPersonaje.getX(), animaciónPersonaje.getY());
     }
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -113,14 +119,14 @@ public class CuevaController implements Initializable {
             for (int i = 0; i < 3; i++) {
                 animaciónQuimera = new AnimaciónQuimera(x, 272);
                 arrayListQuimera.add(animaciónQuimera);
-                x += 200;
+                x += 300;
             }
 
-            int xZombie = 0;
+            int xZombie = -200;
             for (int i = 0; i < 3; i++) {
                 animaciónZombie = new AnimaciónZombie(xZombie, 300);
                 arrayListZombie.add(animaciónZombie);
-                xZombie += 200;
+                xZombie += 300;
             }
             animaciónPersonaje = new AnimaciónPersonaje(50, 0);
 
@@ -137,45 +143,19 @@ public class CuevaController implements Initializable {
         for (int i = 0; i < arrayListQuimera.size(); i++) {
             AnimaciónQuimera auxAnimaciónQuimera = arrayListQuimera.get(i);
             auxAnimaciónQuimera.hiloQuimera();
-            
+
         }
         for (int i = 0; i < arrayListZombie.size(); i++) {
             AnimaciónZombie auxAnimaciónZombie = arrayListZombie.get(i);
             auxAnimaciónZombie.hiloZombie();
-            
+
         }
         animaciónPersonaje.movimientPersonaje(stackPane, 310);
     }
 
     /**
-     * Define el area en que se encuentra cada monstruo.
-     * @return Boolean
-     */
-    public Boolean obstaculo() {
-        Area areaZombie = null;
-//        for (int i = 0; i < arrayListZombie.size(); i++) {
-//            AnimaciónZombie auxAnimaciónZombie = arrayListZombie.get(i);
-//            Rectangle zombie = new Rectangle(auxAnimaciónZombie.getX(), auxAnimaciónZombie.getY(), 38, 40);
-//            areaZombie = new Area(zombie);
-//            areaZombie.intersect(getBounds());
-//        }
-
-        Area areaQuimera = null;
-        AnimaciónQuimera auxAnimaciónQuimera = null;
-        for (int i = 0; i < arrayListQuimera.size(); i++) {
-            auxAnimaciónQuimera = arrayListQuimera.get(i);
-        }
-
-        Rectangle quimera = new Rectangle(auxAnimaciónQuimera.getX(), auxAnimaciónQuimera.getY(), 38, 40);
-        areaQuimera = new Area(quimera);
-        areaQuimera.intersect(getBounds());
-        return !areaQuimera.isEmpty();
-
-
-    }
-
-    /**
      * Area en que se encuentra el personaje principal.
+     *
      * @return Area
      */
     public Area getBounds() {
@@ -186,17 +166,43 @@ public class CuevaController implements Initializable {
     }
 
     /**
-     *  Detecta si hay una colisión entre el personaje y algún monstruo.
-     *  
+     * Detecta si hay una colisión entre el personaje y algún monstruo.
+     *
      */
-    public void colisión() {
+    public void colisión() throws FileNotFoundException {
 
+        int arma = animaciónPersonaje.movimientPersonaje(stackPane, 310);
+        Boolean obstaculo = false;
         corazonLleno = new Image("/starlord/heart.png");
         corazonVacio = new Image("/starlord/emptyHeart.png");
 
-        if (obstaculo()) {
+        Area areaQuimera = null;
+        AnimaciónQuimera auxAnimaciónQuimera = null;
+        for (int i = 0; i < arrayListQuimera.size(); i++) {
+            auxAnimaciónQuimera = arrayListQuimera.get(i);
+            Rectangle quimera = new Rectangle(auxAnimaciónQuimera.getX(), auxAnimaciónQuimera.getY(), 38, 40);
+            areaQuimera = new Area(quimera);
+            areaQuimera.intersect(getBounds());
+            if (!areaQuimera.isEmpty()) {
+                obstaculo = true;
+            }
+        }
+        for (int i = 0; i < arrayListZombie.size(); i++) {
+                Area areaZombie = null;
+            AnimaciónZombie auxAnimaciónZombie = arrayListZombie.get(i);
+            Rectangle zombie = new Rectangle(auxAnimaciónZombie.getX(), auxAnimaciónZombie.getY(), 38, 40);
+            areaZombie = new Area(zombie);
+            areaZombie.intersect(getBounds());
+            if(!areaZombie.isEmpty()){
+                obstaculo = true;
+            }
+        }
+
+        if (obstaculo == true) {
+            if (arma == 1){
             corazonPersonaje++;
-            System.out.println("golpe");
+            System.out.println("Quita vida");
+            }
 //            if(detectaArma()){
 //                
 //            }
@@ -224,15 +230,5 @@ public class CuevaController implements Initializable {
                 break;
         }
     }
-    
-    public int detectaArma(int arma){
-        if (arma==1) {
-            return 1;
-        } else if(arma == 2){
-            return 2;
-        } else if(arma == 3){
-            return 3;
-        }
-        return 0;
-    }
+
 }

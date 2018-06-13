@@ -38,10 +38,10 @@ public class AnimaciónPersonaje extends Personaje {
         sprite.add(new Image(new FileInputStream("src/starlord/derechaPala.png")));
     }
 
-    int x = 0;
+    int x = 450;
     int j = 0;
-
-    public void movimientPersonaje(StackPane stackPane, int y) {
+    int arma = 0; 
+    public int movimientPersonaje(StackPane stackPane, int y) {
         ArrayList<Image> sprite = super.getSprite();
         super.setImage(sprite.get(0));
         super.setX(x);
@@ -94,7 +94,8 @@ public class AnimaciónPersonaje extends Personaje {
                 super.setX(x);
                 super.setY(y);
                 int a= 1;
-                cuevaController.detectaArma(a);
+                arma = 1;
+
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/espada.wav").toString());
 //                    note.play();
             }
@@ -103,7 +104,8 @@ public class AnimaciónPersonaje extends Personaje {
                 super.setImage(sprite.get(5));
                 super.setX(x);
                 super.setY(y);
-                cuevaController.detectaArma(2);
+                arma = 2;
+
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/latigo.wav").toString());
 //                    note.play();
             }
@@ -112,7 +114,8 @@ public class AnimaciónPersonaje extends Personaje {
                 super.setImage(sprite.get(6));
                 super.setX(x);
                 super.setY(y);
-                cuevaController.detectaArma(3);
+                arma = 3;
+
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/pala.mp3").toString());
 //                    note.play();
             }
@@ -135,6 +138,7 @@ public class AnimaciónPersonaje extends Personaje {
                 }
             }
         });
+           return arma;
     }
 
 }
