@@ -123,13 +123,13 @@ public class AnimaciónPersonaje extends Personaje {
                 if (!super.getImage().equals(sprite.get(3))) {
                     if (x > 0 && x < 765) {
                         super.setImage(sprite.get(0));
-                        super.setX(x += 30);
+                        super.setX(x += 50);
                         super.setY(y);
                     }
                 } else {
                     if (x > 25) {
                         super.setImage(sprite.get(3));
-                        super.setX(x -= 30);
+                        super.setX(x -= 50);
                         super.setY(y);
                     }
                 }
