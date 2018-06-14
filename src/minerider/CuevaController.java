@@ -23,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -61,6 +62,7 @@ public class CuevaController implements Initializable {
     private int corazonPersonaje = 0;
     private int vidasQuimera = 0;
     private int vidasZombie = 0;
+
     static ArrayList<AnimaciónQuimera> arrayListQuimera = new ArrayList<>();
     static ArrayList<AnimaciónZombie> arrayListZombie = new ArrayList<>();
     
