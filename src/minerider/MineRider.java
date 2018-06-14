@@ -26,7 +26,7 @@ public class MineRider extends Application {
         stage.setScene(scene);
         stage.show();
         stage.setTitle("MineRider");
-        stage.getIcons().add(new Image("/starlord/derecha.png")); 
+        stage.getIcons().add(new Image("/starlord/icono.png")); 
         scene.getRoot().requestFocus();
         stage.setResizable(false);
         stage.setOnCloseRequest(e -> {

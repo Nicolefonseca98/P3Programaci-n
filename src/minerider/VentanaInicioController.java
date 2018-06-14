@@ -1,4 +1,3 @@
-
 package minerider;
 
 import java.io.IOException;
@@ -28,30 +27,33 @@ public class VentanaInicioController implements Initializable {
     private Button botónJugar;
     @FXML
     private ImageView tituloImageView;
-    private Image titulo;
+    @FXML
+    private ImageView gifImageView;
     @FXML
     private AnchorPane anchorPane;
+    private Image titulo;
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Image image = new  Image("/cueva/start.jpg");
+        Image image = new Image("/cueva/start.jpg");
         botónJugar.setGraphic(new ImageView(image));
-        Image titulo = new Image ("/cueva/titulo.png");
+        Image titulo = new Image("/cueva/titulo.png");
         tituloImageView.setImage(titulo);
-//       Image fondo = new Image ("/cueva/mine.png");
-//        fondoImageView.setImage(fondo);
 //        Fondo de la ventana
         String backgroundImage = "/cueva/mine.png";
         anchorPane.setStyle("-fx-background-image: url('" + backgroundImage + "'); "
-                            +"-fx-background-position: left top, center;"
-                            +"-fx-background-repeat: no-repeat;"
-                            +"-fx-background-size: cover, auto;");
-    }    
+                + "-fx-background-position: left top, center;"
+                + "-fx-background-repeat: no-repeat;"
+                + "-fx-background-size: cover, auto;");
+        Image gif = new Image("/starlord/gif.gif");
+        gifImageView.setImage(gif);
+    }
 
     @FXML
     private void jugar(ActionEvent event) throws IOException {
