@@ -181,7 +181,7 @@ public class CuevaController implements Initializable {
 
         for (int i = 0; i < arrayListQuimera.size(); i++) {
             Quimera quimeraAux = arrayListQuimera.get(i);
-            Rectangle quimera = new Rectangle(quimeraAux.getX(), quimeraAux.getY(), 38, 40);
+            Rectangle quimera = new Rectangle(quimeraAux.getX(), quimeraAux.getY(), 35,40);
             Area areaQuimera = new Area(quimera);
             areaQuimera.intersect(getBounds());
             if (!areaQuimera.isEmpty()) {
@@ -191,7 +191,7 @@ public class CuevaController implements Initializable {
         for (int i = 0; i < arrayListZombie.size(); i++) {
             Area areaZombie = null;
             Zombie zombieAux = arrayListZombie.get(i);
-            Rectangle zombie = new Rectangle(zombieAux.getX(), zombieAux.getY(), 38, 40);
+            Rectangle zombie = new Rectangle(zombieAux.getX(), zombieAux.getY(), 45, 55);
             areaZombie = new Area(zombie);
             areaZombie.intersect(getBounds());
             if (!areaZombie.isEmpty()) {

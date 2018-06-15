@@ -171,7 +171,7 @@ public class AnimaciónPersonaje extends Personaje {
                         || super.getImage().equals(sprite.get(6)) || super.getImage().equals(sprite.get(7)) || super.getImage().equals(sprite.get(8))) {
                     if (x > 0 && x < 730) {
                         super.setImage(sprite.get(0));
-                        super.setX(x += 85);
+                        super.setX(x += 120);
                         super.setY(y);
                     }
                 } else {
@@ -179,7 +179,7 @@ public class AnimaciónPersonaje extends Personaje {
                         if (super.getImage().equals(sprite.get(3)) || super.getImage().equals(sprite.get(4)) || super.getImage().equals(sprite.get(5))
                                || super.getImage().equals(sprite.get(9)) || super.getImage().equals(sprite.get(10)) || super.getImage().equals(sprite.get(11))) {
                             super.setImage(sprite.get(3));
-                            super.setX(x -= 85);
+                            super.setX(x -= 120);
                             super.setY(y);
                         }
                     }
