@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
  *
  * @author Nicole Fonseca, Wilmer Mata
  */
-public class AnimaciónZombie extends Zombie {
+public class AnimaciónZombie extends Zombie implements Runnable{
 
     int j = 0; //Indice en lista de imágenes.
 
@@ -28,32 +28,26 @@ public class AnimaciónZombie extends Zombie {
         sprite.add(new Image(new FileInputStream("src/zombie/zombieDerechaAtaque.png")));
     }
 
-    public void hiloZombie() {
+    @Override
+    public void run() {
         ArrayList<Image> sprite = super.getSprite();
-        Runnable runnable = () -> {
-            while (true) {
-                try {
-
-                    for (int x = super.getX(); x <= 700; x += 2) { //Recorrido del zombie.
-                        if (j >= 2) {
-                            j = 0;
-                        }
-                        super.setImage(sprite.get(j));
-                        super.setX(x);
-                        super.setY(super.getY());
-                        Thread.sleep(400);
-                        j++;
+        while (true) {
+            try {
+                for (int x = super.getX(); x <= 700; x += 2) { //Recorrido del zombie.
+                    if (j >= 2) {
+                        j = 0;
                     }
-
-                } catch (InterruptedException ex) {
+                    super.setImage(sprite.get(j));
+                    super.setX(x);
+                    super.setY(super.getY());
+                    Thread.sleep(400);
+                    j++;
                 }
+            } catch (InterruptedException ex) {
             }
-        };
-
-        Thread hiloZombie = new Thread(runnable);
-        hiloZombie.start();
+        }
     }
-
+ 
     public Boolean muerdeCerebro() {
         if (j == 1) {
             return true;
@@ -61,4 +55,6 @@ public class AnimaciónZombie extends Zombie {
             return false;
         }
     }
+
+    
 }

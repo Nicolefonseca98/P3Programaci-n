@@ -1,8 +1,6 @@
 
 package minerider;
 
-import animación.AnimaciónZombie;
-import animación.AnimaciónPersonaje;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -41,7 +39,7 @@ public class MineRider extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-
+       
     }
     
 }

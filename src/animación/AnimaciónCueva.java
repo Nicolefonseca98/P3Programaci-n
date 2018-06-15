@@ -10,8 +10,6 @@ public class AnimaciónCueva {
     
     public Object[][] matriz() {
         Object[][] object = new Object[2][5];
-        
-        
         return object;
     }
 }
