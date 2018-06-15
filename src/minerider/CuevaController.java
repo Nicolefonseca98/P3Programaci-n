@@ -122,7 +122,7 @@ public class CuevaController implements Initializable {
         try {
             int x = 600;
             for (int i = 0; i < 2; i++) {
-                animaciónQuimera = new AnimaciónQuimera(x, 272);
+                animaciónQuimera = new AnimaciónQuimera(x, 310);
                 Thread threadQuimera = new Thread(animaciónQuimera);
                 threadQuimera.setName("Quimera "+i);
                 threadQuimera.start();
@@ -161,7 +161,7 @@ public class CuevaController implements Initializable {
      * @return Area
      */
     public Area getBounds() {
-        Rectangle starlord = new Rectangle(animaciónPersonaje.getX(), animaciónPersonaje.getY(), 38, 40);
+        Rectangle starlord = new Rectangle(animaciónPersonaje.getX(), animaciónPersonaje.getY(), 34, 36);
         personaje = new Area(starlord);
 
         return personaje;
