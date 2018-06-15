@@ -21,6 +21,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 
@@ -56,7 +57,8 @@ public class CuevaController implements Initializable {
     GraphicsContext graphicsContext;
     static ArrayList<Quimera> arrayListQuimera = new ArrayList<>();
     static ArrayList<Zombie> arrayListZombie = new ArrayList<>();
-    
+    Thread threadQuimera;
+
     //Hilo principal
     public void run() {
         Runnable runnable = () -> {
@@ -117,25 +119,30 @@ public class CuevaController implements Initializable {
         corazon1.setImage(corazonLleno);
         corazon2.setImage(corazonLleno);
         corazon3.setImage(corazonLleno);
+        animaciónCueva = new AnimaciónCueva();
+        GridPane gridPane = animaciónCueva.tierra();
+        stackPane.getChildren().add(gridPane);
+        animaciónCueva.hayTierra();
+       
 
         //Personajes
         try {
             int x = 600;
             for (int i = 0; i < 2; i++) {
                 animaciónQuimera = new AnimaciónQuimera(x, 310);
-                Thread threadQuimera = new Thread(animaciónQuimera);
-                threadQuimera.setName("Quimera "+i);
+                threadQuimera = new Thread(animaciónQuimera);
+                threadQuimera.setName("Quimera " + i);
                 threadQuimera.start();
                 arrayListQuimera.add(animaciónQuimera);
                 x += 350;
                 System.out.println(threadQuimera.getName());
             }
-            
+
             int xZombie = -300;
             for (int i = 0; i < 2; i++) {
                 animaciónZombie = new AnimaciónZombie(xZombie, 300);
                 Thread threadZombie = new Thread(animaciónZombie);
-                threadZombie.setName("Zombie "+i);
+                threadZombie.setName("Zombie " + i);
                 threadZombie.start();
                 arrayListZombie.add(animaciónZombie);
                 xZombie += 350;
@@ -178,10 +185,10 @@ public class CuevaController implements Initializable {
         Boolean obstaculo = false;
         corazonLleno = new Image("/starlord/heart.png");
         corazonVacio = new Image("/starlord/emptyHeart.png");
-
+        Rectangle quimera;
         for (int i = 0; i < arrayListQuimera.size(); i++) {
             Quimera quimeraAux = arrayListQuimera.get(i);
-            Rectangle quimera = new Rectangle(quimeraAux.getX(), quimeraAux.getY(), 35,40);
+            quimera = new Rectangle(quimeraAux.getX(), quimeraAux.getY(), 35, 40);
             Area areaQuimera = new Area(quimera);
             areaQuimera.intersect(getBounds());
             if (!areaQuimera.isEmpty()) {
@@ -200,36 +207,36 @@ public class CuevaController implements Initializable {
         }
 
         if (obstaculo == true) {
-            
+
             if (animaciónQuimera.llamarada() == true || animaciónZombie.muerdeCerebro() == true) {
                 corazonPersonaje++;
-                  switch (corazonPersonaje) {
-            case 0:
-                corazon1.setImage(corazonLleno);
-                corazon2.setImage(corazonLleno);
-                corazon3.setImage(corazonLleno);
-                break;
-            case 5:
-                corazon1.setImage(corazonLleno);
-                corazon2.setImage(corazonLleno);
-                corazon3.setImage(corazonVacio);
-                break;
-            case 17:
-                corazon1.setImage(corazonLleno);
-                corazon2.setImage(corazonVacio);
-                corazon3.setImage(corazonVacio);
-                break;
-            case 28:
-                corazon1.setImage(corazonVacio);
-                corazon2.setImage(corazonVacio);
-                corazon3.setImage(corazonVacio);
-                System.out.println("¡¡¡¡¡¡Juego terminado!!!!!");
-                break;
-        }
+                switch (corazonPersonaje) {
+                    case 0:
+                        corazon1.setImage(corazonLleno);
+                        corazon2.setImage(corazonLleno);
+                        corazon3.setImage(corazonLleno);
+                        break;
+                    case 5:
+                        corazon1.setImage(corazonLleno);
+                        corazon2.setImage(corazonLleno);
+                        corazon3.setImage(corazonVacio);
+                        break;
+                    case 17:
+                        corazon1.setImage(corazonLleno);
+                        corazon2.setImage(corazonVacio);
+                        corazon3.setImage(corazonVacio);
+                        break;
+                    case 28:
+                        corazon1.setImage(corazonVacio);
+                        corazon2.setImage(corazonVacio);
+                        corazon3.setImage(corazonVacio);
+                        System.out.println("¡¡¡¡¡¡Juego terminado!!!!!");
+                        break;
+                }
                 System.out.println("Rawr");
             } else if (animaciónPersonaje.arma() == 1) {
                 vidasQuimera++;
-                switch(vidasQuimera) {
+                switch (vidasQuimera) {
                     case 0:
                         System.out.println("3 vidas");
                         break;
@@ -240,20 +247,30 @@ public class CuevaController implements Initializable {
                         System.out.println("1 vida");
                         break;
                     case 12:
-//                        graphicsContext = this.canvas.getGraphicsContext2D();
-//                        graphicsContext.clearRect(this.animaciónQuimera.getX(), this.animaciónQuimera.getY(), 38, 40);
+//                        if(threadQuimera.getName().equals("Quimera 1")){
+                        for (int i = 0; i < arrayListQuimera.size(); i++) {
+                            if (threadQuimera.getName().contains("Quimera 1")) {
+                                System.out.println("Sí");
+                            }
+                           
+                        }
+//                         threadQuimera.stop();
+                       
+                       
                         System.out.println("*************Murió quimera******************");
+                        vidasQuimera = 0;
                         break;
+//                         }
                 }
                 System.out.println("Ataco quimera");
             } else if (animaciónPersonaje.arma() == 2) {
                 System.out.println("Latigazo");
             } else if (animaciónPersonaje.arma() == 3) {
-                System.out.println("Palazo");
+                System.out.println("Pala");
             } else {
                 System.out.println("Desarmado");
             }
         }
     }
-    
+
 }
