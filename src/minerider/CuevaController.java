@@ -179,13 +179,10 @@ public class CuevaController implements Initializable {
         corazonLleno = new Image("/starlord/heart.png");
         corazonVacio = new Image("/starlord/emptyHeart.png");
 
-        Area areaQuimera = null;
-        Quimera quimeraAux = null;
-        Rectangle quimera = null;
         for (int i = 0; i < arrayListQuimera.size(); i++) {
-            quimeraAux = arrayListQuimera.get(i);
-            quimera = new Rectangle(quimeraAux.getX(), quimeraAux.getY(), 38, 40);
-            areaQuimera = new Area(quimera);
+            Quimera quimeraAux = arrayListQuimera.get(i);
+            Rectangle quimera = new Rectangle(quimeraAux.getX(), quimeraAux.getY(), 38, 40);
+            Area areaQuimera = new Area(quimera);
             areaQuimera.intersect(getBounds());
             if (!areaQuimera.isEmpty()) {
                 obstaculo = true;

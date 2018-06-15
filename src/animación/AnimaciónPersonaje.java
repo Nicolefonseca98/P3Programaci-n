@@ -70,7 +70,7 @@ public class AnimaciónPersonaje extends Personaje {
             
             
             if (event.getCode() == KeyCode.LEFT) {
-                if (x > 0) {
+                if (x > 14) {
                     if(indice >= 6) {
                         indice = 3;
                     }
@@ -85,7 +85,7 @@ public class AnimaciónPersonaje extends Personaje {
             if (event.getCode() == KeyCode.UP) {
                 if (super.getImage().equals(sprite.get(0)) || super.getImage().equals(sprite.get(1)) || super.getImage().equals(sprite.get(2))
                         || super.getImage().equals(sprite.get(6)) || super.getImage().equals(sprite.get(7)) || super.getImage().equals(sprite.get(8))) {
-                    if (x > 0 && x < 765) {
+                    if (x > 0 && x < 730) {
                         super.setImage(sprite.get(0));
                         super.setX(x);
                         int auxY = y;
@@ -93,7 +93,7 @@ public class AnimaciónPersonaje extends Personaje {
                         super.setY(auxY);
                     }
                 } else {
-                    if (x > 25) {
+                    if (x > 50) {
                         if (super.getImage().equals(sprite.get(3)) || super.getImage().equals(sprite.get(4)) || super.getImage().equals(sprite.get(5))
                                 || super.getImage().equals(sprite.get(9)) || super.getImage().equals(sprite.get(10)) || super.getImage().equals(sprite.get(11))) {
                             super.setImage(sprite.get(3));
@@ -169,13 +169,13 @@ public class AnimaciónPersonaje extends Personaje {
             if (event.getCode() == KeyCode.UP) {
                 if (super.getImage().equals(sprite.get(0)) || super.getImage().equals(sprite.get(1)) || super.getImage().equals(sprite.get(2))
                         || super.getImage().equals(sprite.get(6)) || super.getImage().equals(sprite.get(7)) || super.getImage().equals(sprite.get(8))) {
-                    if (x > 0 && x < 765) {
+                    if (x > 0 && x < 730) {
                         super.setImage(sprite.get(0));
                         super.setX(x += 85);
                         super.setY(y);
                     }
                 } else {
-                    if (x > 25) {
+                    if (x > 50) {
                         if (super.getImage().equals(sprite.get(3)) || super.getImage().equals(sprite.get(4)) || super.getImage().equals(sprite.get(5))
                                || super.getImage().equals(sprite.get(9)) || super.getImage().equals(sprite.get(10)) || super.getImage().equals(sprite.get(11))) {
                             super.setImage(sprite.get(3));
