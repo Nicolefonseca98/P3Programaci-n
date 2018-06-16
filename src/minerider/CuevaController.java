@@ -53,10 +53,10 @@ public class CuevaController implements Initializable {
     static ArrayList<Quimera> arrayListQuimera = new ArrayList<>();
     static ArrayList<Zombie> arrayListZombie = new ArrayList<>();
     Thread threadQuimera;
-
+  Image image = new Image("/cueva/tierra.png");
+        
     public CuevaController() {
-        Image image = new Image("/cueva/tierra.png");
-        cuevaTierra = new Cueva(10, 325, image);
+      cuevaTierra = new Cueva(10, 325, image);
     }
     
     //Hilo principal
@@ -195,7 +195,7 @@ public class CuevaController implements Initializable {
         Boolean obstaculo = false;
         corazonLleno = new Image("/starlord/heart.png");
         corazonVacio = new Image("/starlord/emptyHeart.png");
-        Rectangle quimera;
+        Rectangle quimera = null;
         for (int i = 0; i < arrayListQuimera.size(); i++) {
             Quimera quimeraAux = arrayListQuimera.get(i);
             quimera = new Rectangle(quimeraAux.getX(), quimeraAux.getY(), 35, 40);
@@ -258,12 +258,13 @@ public class CuevaController implements Initializable {
                         break;
                     case 12:
 //                        if(threadQuimera.getName().equals("Quimera 1")){
-                        for (int i = 0; i < arrayListQuimera.size(); i++) {
-                            if (threadQuimera.getName().contains("Quimera 1")) {
+//                        for (int i = 0; i < arrayListQuimera.size(); i++) {
+//                            if (threadQuimera.getName().contains("Quimera 1")) {
                                 System.out.println("Sí");
-                            }
+                                canvas.getGraphicsContext2D().clearRect(quimera.getX(), quimera.getY(), 50, 50);
+//                            }
                            
-                        }
+//                        }
                         System.out.println("*************Murió quimera******************");
                         vidasQuimera = 0;
                         break;
@@ -288,6 +289,7 @@ public class CuevaController implements Initializable {
             return true;
         }
         return false;
+//     image.getWidth().
     }
 
 }
