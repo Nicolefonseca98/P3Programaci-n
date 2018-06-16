@@ -4,11 +4,15 @@ import animación.AnimaciónCueva;
 import animación.AnimaciónPersonaje;
 import animación.AnimaciónQuimera;
 import animación.AnimaciónZombie;
+import com.sun.javafx.geom.Area;
+import com.sun.javafx.geom.PathIterator;
 import dominio.Cueva;
 import dominio.Quimera;
 import dominio.Zombie;
-import java.awt.Rectangle;
-import java.awt.geom.Area;
+//import java.awt.Shape;
+//import java.awt.Rectangle;
+//import java.awt.geom.Area;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -18,8 +22,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -37,6 +43,7 @@ public class CuevaController implements Initializable {
     @FXML private ImageView corazon1;
     @FXML private ImageView corazon2;
     @FXML private ImageView corazon3;
+    @FXML private Label label;
     private Image cueva;
     private Image corazonLleno;
     private Image corazonVacio;
@@ -177,11 +184,11 @@ public class CuevaController implements Initializable {
      * @return Area
      */
     
-    public Area getBounds() {
+    public Rectangle getBounds() {
         Rectangle starlord = new Rectangle(animaciónPersonaje.getX(), animaciónPersonaje.getY(), 34, 36);
-        personaje = new Area(starlord);
+//        personaje = new Area(starlord);
 
-        return personaje;
+        return starlord;
     }
 
     /**
@@ -199,23 +206,30 @@ public class CuevaController implements Initializable {
         for (int i = 0; i < arrayListQuimera.size(); i++) {
             Quimera quimeraAux = arrayListQuimera.get(i);
             quimera = new Rectangle(quimeraAux.getX(), quimeraAux.getY(), 35, 40);
-            Area areaQuimera = new Area(quimera);
-            areaQuimera.intersect(getBounds());
-            if (!areaQuimera.isEmpty()) {
-                obstaculo = true;
-            }
+//            Area areaQuimera = new Area( (PathIterator) quimera);
+if (quimera.intersects(animaciónPersonaje.getX(), animaciónPersonaje.getY(),35,40)){
+           obstaculo = true;
+       }
+//            quimera.intersect(getBounds());
+//            if (!quimera.isEmpty()) {
+//                obstaculo = true;
+//            }
         }
-        
+//        
         for (int i = 0; i < arrayListZombie.size(); i++) {
-            Area areaZombie = null;
+//            Area areaZombie = null;
             Zombie zombieAux = arrayListZombie.get(i);
             Rectangle zombie = new Rectangle(zombieAux.getX(), zombieAux.getY(), 45, 55);
-            areaZombie = new Area(zombie);
-            areaZombie.intersect(getBounds());
-            if (!areaZombie.isEmpty()) {
-                obstaculo = true;
+        
+//            areaZombie = new Area((PathIterator) zombie);
+//            areaZombie.intersect(getBounds());
+//            if (!areaZombie.isEmpty()) {
+//                obstaculo = true;
+if (zombie.intersects(animaciónPersonaje.getX(), animaciónPersonaje.getY(),35,40)){
+           obstaculo = true;
+       }
             }
-        }
+//        }
 
         if (obstaculo == true) {
             if (animaciónQuimera.llamarada() == true || animaciónZombie.muerdeCerebro() == true) {
@@ -260,10 +274,17 @@ public class CuevaController implements Initializable {
 //                        if(threadQuimera.getName().equals("Quimera 1")){
 //                        for (int i = 0; i < arrayListQuimera.size(); i++) {
 //                            if (threadQuimera.getName().contains("Quimera 1")) {
+                        ///threadQuimera.wait();
+//                          threadQuimera.interrupt();
+//                        label.setText("Juego terminado");
+                      
                                 System.out.println("Sí");
-                                canvas.getGraphicsContext2D().clearRect(quimera.getX(), quimera.getY(), 50, 50);
+//                                canvas.getGraphicsContext2D().clearRect(quimera.getX(), quimera.getY(), 50, 50);
+                                Rectangle rect  = new Rectangle(vidasZombie, vidasZombie, vidasZombie, vidasQuimera);
+                                rect.setFill(javafx.scene.paint.Color.RED);
+                                canvas.getGraphicsContext2D().fillRect(quimera.getX(), quimera.getY(), 50, 50);
 //                            }
-                           
+//                           System.out.println(quimera.getX() + " " + quimera.getY());
 //                        }
                         System.out.println("*************Murió quimera******************");
                         vidasQuimera = 0;
@@ -283,11 +304,13 @@ public class CuevaController implements Initializable {
     
     public Boolean tierra() {
         Rectangle cueva = new Rectangle(cuevaTierra.getX(), cuevaTierra.getY(), 35, 40);
-        Area areaCueva = new Area(cueva);
-        areaCueva.intersect(getBounds());
-        if (!areaCueva.isEmpty()) {
-            return true;
-        }
+//        Area areaCueva = new Area((Shape)cueva);
+       if (cueva.intersects(animaciónPersonaje.getX(), animaciónPersonaje.getY(),35,40)){
+           return true;
+       }
+//        if (!cueva.isEmpty()) {
+//            return true;
+//        }
         return false;
 //     image.getWidth().
     }
