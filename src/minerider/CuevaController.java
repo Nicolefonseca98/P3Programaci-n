@@ -4,6 +4,7 @@ import animación.AnimaciónCueva;
 import animación.AnimaciónPersonaje;
 import animación.AnimaciónQuimera;
 import animación.AnimaciónZombie;
+import dominio.Cueva;
 import dominio.Quimera;
 import dominio.Zombie;
 import java.awt.Rectangle;
@@ -21,7 +22,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 
@@ -32,16 +32,11 @@ import javafx.scene.media.AudioClip;
  */
 public class CuevaController implements Initializable {
 
-    @FXML
-    private StackPane stackPane;
-    @FXML
-    private ImageView background1;
-    @FXML
-    private ImageView corazon1;
-    @FXML
-    private ImageView corazon2;
-    @FXML
-    private ImageView corazon3;
+    @FXML private StackPane stackPane;
+    @FXML private ImageView background1;
+    @FXML private ImageView corazon1;
+    @FXML private ImageView corazon2;
+    @FXML private ImageView corazon3;
     private Image cueva;
     private Image corazonLleno;
     private Image corazonVacio;
@@ -50,15 +45,20 @@ public class CuevaController implements Initializable {
     private AnimaciónQuimera animaciónQuimera;
     private AnimaciónPersonaje animaciónPersonaje;
     private AnimaciónCueva animaciónCueva;
+    private Cueva cuevaTierra;
     private Area personaje;
     private int corazonPersonaje = 0;
     private int vidasQuimera = 0;
     private int vidasZombie = 0;
-    GraphicsContext graphicsContext;
     static ArrayList<Quimera> arrayListQuimera = new ArrayList<>();
     static ArrayList<Zombie> arrayListZombie = new ArrayList<>();
     Thread threadQuimera;
 
+    public CuevaController() {
+        Image image = new Image("/cueva/tierra.png");
+        cuevaTierra = new Cueva(10, 325, image);
+    }
+    
     //Hilo principal
     public void run() {
         Runnable runnable = () -> {
@@ -74,8 +74,9 @@ public class CuevaController implements Initializable {
                     transcurrido = System.nanoTime() - inicio;
                     tiempoEspera = tiempo - transcurrido / 1000000;
                     colisión();
+                    System.out.println(tierra());
                     Thread.sleep(tiempoEspera);
-                    graphicsContext = this.canvas.getGraphicsContext2D();
+                    GraphicsContext graphicsContext = this.canvas.getGraphicsContext2D();
                     dibujarPersonajes(graphicsContext);
                 } catch (InterruptedException ex) {
                     System.out.println("Exception");
@@ -104,7 +105,17 @@ public class CuevaController implements Initializable {
             graphicsContext.drawImage(quimeraAux.getImage(), quimeraAux.getX(), quimeraAux.getY());
         }
         graphicsContext.drawImage(this.animaciónPersonaje.getImage(), this.animaciónPersonaje.getX(), animaciónPersonaje.getY());
+       
+//      cuevaTierra = new Cueva(10, 325, image);
+        graphicsContext.drawImage(this.cuevaTierra.getImage(), this.cuevaTierra.getX(), this.cuevaTierra.getY());
+        graphicsContext.drawImage(this.cuevaTierra.getImage(), this.cuevaTierra.getX()+80, this.cuevaTierra.getY());
+        graphicsContext.drawImage(this.cuevaTierra.getImage(), this.cuevaTierra.getX()+180, this.cuevaTierra.getY());
+        graphicsContext.drawImage(this.cuevaTierra.getImage(), this.cuevaTierra.getX()+280, this.cuevaTierra.getY());
+        graphicsContext.drawImage(this.cuevaTierra.getImage(), this.cuevaTierra.getX()+370, this.cuevaTierra.getY());
+        graphicsContext.drawImage(this.cuevaTierra.getImage(), this.cuevaTierra.getX()+450, this.cuevaTierra.getY());
+        graphicsContext.drawImage(this.cuevaTierra.getImage(), this.cuevaTierra.getX()+600, this.cuevaTierra.getY());
     }
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -120,11 +131,10 @@ public class CuevaController implements Initializable {
         corazon2.setImage(corazonLleno);
         corazon3.setImage(corazonLleno);
         animaciónCueva = new AnimaciónCueva();
-        GridPane gridPane = animaciónCueva.tierra();
-        stackPane.getChildren().add(gridPane);
-        animaciónCueva.hayTierra();
+//        GridPane gridPane = animaciónCueva.tierra();
+//        stackPane.getChildren().add(gridPane);
+//        animaciónCueva.hayTierra();
        
-
         //Personajes
         try {
             int x = 600;
@@ -164,9 +174,9 @@ public class CuevaController implements Initializable {
 
     /**
      * Area en que se encuentra el personaje principal.
-     *
      * @return Area
      */
+    
     public Area getBounds() {
         Rectangle starlord = new Rectangle(animaciónPersonaje.getX(), animaciónPersonaje.getY(), 34, 36);
         personaje = new Area(starlord);
@@ -176,10 +186,10 @@ public class CuevaController implements Initializable {
 
     /**
      * Detecta si hay una colisión entre el personaje y algún monstruo.
-     *
      * @throws java.io.FileNotFoundException
      * @throws java.lang.InterruptedException
      */
+    
     public void colisión() throws FileNotFoundException, InterruptedException, IOException {
 
         Boolean obstaculo = false;
@@ -195,6 +205,7 @@ public class CuevaController implements Initializable {
                 obstaculo = true;
             }
         }
+        
         for (int i = 0; i < arrayListZombie.size(); i++) {
             Area areaZombie = null;
             Zombie zombieAux = arrayListZombie.get(i);
@@ -207,7 +218,6 @@ public class CuevaController implements Initializable {
         }
 
         if (obstaculo == true) {
-
             if (animaciónQuimera.llamarada() == true || animaciónZombie.muerdeCerebro() == true) {
                 corazonPersonaje++;
                 switch (corazonPersonaje) {
@@ -254,9 +264,6 @@ public class CuevaController implements Initializable {
                             }
                            
                         }
-//                         threadQuimera.stop();
-                       
-                       
                         System.out.println("*************Murió quimera******************");
                         vidasQuimera = 0;
                         break;
@@ -271,6 +278,16 @@ public class CuevaController implements Initializable {
                 System.out.println("Desarmado");
             }
         }
+    }
+    
+    public Boolean tierra() {
+        Rectangle cueva = new Rectangle(cuevaTierra.getX(), cuevaTierra.getY(), 35, 40);
+        Area areaCueva = new Area(cueva);
+        areaCueva.intersect(getBounds());
+        if (!areaCueva.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 
 }

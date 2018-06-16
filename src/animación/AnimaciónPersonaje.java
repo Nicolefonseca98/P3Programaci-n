@@ -54,6 +54,7 @@ public class AnimaciónPersonaje extends Personaje {
         super.setImage(sprite.get(0));
         super.setX(x);
         super.setY(y);
+        
         stackPane.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.RIGHT) {
                 if (j >= 3) {
@@ -63,12 +64,11 @@ public class AnimaciónPersonaje extends Personaje {
                     super.setImage(sprite.get(j));
                     super.setX(x += 10);
                     super.setY(y);
+                    j++;
+                    arma = 0;
                 }
-                j++;
-                arma = 0;
             }
-            
-            
+           
             if (event.getCode() == KeyCode.LEFT) {
                 if (x > 14) {
                     if(indice >= 6) {

@@ -8,34 +8,50 @@ import javafx.scene.image.Image;
  * @author Nicole Fonseca, Wilmer Mata
  */
 public class Cueva {
-    private int tamaño;
+    private int x;
+    private int y;
     private Image image;
     
-    private static final Cueva cueva = new Cueva();
+    private static Cueva cueva = new Cueva();
     
     private Cueva() { }
+
+    public Cueva(int x, int y, Image image) {
+        this.x = x;
+        this.y = y;
+        this.image = image;
+    }
     
     public static Cueva getCueva() {
         return cueva;
     }
 
-    public Cueva(int tamaño, Image image) {
-        this.tamaño = tamaño;
-        this.image = image;
+    /**
+     * @return the x
+     */
+    public int getX() {
+        return x;
     }
 
     /**
-     * @return the tamaño
+     * @param x the x to set
      */
-    public int getTamaño() {
-        return tamaño;
+    public void setX(int x) {
+        this.x = x;
     }
 
     /**
-     * @param tamaño the tamaño to set
+     * @return the y
      */
-    public void setTamaño(int tamaño) {
-        this.tamaño = tamaño;
+    public int getY() {
+        return y;
+    }
+
+    /**
+     * @param y the y to set
+     */
+    public void setY(int y) {
+        this.y = y;
     }
 
     /**
@@ -52,10 +68,13 @@ public class Cueva {
         this.image = image;
     }
 
-    @Override
-    public String toString() {
-        return "Cueva{" + "tama\u00f1o=" + tamaño + ", image=" + image + '}';
+    /**
+     * @param aCueva the cueva to set
+     */
+    public static void setCueva(Cueva aCueva) {
+        cueva = aCueva;
     }
 
+    
    
 }

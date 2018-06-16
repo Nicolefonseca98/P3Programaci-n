@@ -15,7 +15,6 @@ public class Personaje {
     private int y;
     private Image imagen;
     private ArrayList<Image> sprite;
-    private int heart;
 
     public Personaje() {
     }
@@ -85,7 +84,7 @@ public class Personaje {
 
     @Override
     public String toString() {
-        return "Personaje{" + "x=" + x + ", y=" + y + ", image=" + imagen + ", sprite=" + sprite + ", heart=" + heart + '}';
+        return "Personaje{" + "x=" + x + ", y=" + y + ", image=" + imagen + ", sprite=" + sprite + '}';
     }
 
 }

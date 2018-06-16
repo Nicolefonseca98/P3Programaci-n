@@ -1,5 +1,6 @@
 package animación;
 
+import dominio.Cueva;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,10 +14,11 @@ import javafx.scene.layout.StackPane;
  * @author Nicole Fonseca, Wilmer Mata
  */
 public class AnimaciónCueva {
+    
 
-    static Image[] generaTierra;
-    static GridPane gridPane;
-
+    static Image[] generaTierra = new Image[28];
+    static GridPane gridPane = new GridPane();;
+    static ImageView[] tierra = new ImageView[28];;
     public Object[][] matriz() {
         Object[][] object = new Object[2][5];
         return object;
@@ -25,9 +27,7 @@ public class AnimaciónCueva {
     public GridPane tierra() {
         int fila = 32;
         int columna = 0;
-        gridPane = new GridPane();
         gridPane.setVgap(10);
-        ImageView[] tierra = new ImageView[28];
         generaTierra = new Image[28];
         for (int i = 0; i < generaTierra.length; i++) {
             generaTierra[i] = new Image("/cueva/tierra.png");
@@ -52,10 +52,19 @@ public class AnimaciónCueva {
     }
 
     public void quitaTierra(int x, int y) {
-        for (int i = 0; i < generaTierra.length; i++) {
-                  if(gridPane.getLayoutX() == x && gridPane.getLayoutY() == y)  {
-                      System.out.println("iguales");
-                  }
-        }
+        generaTierra[0] = new Image("/cueva/tierra150.png");
+        tierra[0] = new ImageView();
+        tierra[0].setImage(generaTierra[0]);
+        GridPane.setConstraints(tierra[0], 0, 32);
+        gridPane.getChildren().add(tierra[0]);
+        System.out.println(gridPane.getRowConstraints().size());
+//        for (int i = 0; i < gridPane.getRowConstraints().size(); i++) {
+            for (int j = 0; j < gridPane.getColumnConstraints().size(); j++) {
+//                System.out.println("row " + i);
+                System.out.println("column " + j);
+            }
+//        }
     }
+    
+    
 }
