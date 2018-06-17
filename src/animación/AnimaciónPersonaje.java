@@ -1,6 +1,8 @@
 package animación;
 
 import dominio.Personaje;
+import dominio.Quimera;
+import dominio.Zombie;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -8,7 +10,10 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
+import javafx.scene.shape.Rectangle;
 import minerider.CuevaController;
+import static minerider.CuevaController.arrayListQuimera;
+import static minerider.CuevaController.arrayListZombie;
 
 /**
  *
@@ -54,15 +59,20 @@ public class AnimaciónPersonaje extends Personaje {
         super.setImage(sprite.get(0));
         super.setX(x);
         super.setY(y);
-        
         stackPane.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.RIGHT) {
                 if (j >= 3) {
                     j = 0;
                 }
+                
                 if (x <= 783 && x >= 0) {
                     super.setImage(sprite.get(j));
-                    super.setX(x += 10);
+                    if (getBoundsQuimera()) {
+                        super.setX(x);
+                    } 
+                    if(!getBoundsQuimera()) {
+                        super.setX(x += 10);
+                    }
                     super.setY(y);
                     j++;
                     arma = 0;
@@ -71,11 +81,16 @@ public class AnimaciónPersonaje extends Personaje {
            
             if (event.getCode() == KeyCode.LEFT) {
                 if (x > 14) {
-                    if(indice >= 6) {
+                    if (indice >= 6) {
                         indice = 3;
                     }
                     super.setImage(sprite.get(indice));
-                    super.setX(x -= 10);
+//                    if (getBoundsQuimera()) {
+//                        super.setX(x);
+//                    }
+//                    if (!getBoundsQuimera()) {
+                        super.setX(x -= 10);
+//                    }
                     super.setY(y);
                     indice++;
                 }
@@ -157,11 +172,12 @@ public class AnimaciónPersonaje extends Personaje {
                     super.setX(x);
                     super.setY(y);
                     
-                } if(animaciónCueva.hayTierra() == true){
-                     animaciónCueva.quitaTierra(x, y);
-                     System.out.println("Palazo");
-                }
-                
+                } 
+//                if(animaciónCueva.hayTierra() == true){
+//                     animaciónCueva.quitaTierra(x, y);
+//                     System.out.println("Palazo");
+//                }
+//                
                arma = 3;
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/pala.mp3").toString());
 //                    note.play();
@@ -190,6 +206,11 @@ public class AnimaciónPersonaje extends Personaje {
             }
         });
     }
+    
+     public Rectangle getBounds() {
+        Rectangle starlord = new Rectangle(super.getX(), super.getY(), 34, 36);
+        return starlord;
+    }
 
     public int arma() {
         if (arma == 1) {
@@ -201,5 +222,27 @@ public class AnimaciónPersonaje extends Personaje {
         }
         return 0;
     }
-
+ 
+    public Boolean getBoundsQuimera() {
+        for (int i = 0; i < arrayListQuimera.size(); i++) {
+            Quimera quimeraAux = arrayListQuimera.get(i);
+            Rectangle quimera = new Rectangle(quimeraAux.getX(), quimeraAux.getY(), 40, 40);
+            if (quimera.intersects(getBounds().getX(), getBounds().getY(), 20, 40)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public Boolean getBoundsZombie() {
+        for (int i = 0; i < arrayListZombie.size(); i++) {
+            Zombie zombieAux = arrayListZombie.get(i);
+            Rectangle zombie = new Rectangle(zombieAux.getX(), zombieAux.getY(), 40, 40);
+            if (zombie.intersects(getBounds().getX(), getBounds().getY(), 20, 40)) {
+                return true;
+            }
+        }
+        return false;
+    }
+  
 }

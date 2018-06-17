@@ -5,15 +5,21 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
+import javafx.scene.shape.Rectangle;
+import static minerider.CuevaController.arrayListPersonaje;
+import static minerider.CuevaController.arrayListQuimera;
 
 /**
  *
  * @author Nicole Fonseca, Wilmer Mata
  */
 public class AnimaciónQuimera extends Quimera implements Runnable{
-    Thread hiloQuimera;
-    int j = 0; //Indice en lista de imágenes.
 
+    AnimaciónPersonaje animaciónPersonaje = new AnimaciónPersonaje();
+    int x = super.getX();
+    int indiceImagenesIzquierda = 0; 
+    int indiceImagenesDerecha = 2;
+    
     public AnimaciónQuimera() {
     }
 
@@ -26,22 +32,52 @@ public class AnimaciónQuimera extends Quimera implements Runnable{
         ArrayList<Image> sprite = super.getSprite();
         sprite.add(new Image(new FileInputStream("src/quimera/quimeraIzquierda.png")));
         sprite.add(new Image(new FileInputStream("src/quimera/quimeraIzquierdaAtaque.png")));
+        sprite.add(new Image(new FileInputStream("src/quimera/quimeraDerecha.png")));
+        sprite.add(new Image(new FileInputStream("src/quimera/quimeraDerechaAtaque.png")));
     }
-
+    
+    
+    
     @Override
     public void run() {
-       ArrayList<Image> sprite = super.getSprite();
+        ArrayList<Image> sprite = super.getSprite();
         while (true) {
             try {
-                for (int x = super.getX(); x >= 0; x -= 15) { //Recorrido de la quimera.
-                    if (j >= 2) {
-                        j = 0;
+                if (x > 0) {
+                    int contador = x;
+                    while (contador >= 0) {
+                        if (indiceImagenesIzquierda >= 2) {
+                            indiceImagenesIzquierda = 0;
+                        }
+                        super.setImage(sprite.get(indiceImagenesIzquierda));
+                        if (getBoundsQuimera()) {
+                            super.setX(contador);
+                        }
+                        if (!getBoundsQuimera()) {
+                            super.setX(contador -= 15);
+                        }
+                        super.setY(super.getY());
+                        Thread.sleep(1000);
+                        indiceImagenesIzquierda++;
+
+                        if (contador <= 0) {
+                            while (contador <= 770) {
+                                if (indiceImagenesDerecha >= 4) {
+                                    indiceImagenesDerecha = 2;
+                                }
+                                super.setImage(sprite.get(indiceImagenesDerecha));
+                                if (getBoundsQuimera()) {
+                                    super.setX(contador);
+                                }
+                                if (!getBoundsQuimera()) {
+                                    super.setX(contador += 15);
+                                }
+                                super.setY(super.getY());
+                                Thread.sleep(1000);
+                                indiceImagenesDerecha++;
+                            }
+                        }
                     }
-                    super.setImage(sprite.get(j));
-                    super.setX(x);
-                    super.setY(super.getY());
-                    Thread.sleep(1000);
-                    j++;
                 }
             } catch (InterruptedException ex) {
             }
@@ -49,13 +85,25 @@ public class AnimaciónQuimera extends Quimera implements Runnable{
     }
   
     public Boolean llamarada() {
-        if (j == 1) {
+        if (indiceImagenesIzquierda == 1 || indiceImagenesIzquierda == 3) {
             return true;
         } else {
             return false;
         }
     }
-
     
-
+    public Boolean getBoundsQuimera() {
+        try {
+            Rectangle quimera = null;
+            for (int i = 0; i < arrayListQuimera.size(); i++) {
+                Quimera quimeraAux = arrayListQuimera.get(i);
+                quimera = new Rectangle(quimeraAux.getX(), quimeraAux.getY(), 35, 40);
+                if (quimera.intersects(arrayListPersonaje.get(0).getX(), arrayListPersonaje.get(0).getY(), 35, 40)) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {   
+        }
+        return false;
+    }
 }
