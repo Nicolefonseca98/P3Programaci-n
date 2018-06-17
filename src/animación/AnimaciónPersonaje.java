@@ -1,5 +1,6 @@
 package animación;
 
+import dominio.Cueva;
 import dominio.Personaje;
 import dominio.Quimera;
 import dominio.Zombie;
@@ -13,6 +14,7 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Rectangle;
 import minerider.CuevaController;
 import static minerider.CuevaController.arrayListQuimera;
+import static minerider.CuevaController.arrayListTierra;
 import static minerider.CuevaController.arrayListZombie;
 
 /**
@@ -20,6 +22,7 @@ import static minerider.CuevaController.arrayListZombie;
  * @author Nicole Fonseca, Wilmer Mata
  */
 public class AnimaciónPersonaje extends Personaje {
+
     AnimaciónCueva animaciónCueva = new AnimaciónCueva();
     CuevaController cuevaController = new CuevaController();
     long time;
@@ -53,7 +56,7 @@ public class AnimaciónPersonaje extends Personaje {
     int j = 0;
     int arma = 0;
     int indice = 3;
-    
+
     public void movimientPersonaje(StackPane stackPane, int y) {
         ArrayList<Image> sprite = super.getSprite();
         super.setImage(sprite.get(0));
@@ -64,27 +67,27 @@ public class AnimaciónPersonaje extends Personaje {
                 if (j >= 3) {
                     j = 0;
                 }
-                
+
                 if (x <= 783 && x >= 0) {
                     super.setImage(sprite.get(j));
                     if (getBoundsQuimera() || getBoundsZombie()) {
                         super.setX(x);
-                    } 
-                    if(!getBoundsQuimera() || !getBoundsZombie() ) {
+                    }
+                    if (!getBoundsQuimera() || !getBoundsZombie()) {
                         super.setX(x += 10);
                     }
-//                     if () {
-//                        super.setX(x);
-//                    } 
-//                    if(!getBoundsZombie()) {
-//                        super.setX(x += 10);
-//                    }
+                     if (getBoundsTierra()) {
+                        super.setX(x);
+                    } 
+                    if(!getBoundsTierra()) {
+                        super.setX(x += 10);
+                    }
                     super.setY(y);
                     j++;
                     arma = 0;
                 }
             }
-           
+
             if (event.getCode() == KeyCode.LEFT) {
                 if (x > 14) {
                     if (indice >= 6) {
@@ -95,7 +98,7 @@ public class AnimaciónPersonaje extends Personaje {
 //                        super.setX(x);
 //                    }
 //                    if (!getBoundsQuimera()) {
-                        super.setX(x -= 10);
+                    super.setX(x -= 10);
 //                    }
                     super.setY(y);
                     indice++;
@@ -131,13 +134,13 @@ public class AnimaciónPersonaje extends Personaje {
             }
 
             if (event.getCode() == KeyCode.A) {
-                if (super.getImage().equals(sprite.get(0))|| super.getImage().equals(sprite.get(1)) || super.getImage().equals(sprite.get(2))
+                if (super.getImage().equals(sprite.get(0)) || super.getImage().equals(sprite.get(1)) || super.getImage().equals(sprite.get(2))
                         || super.getImage().equals(sprite.get(7)) || super.getImage().equals(sprite.get(8))) {
                     super.setImage(sprite.get(6));
                     super.setX(x);
                     super.setY(y);
                 } else if (super.getImage().equals(sprite.get(3)) || super.getImage().equals(sprite.get(4)) || super.getImage().equals(sprite.get(5))
-                        || super.getImage().equals(sprite.get(10)) || super.getImage().equals(sprite.get(11))){
+                        || super.getImage().equals(sprite.get(10)) || super.getImage().equals(sprite.get(11))) {
                     super.setImage(sprite.get(9));
                     super.setX(x);
                     super.setY(y);
@@ -149,13 +152,13 @@ public class AnimaciónPersonaje extends Personaje {
             }
 
             if (event.getCode() == KeyCode.S) {
-                if (super.getImage().equals(sprite.get(0))|| super.getImage().equals(sprite.get(1)) || super.getImage().equals(sprite.get(2))
+                if (super.getImage().equals(sprite.get(0)) || super.getImage().equals(sprite.get(1)) || super.getImage().equals(sprite.get(2))
                         || super.getImage().equals(sprite.get(6)) || super.getImage().equals(sprite.get(8))) {
                     super.setImage(sprite.get(7));
                     super.setX(x);
                     super.setY(y);
                 } else if (super.getImage().equals(sprite.get(3)) || super.getImage().equals(sprite.get(4)) || super.getImage().equals(sprite.get(5))
-                        || super.getImage().equals(sprite.get(9)) || super.getImage().equals(sprite.get(11))){ 
+                        || super.getImage().equals(sprite.get(9)) || super.getImage().equals(sprite.get(11))) {
                     super.setImage(sprite.get(10));
                     super.setX(x);
                     super.setY(y);
@@ -177,14 +180,14 @@ public class AnimaciónPersonaje extends Personaje {
                     super.setImage(sprite.get(11));
                     super.setX(x);
                     super.setY(y);
-                    
-                } 
+
+                }
 //                if(animaciónCueva.hayTierra() == true){
 //                     animaciónCueva.quitaTierra(x, y);
 //                     System.out.println("Palazo");
 //                }
 //                
-               arma = 3;
+                arma = 3;
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/pala.mp3").toString());
 //                    note.play();
             }
@@ -202,7 +205,7 @@ public class AnimaciónPersonaje extends Personaje {
                 } else {
                     if (x > 50) {
                         if (super.getImage().equals(sprite.get(3)) || super.getImage().equals(sprite.get(4)) || super.getImage().equals(sprite.get(5))
-                               || super.getImage().equals(sprite.get(9)) || super.getImage().equals(sprite.get(10)) || super.getImage().equals(sprite.get(11))) {
+                                || super.getImage().equals(sprite.get(9)) || super.getImage().equals(sprite.get(10)) || super.getImage().equals(sprite.get(11))) {
                             super.setImage(sprite.get(3));
                             super.setX(x -= 120);
                             super.setY(y);
@@ -212,8 +215,8 @@ public class AnimaciónPersonaje extends Personaje {
             }
         });
     }
-    
-     public Rectangle getBounds() {
+
+    public Rectangle getBounds() {
         Rectangle starlord = new Rectangle(super.getX(), super.getY(), 34, 36);
         return starlord;
     }
@@ -228,7 +231,7 @@ public class AnimaciónPersonaje extends Personaje {
         }
         return 0;
     }
- 
+
     public Boolean getBoundsQuimera() {
         for (int i = 0; i < arrayListQuimera.size(); i++) {
             Quimera quimeraAux = arrayListQuimera.get(i);
@@ -239,7 +242,7 @@ public class AnimaciónPersonaje extends Personaje {
         }
         return false;
     }
-    
+
     public Boolean getBoundsZombie() {
         for (int i = 0; i < arrayListZombie.size(); i++) {
             Zombie zombieAux = arrayListZombie.get(i);
@@ -250,5 +253,16 @@ public class AnimaciónPersonaje extends Personaje {
         }
         return false;
     }
-  
+
+    public Boolean getBoundsTierra() {
+        for (int i = 0; i < arrayListTierra.size(); i++) {
+            Cueva cuevaAux = arrayListTierra.get(i);
+            Rectangle tierra = new Rectangle(cuevaAux.getX(), cuevaAux.getY(), 40, 40);
+            if (tierra.intersects(getBounds().getX(), getBounds().getY(), 20, 40)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

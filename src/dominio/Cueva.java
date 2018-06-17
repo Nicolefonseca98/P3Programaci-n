@@ -26,14 +26,6 @@ public class Cueva {
         return cueva;
     }
 
-    public Cueva(int xTierra, int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Cueva(Cueva cuevaO) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     /**
      * @return the x
      */

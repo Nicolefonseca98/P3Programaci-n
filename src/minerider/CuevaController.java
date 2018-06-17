@@ -56,7 +56,6 @@ public class CuevaController extends Personaje implements Initializable {
     private AnimaciónQuimera animaciónQuimera;
     private AnimaciónPersonaje animaciónPersonaje;
     private AnimaciónCueva animaciónCueva;
-    private Cueva cuevaO;
     private Cueva cuevaTierra;
     private int corazonPersonaje = 0;
     private int vidasQuimera = 0;
@@ -187,11 +186,11 @@ public class CuevaController extends Personaje implements Initializable {
                 xZombie += 350;
             }
 
-            int xTierra = 0;
+            int xTierra = 10;
             for (int i = 0; i < 2; i++) {
-                cuevaO = new Cueva(xTierra, 300);
-                Cueva cuevaAux = new Cueva(cuevaO);
-                arrayListTierra.add(cuevaO);
+                image = new Image("/cueva/tierra.png");
+                cuevaTierra = new Cueva(xTierra, 325, image);
+                arrayListTierra.add(cuevaTierra);
                 xTierra += 170;
             }
 
