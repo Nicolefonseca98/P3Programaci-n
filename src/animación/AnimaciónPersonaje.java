@@ -70,12 +70,12 @@ public class AnimaciónPersonaje extends Personaje {
 
                 if (x <= 783 && x >= 0) {
                     super.setImage(sprite.get(j));
-                    if (getBoundsQuimera() || getBoundsZombie()) {
-                        super.setX(x);
-                    }
-                    if (!getBoundsQuimera() || !getBoundsZombie()) {
-                        super.setX(x += 10);
-                    }
+//                    if (getBoundsQuimera() || getBoundsZombie()) {
+//                        super.setX(x);
+//                    }
+//                    if (!getBoundsQuimera() || !getBoundsZombie()) {
+//                        super.setX(x += 10);
+//                    }
                      if (getBoundsTierra()) {
                         super.setX(x);
                     } 
@@ -98,8 +98,14 @@ public class AnimaciónPersonaje extends Personaje {
 //                        super.setX(x);
 //                    }
 //                    if (!getBoundsQuimera()) {
-                    super.setX(x -= 10);
+//                    super.setX(x -= 10);
 //                    }
+                    if (getBoundsTierra()) {
+                        super.setX(x);
+                    }
+                    if (!getBoundsTierra()) {
+                        super.setX(x -= 10);
+                    }
                     super.setY(y);
                     indice++;
                 }
@@ -217,7 +223,7 @@ public class AnimaciónPersonaje extends Personaje {
     }
 
     public Rectangle getBounds() {
-        Rectangle starlord = new Rectangle(super.getX(), super.getY(), 34, 36);
+        Rectangle starlord = new Rectangle(super.getX(), super.getY(), 25, 35);
         return starlord;
     }
 
@@ -236,7 +242,7 @@ public class AnimaciónPersonaje extends Personaje {
         for (int i = 0; i < arrayListQuimera.size(); i++) {
             Quimera quimeraAux = arrayListQuimera.get(i);
             Rectangle quimera = new Rectangle(quimeraAux.getX(), quimeraAux.getY(), 40, 40);
-            if (quimera.intersects(getBounds().getX(), getBounds().getY(), 20, 40)) {
+            if (quimera.intersects(getBounds().getX(), getBounds().getY(), getBounds().getWidth(), getBounds().getHeight())) {
                 return true;
             }
         }
@@ -247,7 +253,7 @@ public class AnimaciónPersonaje extends Personaje {
         for (int i = 0; i < arrayListZombie.size(); i++) {
             Zombie zombieAux = arrayListZombie.get(i);
             Rectangle zombie = new Rectangle(zombieAux.getX(), zombieAux.getY(), 40, 40);
-            if (zombie.intersects(getBounds().getX(), getBounds().getY(), 20, 40)) {
+            if (zombie.intersects(getBounds().getX(), getBounds().getY(), getBounds().getWidth(), getBounds().getHeight())) {
                 return true;
             }
         }
@@ -258,7 +264,7 @@ public class AnimaciónPersonaje extends Personaje {
         for (int i = 0; i < arrayListTierra.size(); i++) {
             Cueva cuevaAux = arrayListTierra.get(i);
             Rectangle tierra = new Rectangle(cuevaAux.getX(), cuevaAux.getY(), 40, 40);
-            if (tierra.intersects(getBounds().getX(), getBounds().getY(), 20, 40)) {
+            if (tierra.intersects(getBounds().getX(), getBounds().getY(), getBounds().getWidth(), getBounds().getHeight())) {
                 return true;
             }
         }
