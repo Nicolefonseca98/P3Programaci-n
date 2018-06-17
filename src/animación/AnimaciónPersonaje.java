@@ -77,10 +77,10 @@ public class AnimaciónPersonaje extends Personaje {
 //                        super.setX(x += 10);
 //                    }
                     if (getBoundsTierra()) {
-                        super.setX(x);
+                        super.setX(x+15);
                     }
                     if (!getBoundsTierra()) {
-                        super.setX(x += 10);
+                        super.setX(x+=10);
                     }
                     super.setY(y);
                     j++;
@@ -101,25 +101,7 @@ public class AnimaciónPersonaje extends Personaje {
 //                    super.setX(x -= 10);
 //                    }
                     if (getBoundsTierra()) {
-//                        if (super.getImage().equals("/starlord/izquierda.png")) {
-                            super.setX(x);
-                            x += 15;
-//                        }
-//                        if (super.getImage().equals("/starlord/slI1.png")) {
-//                            super.setX(x);
-//                            x += 15;
-//                        }
-//                        if (super.getImage().equals("/starlord/SLI3.png")) {
-//                            super.setX(x);
-//                            x += 15;
-//                        }
-//                        if (super.getImage().equals("/starlord/SLI4.png")) {
-//                            super.setX(x);
-//                            x += 15;
-//                        } else if (super.getImage().equals("/starlord/derecha.png")) {
-//                            super.setX(x);
-//                            x -= 15;
-//                        }
+                        super.setX(x-10);
                     }
                     if (!getBoundsTierra()) {
                         super.setX(x -= 10);
@@ -206,11 +188,6 @@ public class AnimaciónPersonaje extends Personaje {
                     super.setY(y);
 
                 }
-//                if(animaciónCueva.hayTierra() == true){
-//                     animaciónCueva.quitaTierra(x, y);
-//                     System.out.println("Palazo");
-//                }
-//                
                 arma = 3;
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/pala.mp3").toString());
 //                    note.play();
