@@ -102,9 +102,10 @@ public class AnimaciónPersonaje extends Personaje {
 //                    }
                     if (getBoundsTierra()) {
                         super.setX(x);
+                        x+= 15;
                     }
                     if (!getBoundsTierra()) {
-                        super.setX(x -= 10);
+                        super.setX(x -= 1);
                     }
                     super.setY(y);
                     indice++;
