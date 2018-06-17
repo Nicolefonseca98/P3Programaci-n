@@ -67,12 +67,18 @@ public class AnimaciónPersonaje extends Personaje {
                 
                 if (x <= 783 && x >= 0) {
                     super.setImage(sprite.get(j));
-                    if (getBoundsQuimera()) {
+                    if (getBoundsQuimera() || getBoundsZombie()) {
                         super.setX(x);
                     } 
-                    if(!getBoundsQuimera()) {
+                    if(!getBoundsQuimera() || !getBoundsZombie() ) {
                         super.setX(x += 10);
                     }
+//                     if () {
+//                        super.setX(x);
+//                    } 
+//                    if(!getBoundsZombie()) {
+//                        super.setX(x += 10);
+//                    }
                     super.setY(y);
                     j++;
                     arma = 0;
