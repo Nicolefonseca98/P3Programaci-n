@@ -76,10 +76,10 @@ public class AnimaciónPersonaje extends Personaje {
 //                    if (!getBoundsQuimera() || !getBoundsZombie()) {
 //                        super.setX(x += 10);
 //                    }
-                     if (getBoundsTierra()) {
+                    if (getBoundsTierra()) {
                         super.setX(x);
-                    } 
-                    if(!getBoundsTierra()) {
+                    }
+                    if (!getBoundsTierra()) {
                         super.setX(x += 10);
                     }
                     super.setY(y);
@@ -101,11 +101,28 @@ public class AnimaciónPersonaje extends Personaje {
 //                    super.setX(x -= 10);
 //                    }
                     if (getBoundsTierra()) {
-                        super.setX(x);
-                        x+= 15;
+//                        if (super.getImage().equals("/starlord/izquierda.png")) {
+                            super.setX(x);
+                            x += 15;
+//                        }
+//                        if (super.getImage().equals("/starlord/slI1.png")) {
+//                            super.setX(x);
+//                            x += 15;
+//                        }
+//                        if (super.getImage().equals("/starlord/SLI3.png")) {
+//                            super.setX(x);
+//                            x += 15;
+//                        }
+//                        if (super.getImage().equals("/starlord/SLI4.png")) {
+//                            super.setX(x);
+//                            x += 15;
+//                        } else if (super.getImage().equals("/starlord/derecha.png")) {
+//                            super.setX(x);
+//                            x -= 15;
+//                        }
                     }
                     if (!getBoundsTierra()) {
-                        super.setX(x -= 1);
+                        super.setX(x -= 10);
                     }
                     super.setY(y);
                     indice++;
