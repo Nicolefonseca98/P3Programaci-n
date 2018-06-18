@@ -81,22 +81,12 @@ public class CuevaController extends Personaje implements Initializable {
                     transcurrido = System.nanoTime() - inicio;
                     tiempoEspera = tiempo - transcurrido / 1000000;
                     colisión();
-                    tierra();
+//                    tierra();
                     Thread.sleep(tiempoEspera);
                     GraphicsContext graphicsContext = this.canvas.getGraphicsContext2D();
                     dibujarPersonajes(graphicsContext);
-                } catch (InterruptedException ex) {
-                } catch (FileNotFoundException ex) {
-                } catch (IOException ex) {
-                } catch (BufferOverflowException e) {
-                    System.out.println("hola");
-                } catch (InternalError e) {
-                    System.out.println("f");
-                } catch (RuntimeException c) {
-                    System.out.println("runtime");
-                } catch (ThreadDeath death) {
-                    System.out.println("death");
-                }
+                } catch (InterruptedException | IOException | RuntimeException ex) {
+                } 
             }
         };
 
@@ -122,26 +112,12 @@ public class CuevaController extends Personaje implements Initializable {
                 Cueva cuevaAux = arrayListTierra.get(i);
                 graphicsContext.drawImage(cuevaAux.getImage(), cuevaAux.getX(), cuevaAux.getY());
             }
-
-            graphicsContext.drawImage(this.animaciónPersonaje.getImage(), this.animaciónPersonaje.getX(), this.animaciónPersonaje.getY());
-
-//      cuevaTierra = new Cueva(10, 325, image);
-//        graphicsContext.drawImage(this.cuevaTierra.getImage(), this.cuevaTierra.getX(), this.cuevaTierra.getY());
-//        graphicsContext.drawImage(this.cuevaTierra.getImage(), this.cuevaTierra.getX()+80, this.cuevaTierra.getY());
-//        graphicsContext.drawImage(this.cuevaTierra.getImage(), this.cuevaTierra.getX()+180, this.cuevaTierra.getY());
-//        graphicsContext.drawImage(this.cuevaTierra.getImage(), this.cuevaTierra.getX()+280, this.cuevaTierra.getY());
-//        graphicsContext.drawImage(this.cuevaTierra.getImage(), this.cuevaTierra.getX()+370, this.cuevaTierra.getY());
-//        graphicsContext.drawImage(this.cuevaTierra.getImage(), this.cuevaTierra.getX()+450, this.cuevaTierra.getY());
-//        graphicsContext.drawImage(this.cuevaTierra.getImage(), this.cuevaTierra.getX()+600, this.cuevaTierra.getY());
-        } catch (BufferOverflowException e) {
-            System.out.println("hola");
-        } catch (InternalError e) {
-            System.out.println("internal");
+            for (int i = 0; i < arrayListPersonaje.size(); i++) {
+                Personaje personajeAux = arrayListPersonaje.get(i);
+                graphicsContext.drawImage(personajeAux.getImage(), personajeAux.getX(), personajeAux.getY());
+            }
         } catch (RuntimeException c) {
-            System.out.println("runtime");
-        } catch (ThreadDeath death) {
-            System.out.println("death");
-        }
+        } 
     }
 
     @Override
@@ -212,8 +188,7 @@ public class CuevaController extends Personaje implements Initializable {
 
     /**
      * Detecta si hay una colisión entre el personaje y algún monstruo.
-     *
-     * @return
+     * @return Boolean 
      * @throws java.io.FileNotFoundException
      * @throws java.lang.InterruptedException
      */
@@ -262,9 +237,10 @@ public class CuevaController extends Personaje implements Initializable {
                         corazon2.setImage(corazonVacio);
                         corazon3.setImage(corazonVacio);
                         System.out.println("¡¡¡¡¡¡Juego terminado!!!!!");
+//                        arrayListPersonaje.clear();
+                        label.setText("terminó");
                         break;
                 }
-//                System.out.println("Rawr");
 
             } else if (animaciónPersonaje.arma() == 1 || animaciónPersonaje.arma() == 2) {
                 vidasQuimera++;
@@ -279,27 +255,58 @@ public class CuevaController extends Personaje implements Initializable {
                         System.out.println("1 vida");
                         break;
                     case 12:
-//                      canvas.getGraphicsContext2D().fillRect(quimera.getX(), quimera.getY(), 50, 50);
-                        System.out.println("*************Murió monstruo******************");
+                        System.out.println("*************Murió quimera******************");
                         vidasQuimera = 0;
+                        for (int i = 0; i < arrayListQuimera.size(); i++) {
+                            Quimera auxQuimera = arrayListQuimera.get(i);
+                            if (animaciónQuimera.boundsQuimera().getX() == auxQuimera.getX()) {
+                                if (animaciónQuimera.boundsQuimera().getY() == auxQuimera.getY()) {
+                                    arrayListQuimera.remove(auxQuimera);
+                                }
+                            }
+                        }
                         break;
                 }
-                System.out.println("Ataco monstruo");
+                vidasZombie++;
+                switch (vidasZombie) {
+                    case 0:
+                        System.out.println("3 vidas Z");
+                        break;
+                    case 6:
+                        System.out.println("2 vidas Z");
+                        break;
+                    case 9:
+                        System.out.println("1 vida Z");
+                        break;
+                    case 13:
+                        System.out.println("*************Murió Zombie******************");
+                        vidasZombie = 0;
+                        for (int i = 0; i < arrayListZombie.size(); i++) {
+                            Zombie auxZombie = arrayListZombie.get(i);
+                            if (animaciónZombie.boundsZombie().getX() == auxZombie.getX()) {
+                                if (animaciónZombie.boundsZombie().getY() == auxZombie.getY()) {
+                                    arrayListZombie.remove(auxZombie);
+                                }
+                            }
+                        }
+                        break;
+                }
+                if(arrayListQuimera.isEmpty() & arrayListZombie.isEmpty()) {
+                    System.out.println("¡¡¡Ha ganado!!!");
+                }
             } else if (animaciónPersonaje.arma() == 3) {
                 System.out.println("Pala");
-            } else {
-//                System.out.println("Desarmado");
-            }
+            } 
         }
         return obstaculo;
     }
 
-    public Boolean tierra() {
-        Rectangle cueva = new Rectangle(cuevaTierra.getX(), cuevaTierra.getY(), 35, 40);
-        if (cueva.intersects(animaciónPersonaje.getBounds().getX(), animaciónPersonaje.getBounds().getY(), 35, 40)) {
-            return true;
-        }
-        return false;
-    }
+//    public Boolean tierra() {
+//        Rectangle cueva = new Rectangle(cuevaTierra.getX(), cuevaTierra.getY(), 35, 40);
+//        if (cueva.intersects(animaciónPersonaje.getBounds().getX(), animaciónPersonaje.getBounds().getY(), 35, 40)) {
+//            return true;
+//        }
+//        return false;
+//    }
 
 }

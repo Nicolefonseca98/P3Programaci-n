@@ -218,7 +218,7 @@ public class AnimaciónPersonaje extends Personaje {
     }
 
     public Rectangle getBounds() {
-        Rectangle starlord = new Rectangle(super.getX(), super.getY(), 25, 35);
+        Rectangle starlord = new Rectangle(super.getX(), super.getY(), 35, 40);
         return starlord;
     }
 
@@ -236,7 +236,7 @@ public class AnimaciónPersonaje extends Personaje {
     public Boolean getBoundsQuimera() {
         for (int i = 0; i < arrayListQuimera.size(); i++) {
             Quimera quimeraAux = arrayListQuimera.get(i);
-            Rectangle quimera = new Rectangle(quimeraAux.getX(), quimeraAux.getY(), 40, 40);
+            Rectangle quimera = new Rectangle(quimeraAux.getX(), quimeraAux.getY(), 35, 40);
             if (quimera.intersects(getBounds().getX(), getBounds().getY(), getBounds().getWidth(), getBounds().getHeight())) {
                 return true;
             }
@@ -247,7 +247,7 @@ public class AnimaciónPersonaje extends Personaje {
     public Boolean getBoundsZombie() {
         for (int i = 0; i < arrayListZombie.size(); i++) {
             Zombie zombieAux = arrayListZombie.get(i);
-            Rectangle zombie = new Rectangle(zombieAux.getX(), zombieAux.getY(), 40, 40);
+            Rectangle zombie = new Rectangle(zombieAux.getX(), zombieAux.getY(), 35, 40);
             if (zombie.intersects(getBounds().getX(), getBounds().getY(), getBounds().getWidth(), getBounds().getHeight())) {
                 return true;
             }

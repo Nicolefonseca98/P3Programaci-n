@@ -106,4 +106,15 @@ public class AnimaciónZombie extends Zombie implements Runnable{
         return false;
     }
     
+    public Rectangle boundsZombie() {
+        Rectangle zombie = null;
+        for (int i = 0; i < arrayListZombie.size(); i++) {
+            Zombie ZombieAux = arrayListZombie.get(i);
+            zombie = new Rectangle(ZombieAux.getX(), ZombieAux.getY(), 35, 40);
+            if (zombie.intersects(arrayListPersonaje.get(0).getX(), arrayListPersonaje.get(0).getY(), 35, 40)) {
+                return zombie;
+            }
+        }
+        return null;
+    }
 }

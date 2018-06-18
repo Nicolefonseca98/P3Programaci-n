@@ -106,4 +106,16 @@ public class AnimaciónQuimera extends Quimera implements Runnable{
         }
         return false;
     }
+    
+    public Rectangle boundsQuimera() {
+        Rectangle quimera = null;
+        for (int i = 0; i < arrayListQuimera.size(); i++) {
+            Quimera quimeraAux = arrayListQuimera.get(i);
+            quimera = new Rectangle(quimeraAux.getX(), quimeraAux.getY(), 35, 40);
+            if (quimera.intersects(arrayListPersonaje.get(0).getX(), arrayListPersonaje.get(0).getY(), 35, 40)) {
+                return quimera;
+            }
+        }
+        return null;
+    }
 }
