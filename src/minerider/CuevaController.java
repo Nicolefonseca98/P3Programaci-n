@@ -135,14 +135,11 @@ public class CuevaController extends Personaje implements Initializable {
         corazon3.setImage(corazonLleno);
         animaciónCueva = new AnimaciónCueva();
 
-        //Imagénes tierra
-        Image image = new Image("/cueva/tierra.png");
-        cuevaTierra = new Cueva(10, 325, image);
 
         //Personajes
         try {
             int x = 600;
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 3; i++) {
                 animaciónQuimera = new AnimaciónQuimera(x, 310);
                 Thread threadQuimera = new Thread(animaciónQuimera);
                 threadQuimera.setName("Quimera " + i);
@@ -153,7 +150,7 @@ public class CuevaController extends Personaje implements Initializable {
             }
 
             int xZombie = 0;
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 3; i++) {
                 animaciónZombie = new AnimaciónZombie(xZombie, 300);
                 Thread threadZombie = new Thread(animaciónZombie);
                 threadZombie.setName("Zombie " + i);
@@ -162,12 +159,10 @@ public class CuevaController extends Personaje implements Initializable {
                 xZombie += 350;
             }
 
-            int xTierra = 10;
-            for (int i = 0; i < 2; i++) {
-                image = new Image("/cueva/tierra.png");
-                cuevaTierra = new Cueva(xTierra, 325, image);
+            for (int i = 0; i < 5; i++) {
+                Image image = new Image("/cueva/tierra.png");
+                cuevaTierra = new Cueva(random(), 325, image);
                 arrayListTierra.add(cuevaTierra);
-                xTierra += 170;
             }
 
             animaciónPersonaje = new AnimaciónPersonaje(50, 0);
@@ -183,7 +178,6 @@ public class CuevaController extends Personaje implements Initializable {
         //Hilo principal
         run();
         animaciónPersonaje.movimientPersonaje(stackPane, 310);
-
     }
 
     /**
@@ -238,7 +232,7 @@ public class CuevaController extends Personaje implements Initializable {
                         corazon3.setImage(corazonVacio);
                         System.out.println("¡¡¡¡¡¡Juego terminado!!!!!");
 //                        arrayListPersonaje.clear();
-                        label.setText("terminó");
+//                        label.setText("terminó");
                         break;
                 }
 
@@ -300,13 +294,10 @@ public class CuevaController extends Personaje implements Initializable {
         }
         return obstaculo;
     }
-
-//    public Boolean tierra() {
-//        Rectangle cueva = new Rectangle(cuevaTierra.getX(), cuevaTierra.getY(), 35, 40);
-//        if (cueva.intersects(animaciónPersonaje.getBounds().getX(), animaciónPersonaje.getBounds().getY(), 35, 40)) {
-//            return true;
-//        }
-//        return false;
-//    }
+    
+    public int random() {
+        int x = (int) (10+Math.random()*600);
+        return x;
+    }
 
 }

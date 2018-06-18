@@ -181,12 +181,33 @@ public class AnimaciónPersonaje extends Personaje {
                     super.setImage(sprite.get(8));
                     super.setX(x);
                     super.setY(y);
+                    try {
+                        if (getBoundsTierra()) {
+                            for (int i = 0; i < arrayListTierra.size(); i++) {
+                                Cueva cuevaAux = arrayListTierra.get(i);
+                                if (cuevaAux.getX() == boundsTierra().getX()) {
+                                    arrayListTierra.remove(cuevaAux);
+                                }
+                            }
+                        }
+                    } catch (NullPointerException nullPointerException) {
+                    }           
                 } else if (super.getImage().equals(sprite.get(3)) || super.getImage().equals(sprite.get(4)) || super.getImage().equals(sprite.get(5))
                         || super.getImage().equals(sprite.get(9)) || super.getImage().equals(sprite.get(10))) {
                     super.setImage(sprite.get(11));
                     super.setX(x);
                     super.setY(y);
-
+                    try {
+                        if (getBoundsTierra()) {
+                            for (int i = 0; i < arrayListTierra.size(); i++) {
+                                Cueva cuevaAux = arrayListTierra.get(i);
+                                if (cuevaAux.getX() == boundsTierra().getX()) {
+                                    arrayListTierra.remove(cuevaAux);
+                                }
+                            }
+                        }
+                    } catch (NullPointerException nullPointerException) {
+                    }
                 }
                 arma = 3;
 //                    AudioClip note = new AudioClip(this.getClass().getResource("/music/pala.mp3").toString());
@@ -264,6 +285,17 @@ public class AnimaciónPersonaje extends Personaje {
             }
         }
         return false;
+    }
+    
+    public Rectangle boundsTierra() {
+        for (int i = 0; i < arrayListTierra.size(); i++) {
+            Cueva cuevaAux = arrayListTierra.get(i);
+            Rectangle tierra = new Rectangle(cuevaAux.getX(), cuevaAux.getY(), 40, 40);
+            if (tierra.intersects(getBounds().getX(), getBounds().getY(), getBounds().getWidth(), getBounds().getHeight())) {
+                return tierra;
+            }
+        }
+        return null;
     }
 
 }
