@@ -28,6 +28,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
+import javafx.scene.paint.Color;
 
 /**
  * FXML Controller class
@@ -60,6 +61,7 @@ public class CuevaController extends Personaje implements Initializable {
     private int corazonPersonaje = 0;
     private int vidasQuimera = 0;
     private int vidasZombie = 0;
+    GraphicsContext graphicsContext;
     public static ArrayList<Quimera> arrayListQuimera = new ArrayList<>();
     public static ArrayList<Zombie> arrayListZombie = new ArrayList<>();
     public static ArrayList<Personaje> arrayListPersonaje = new ArrayList<>();
@@ -83,10 +85,10 @@ public class CuevaController extends Personaje implements Initializable {
                     colisión();
 //                    tierra();
                     Thread.sleep(tiempoEspera);
-                    GraphicsContext graphicsContext = this.canvas.getGraphicsContext2D();
+                    graphicsContext = this.canvas.getGraphicsContext2D();
                     dibujarPersonajes(graphicsContext);
                 } catch (InterruptedException | IOException | RuntimeException ex) {
-                } 
+                }
             }
         };
 
@@ -117,14 +119,14 @@ public class CuevaController extends Personaje implements Initializable {
                 graphicsContext.drawImage(personajeAux.getImage(), personajeAux.getX(), personajeAux.getY());
             }
         } catch (RuntimeException c) {
-        } 
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Audio
-//        AudioClip note = new AudioClip(this.getClass().getResource("/music/contra.mp3").toString());
-//        note.play();
+        AudioClip note = new AudioClip(this.getClass().getResource("/music/contra.mp3").toString());
+        note.play();
 
         //Imagen de fondo
         cueva = new Image("/cueva/cueva1.png");
@@ -134,7 +136,6 @@ public class CuevaController extends Personaje implements Initializable {
         corazon2.setImage(corazonLleno);
         corazon3.setImage(corazonLleno);
         animaciónCueva = new AnimaciónCueva();
-
 
         //Personajes
         try {
@@ -182,7 +183,8 @@ public class CuevaController extends Personaje implements Initializable {
 
     /**
      * Detecta si hay una colisión entre el personaje y algún monstruo.
-     * @return Boolean 
+     *
+     * @return Boolean
      * @throws java.io.FileNotFoundException
      * @throws java.lang.InterruptedException
      */
@@ -227,12 +229,14 @@ public class CuevaController extends Personaje implements Initializable {
                         corazon3.setImage(corazonVacio);
                         break;
                     case 28:
+                        arrayListPersonaje.clear();
                         corazon1.setImage(corazonVacio);
                         corazon2.setImage(corazonVacio);
                         corazon3.setImage(corazonVacio);
-                        System.out.println("¡¡¡¡¡¡Juego terminado!!!!!");
-//                        arrayListPersonaje.clear();
-//                        label.setText("terminó");
+                        graphicsContext.setStroke(Color.WHITE);
+                        graphicsContext.strokeText("Juego terminado", 350, 150);
+                        Thread.sleep(10000000);
+                        
                         break;
                 }
 
@@ -285,18 +289,18 @@ public class CuevaController extends Personaje implements Initializable {
                         }
                         break;
                 }
-                if(arrayListQuimera.isEmpty() & arrayListZombie.isEmpty()) {
+                if (arrayListQuimera.isEmpty() & arrayListZombie.isEmpty()) {
                     System.out.println("¡¡¡Ha ganado!!!");
                 }
             } else if (animaciónPersonaje.arma() == 3) {
                 System.out.println("Pala");
-            } 
+            }
         }
         return obstaculo;
     }
-    
+
     public int random() {
-        int x = (int) (10+Math.random()*600);
+        int x = (int) (10 + Math.random() * 600);
         return x;
     }
 
