@@ -74,12 +74,6 @@ public class AnimacionPersonaje extends Personaje {
 
                 if (x <= 783 && x >= 0) {
                     super.setImage(sprite.get(j));
-//                    if (getBoundsQuimera() || getBoundsZombie()) {
-//                        super.setX(x);
-//                    }
-//                    if (!getBoundsQuimera() || !getBoundsZombie()) {
-//                        super.setX(x += 10);
-//                    }
                     if (getBoundsTierra()) {
                         super.setX(x+15);
                     }
@@ -98,12 +92,6 @@ public class AnimacionPersonaje extends Personaje {
                         indice = 3;
                     }
                     super.setImage(sprite.get(indice));
-//                    if (getBoundsQuimera()) {
-//                        super.setX(x);
-//                    }
-//                    if (!getBoundsQuimera()) {
-//                    super.setX(x -= 10);
-//                    }
                     if (getBoundsTierra()) {
                         super.setX(x-10);
                     }
@@ -157,8 +145,8 @@ public class AnimacionPersonaje extends Personaje {
                 }
                 arma = 1;
 
-//                    AudioClip mainSong = new AudioClip(this.getClass().getResource("/music/espada.wav").toString());
-//                    mainSong.play();
+                    AudioClip mainSong = new AudioClip(this.getClass().getResource("/music/espada.wav").toString());
+                    mainSong.play();
             }
 
             if (event.getCode() == KeyCode.S) {
@@ -175,8 +163,8 @@ public class AnimacionPersonaje extends Personaje {
                 }
                 arma = 2;
 
-//                    AudioClip mainSong = new AudioClip(this.getClass().getResource("/music/latigo.wav").toString());
-//                    mainSong.play();
+                    AudioClip mainSong = new AudioClip(this.getClass().getResource("/music/latigo.wav").toString());
+                    mainSong.play();
             }
 
             if (event.getCode() == KeyCode.D) {
@@ -214,8 +202,8 @@ public class AnimacionPersonaje extends Personaje {
                     }
                 }
                 arma = 3;
-//                    AudioClip mainSong = new AudioClip(this.getClass().getResource("/music/pala.mp3").toString());
-//                    mainSong.play();
+                    AudioClip mainSong = new AudioClip(this.getClass().getResource("/music/pala.mp3").toString());
+                    mainSong.play();
             }
         });
 

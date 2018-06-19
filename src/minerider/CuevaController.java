@@ -63,7 +63,7 @@ public class CuevaController extends Personaje implements Initializable {
     public static ArrayList<Cueva> arrayListTierra = new ArrayList<>();
     AudioClip mainSong;
     AudioClip gameOver;
-    
+
     //Hilo principal
     public void run() {
 
@@ -121,9 +121,9 @@ public class CuevaController extends Personaje implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Audio
-       mainSong = new AudioClip(this.getClass().getResource("/music/contra.mp3").toString());
+        mainSong = new AudioClip(this.getClass().getResource("/music/contra.mp3").toString());
         mainSong.play();
- 
+
         //Imagen de fondo
         cueva = new Image("/cueva/cueva1.png");
         background1.setImage(cueva);
@@ -134,29 +134,28 @@ public class CuevaController extends Personaje implements Initializable {
 
         //Personajes
         try {
-           
+
             int x = 600;
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 5; i++) {
                 animacionQuimera = new AnimacionQuimera(x, 310);
                 Thread threadQuimera = new Thread(animacionQuimera);
                 threadQuimera.setName("Quimera " + i);
                 threadQuimera.start();
                 arrayListQuimera.add(animacionQuimera);
-                x += 350;
-                System.out.println(threadQuimera.getName());
+                x += 245;
             }
 
             int xZombie = 0;
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 5; i++) {
                 animacionZombie = new AnimacionZombie(xZombie, 300);
                 Thread threadZombie = new Thread(animacionZombie);
                 threadZombie.setName("Zombie " + i);
                 threadZombie.start();
                 arrayListZombie.add(animacionZombie);
-                xZombie += 350;
+                xZombie += 190;
             }
 
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 8; i++) {
                 Image image = new Image("/cueva/tierra.png");
                 cuevaTierra = new Cueva(random(), 325, image);
                 arrayListTierra.add(cuevaTierra);
@@ -175,19 +174,17 @@ public class CuevaController extends Personaje implements Initializable {
         //Hilo principal
         run();
         animacionPersonaje.movimientPersonaje(stackPane, 310);
-     
+
     }
 
-
-
-/**
- * Detecta si hay una colisión entre el personaje y algún monstruo.
- *
- * @return Boolean
- * @throws java.io.FileNotFoundException
- * @throws java.lang.InterruptedException
- */
-public Boolean colision() throws FileNotFoundException, InterruptedException, IOException {
+    /**
+     * Detecta si hay una colisión entre el personaje y algún monstruo.
+     *
+     * @return Boolean
+     * @throws java.io.FileNotFoundException
+     * @throws java.lang.InterruptedException
+     */
+    public Boolean colision() throws FileNotFoundException, InterruptedException, IOException {
 
         Boolean obstaculo = false;
         corazonLleno = new Image("/starlord/heart.png");
@@ -234,11 +231,10 @@ public Boolean colision() throws FileNotFoundException, InterruptedException, IO
                         corazon3.setImage(corazonVacio);
                         graphicsContext.setStroke(Color.WHITE);
                         graphicsContext.strokeText("Juego terminado", 350, 150);
-                         mainSong.stop();
-                         gameOver = new AudioClip(this.getClass().getResource("/music/gameOver.mp3").toString());
-                         gameOver.play();
+                        mainSong.stop();
+                        gameOver = new AudioClip(this.getClass().getResource("/music/gameOver.mp3").toString());
+                        gameOver.play();
                         Thread.sleep(10000000);
-                       
 
                         break;
                 }
@@ -266,15 +262,6 @@ public Boolean colision() throws FileNotFoundException, InterruptedException, IO
                 }
                 vidasZombie++;
                 switch (vidasZombie) {
-                    case 0:
-                        System.out.println("3 vidas Z");
-                        break;
-                    case 6:
-                        System.out.println("2 vidas Z");
-                        break;
-                    case 9:
-                        System.out.println("1 vida Z");
-                        break;
                     case 13:
                         vidasZombie = 0;
                         for (int i = 0; i < arrayListZombie.size(); i++) {
