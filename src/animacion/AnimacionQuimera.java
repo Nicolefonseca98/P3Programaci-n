@@ -1,4 +1,4 @@
-package animación;
+package animacion;
 
 import dominio.Quimera;
 import java.io.FileInputStream;
@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
+import dominio.Quimera;
 import static minerider.CuevaController.arrayListPersonaje;
 import static minerider.CuevaController.arrayListQuimera;
 
@@ -13,17 +14,17 @@ import static minerider.CuevaController.arrayListQuimera;
  *
  * @author Nicole Fonseca, Wilmer Mata
  */
-public class AnimaciónQuimera extends Quimera implements Runnable{
+public class AnimacionQuimera extends Quimera implements Runnable{
 
-    AnimaciónPersonaje animaciónPersonaje = new AnimaciónPersonaje();
+    AnimacionPersonaje animacionPersonaje = new AnimacionPersonaje();
     int x = super.getX();
     int indiceImagenesIzquierda = 0; 
     int indiceImagenesDerecha = 2;
     
-    public AnimaciónQuimera() {
+    public AnimacionQuimera() {
     }
 
-    public AnimaciónQuimera(int x, int y) throws FileNotFoundException {
+    public AnimacionQuimera(int x, int y) throws FileNotFoundException {
         super(x, y);
         setSprite();
     }

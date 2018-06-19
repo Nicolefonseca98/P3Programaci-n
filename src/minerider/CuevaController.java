@@ -1,15 +1,13 @@
 package minerider;
 
-import animación.AnimaciónCueva;
-import animación.AnimaciónPersonaje;
-import animación.AnimaciónQuimera;
-import animación.AnimaciónZombie;
-import com.sun.javafx.geom.Area;
-import dominio.Cueva;
 import dominio.Personaje;
 import dominio.Quimera;
-import dominio.Tierra;
 import dominio.Zombie;
+import dominio.Cueva;
+import animacion.AnimacionQuimera;
+import animacion.AnimacionZombie;
+import animacion.AnimacionPersonaje;
+import com.sun.javafx.geom.Area;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -47,16 +45,13 @@ public class CuevaController extends Personaje implements Initializable {
     private ImageView corazon2;
     @FXML
     private ImageView corazon3;
-    @FXML
-    private Label label;
     private Image cueva;
     private Image corazonLleno;
     private Image corazonVacio;
     private Canvas canvas;
-    private AnimaciónZombie animaciónZombie;
-    private AnimaciónQuimera animaciónQuimera;
-    private AnimaciónPersonaje animaciónPersonaje;
-    private AnimaciónCueva animaciónCueva;
+    private AnimacionZombie animacionZombie;
+    private AnimacionQuimera animacionQuimera;
+    private AnimacionPersonaje animacionPersonaje;
     private Cueva cuevaTierra;
     private int corazonPersonaje = 0;
     private int vidasQuimera = 0;
@@ -82,8 +77,7 @@ public class CuevaController extends Personaje implements Initializable {
                     inicio = System.nanoTime();
                     transcurrido = System.nanoTime() - inicio;
                     tiempoEspera = tiempo - transcurrido / 1000000;
-                    colisión();
-//                    tierra();
+                    colision();
                     Thread.sleep(tiempoEspera);
                     graphicsContext = this.canvas.getGraphicsContext2D();
                     dibujarPersonajes(graphicsContext);
@@ -127,7 +121,7 @@ public class CuevaController extends Personaje implements Initializable {
         //Audio
         AudioClip note = new AudioClip(this.getClass().getResource("/music/contra.mp3").toString());
         note.play();
-
+ 
         //Imagen de fondo
         cueva = new Image("/cueva/cueva1.png");
         background1.setImage(cueva);
@@ -135,28 +129,28 @@ public class CuevaController extends Personaje implements Initializable {
         corazon1.setImage(corazonLleno);
         corazon2.setImage(corazonLleno);
         corazon3.setImage(corazonLleno);
-        animaciónCueva = new AnimaciónCueva();
 
         //Personajes
         try {
+           
             int x = 600;
             for (int i = 0; i < 3; i++) {
-                animaciónQuimera = new AnimaciónQuimera(x, 310);
-                Thread threadQuimera = new Thread(animaciónQuimera);
+                animacionQuimera = new AnimacionQuimera(x, 310);
+                Thread threadQuimera = new Thread(animacionQuimera);
                 threadQuimera.setName("Quimera " + i);
                 threadQuimera.start();
-                arrayListQuimera.add(animaciónQuimera);
+                arrayListQuimera.add(animacionQuimera);
                 x += 350;
                 System.out.println(threadQuimera.getName());
             }
 
             int xZombie = 0;
             for (int i = 0; i < 3; i++) {
-                animaciónZombie = new AnimaciónZombie(xZombie, 300);
-                Thread threadZombie = new Thread(animaciónZombie);
+                animacionZombie = new AnimacionZombie(xZombie, 300);
+                Thread threadZombie = new Thread(animacionZombie);
                 threadZombie.setName("Zombie " + i);
                 threadZombie.start();
-                arrayListZombie.add(animaciónZombie);
+                arrayListZombie.add(animacionZombie);
                 xZombie += 350;
             }
 
@@ -166,8 +160,8 @@ public class CuevaController extends Personaje implements Initializable {
                 arrayListTierra.add(cuevaTierra);
             }
 
-            animaciónPersonaje = new AnimaciónPersonaje(50, 0);
-            arrayListPersonaje.add(animaciónPersonaje);
+            animacionPersonaje = new AnimacionPersonaje(50, 0);
+            arrayListPersonaje.add(animacionPersonaje);
 
         } catch (FileNotFoundException ex) {
         }
@@ -178,17 +172,20 @@ public class CuevaController extends Personaje implements Initializable {
 
         //Hilo principal
         run();
-        animaciónPersonaje.movimientPersonaje(stackPane, 310);
+        animacionPersonaje.movimientPersonaje(stackPane, 310);
+     
     }
 
-    /**
-     * Detecta si hay una colisión entre el personaje y algún monstruo.
-     *
-     * @return Boolean
-     * @throws java.io.FileNotFoundException
-     * @throws java.lang.InterruptedException
-     */
-    public Boolean colisión() throws FileNotFoundException, InterruptedException, IOException {
+
+
+/**
+ * Detecta si hay una colisión entre el personaje y algún monstruo.
+ *
+ * @return Boolean
+ * @throws java.io.FileNotFoundException
+ * @throws java.lang.InterruptedException
+ */
+public Boolean colision() throws FileNotFoundException, InterruptedException, IOException {
 
         Boolean obstaculo = false;
         corazonLleno = new Image("/starlord/heart.png");
@@ -196,7 +193,7 @@ public class CuevaController extends Personaje implements Initializable {
         for (int i = 0; i < arrayListQuimera.size(); i++) {
             Quimera quimeraAux = arrayListQuimera.get(i);
             Rectangle quimera = new Rectangle(quimeraAux.getX(), quimeraAux.getY(), 35, 40);
-            if (quimera.intersects(animaciónPersonaje.getBounds().getX(), animaciónPersonaje.getBounds().getY(), 35, 40)) {
+            if (quimera.intersects(animacionPersonaje.getBounds().getX(), animacionPersonaje.getBounds().getY(), 35, 40)) {
                 obstaculo = true;
             }
         }
@@ -204,13 +201,13 @@ public class CuevaController extends Personaje implements Initializable {
         for (int i = 0; i < arrayListZombie.size(); i++) {
             Zombie zombieAux = arrayListZombie.get(i);
             Rectangle zombie = new Rectangle(zombieAux.getX(), zombieAux.getY(), 45, 55);
-            if (zombie.intersects(animaciónPersonaje.getBounds().getX(), animaciónPersonaje.getBounds().getY(), 35, 40)) {
+            if (zombie.intersects(animacionPersonaje.getBounds().getX(), animacionPersonaje.getBounds().getY(), 35, 40)) {
                 obstaculo = true;
             }
         }
 
         if (obstaculo == true) {
-            if (animaciónQuimera.llamarada() == true || animaciónZombie.muerdeCerebro() == true) {
+            if (animacionQuimera.llamarada() == true || animacionZombie.muerdeCerebro() == true) {
                 corazonPersonaje++;
                 switch (corazonPersonaje) {
                     case 0:
@@ -218,17 +215,17 @@ public class CuevaController extends Personaje implements Initializable {
                         corazon2.setImage(corazonLleno);
                         corazon3.setImage(corazonLleno);
                         break;
-                    case 5:
+                    case 10:
                         corazon1.setImage(corazonLleno);
                         corazon2.setImage(corazonLleno);
                         corazon3.setImage(corazonVacio);
                         break;
-                    case 17:
+                    case 75:
                         corazon1.setImage(corazonLleno);
                         corazon2.setImage(corazonVacio);
                         corazon3.setImage(corazonVacio);
                         break;
-                    case 28:
+                    case 145:
                         arrayListPersonaje.clear();
                         corazon1.setImage(corazonVacio);
                         corazon2.setImage(corazonVacio);
@@ -236,29 +233,25 @@ public class CuevaController extends Personaje implements Initializable {
                         graphicsContext.setStroke(Color.WHITE);
                         graphicsContext.strokeText("Juego terminado", 350, 150);
                         Thread.sleep(10000000);
-                        
+
                         break;
                 }
 
-            } else if (animaciónPersonaje.arma() == 1 || animaciónPersonaje.arma() == 2) {
+            } else if (animacionPersonaje.arma() == 1 || animacionPersonaje.arma() == 2) {
                 vidasQuimera++;
                 switch (vidasQuimera) {
                     case 0:
-                        System.out.println("3 vidas");
                         break;
-                    case 5:
-                        System.out.println("2 vidas");
+                    case 10:
                         break;
-                    case 8:
-                        System.out.println("1 vida");
+                    case 15:
                         break;
-                    case 12:
-                        System.out.println("*************Murió quimera******************");
+                    case 20:
                         vidasQuimera = 0;
                         for (int i = 0; i < arrayListQuimera.size(); i++) {
                             Quimera auxQuimera = arrayListQuimera.get(i);
-                            if (animaciónQuimera.boundsQuimera().getX() == auxQuimera.getX()) {
-                                if (animaciónQuimera.boundsQuimera().getY() == auxQuimera.getY()) {
+                            if (animacionQuimera.boundsQuimera().getX() == auxQuimera.getX()) {
+                                if (animacionQuimera.boundsQuimera().getY() == auxQuimera.getY()) {
                                     arrayListQuimera.remove(auxQuimera);
                                 }
                             }
@@ -277,12 +270,11 @@ public class CuevaController extends Personaje implements Initializable {
                         System.out.println("1 vida Z");
                         break;
                     case 13:
-                        System.out.println("*************Murió Zombie******************");
                         vidasZombie = 0;
                         for (int i = 0; i < arrayListZombie.size(); i++) {
                             Zombie auxZombie = arrayListZombie.get(i);
-                            if (animaciónZombie.boundsZombie().getX() == auxZombie.getX()) {
-                                if (animaciónZombie.boundsZombie().getY() == auxZombie.getY()) {
+                            if (animacionZombie.boundsZombie().getX() == auxZombie.getX()) {
+                                if (animacionZombie.boundsZombie().getY() == auxZombie.getY()) {
                                     arrayListZombie.remove(auxZombie);
                                 }
                             }
@@ -290,10 +282,10 @@ public class CuevaController extends Personaje implements Initializable {
                         break;
                 }
                 if (arrayListQuimera.isEmpty() & arrayListZombie.isEmpty()) {
-                    System.out.println("¡¡¡Ha ganado!!!");
+                    graphicsContext.setStroke(Color.WHITE);
+                    graphicsContext.strokeText("¡¡¡Ha ganado!!!", 350, 150);
+                    Thread.sleep(10000000);
                 }
-            } else if (animaciónPersonaje.arma() == 3) {
-                System.out.println("Pala");
             }
         }
         return obstaculo;

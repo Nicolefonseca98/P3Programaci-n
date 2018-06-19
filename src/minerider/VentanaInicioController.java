@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 public class VentanaInicioController implements Initializable {
 
     @FXML
-    private Button botónJugar;
+    private Button botonJugar;
     @FXML
     private ImageView tituloImageView;
     @FXML
@@ -42,7 +42,7 @@ public class VentanaInicioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Image image = new Image("/cueva/start.jpg");
-        botónJugar.setGraphic(new ImageView(image));
+        botonJugar.setGraphic(new ImageView(image));
         Image titulo = new Image("/cueva/titulo.png");
         tituloImageView.setImage(titulo);
 //        Fondo de la ventana

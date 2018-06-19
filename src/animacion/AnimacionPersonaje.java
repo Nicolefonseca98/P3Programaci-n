@@ -1,4 +1,4 @@
-package animación;
+package animacion;
 
 import dominio.Cueva;
 import dominio.Personaje;
@@ -12,7 +12,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Rectangle;
+import dominio.Cueva;
 import minerider.CuevaController;
+import minerider.CuevaController;
+import dominio.Personaje;
+import dominio.Quimera;
+import dominio.Zombie;
 import static minerider.CuevaController.arrayListQuimera;
 import static minerider.CuevaController.arrayListTierra;
 import static minerider.CuevaController.arrayListZombie;
@@ -21,16 +26,15 @@ import static minerider.CuevaController.arrayListZombie;
  *
  * @author Nicole Fonseca, Wilmer Mata
  */
-public class AnimaciónPersonaje extends Personaje {
+public class AnimacionPersonaje extends Personaje {
 
-    AnimaciónCueva animaciónCueva = new AnimaciónCueva();
     CuevaController cuevaController = new CuevaController();
     long time;
 
-    public AnimaciónPersonaje() {
+    public AnimacionPersonaje() {
     }
 
-    public AnimaciónPersonaje(int x, int y) throws FileNotFoundException {
+    public AnimacionPersonaje(int x, int y) throws FileNotFoundException {
 
         super(x, y);
         setSprite();

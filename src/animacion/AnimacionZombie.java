@@ -1,4 +1,4 @@
-package animación;
+package animacion;
 
 import dominio.Quimera;
 import dominio.Zombie;
@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
+import dominio.Zombie;
 import static minerider.CuevaController.arrayListPersonaje;
 import static minerider.CuevaController.arrayListZombie;
 
@@ -14,16 +15,16 @@ import static minerider.CuevaController.arrayListZombie;
  *
  * @author Nicole Fonseca, Wilmer Mata
  */
-public class AnimaciónZombie extends Zombie implements Runnable{
+public class AnimacionZombie extends Zombie implements Runnable{
 
     int indiceImagenesDerecha = 0; 
     int indiceImagenesIzquierda = 2; 
     int x = super.getX();
     
-    public AnimaciónZombie() {
+    public AnimacionZombie() {
     }
 
-    public AnimaciónZombie(int x, int y) throws FileNotFoundException {
+    public AnimacionZombie(int x, int y) throws FileNotFoundException {
         super(x, y);
         setSprite();
     }

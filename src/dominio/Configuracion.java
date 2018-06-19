@@ -5,7 +5,7 @@ package dominio;
  *
  * @author Nicole Fonseca, Wilmer Mata.
  */
-public class Configuración {
+public class Configuracion {
     
     private String ruta;
     private int anchura;
@@ -14,7 +14,6 @@ public class Configuración {
     private int piedra;
     private int zombie;
     private int quimera;
-    private int rangoVisiónJugador;
     private int defensaJugador;
     private int ataqueCortoJugador;
     private int ataqueLargoJugador;
@@ -30,10 +29,10 @@ public class Configuración {
     private int retrocesoZombie;
     private int rangoZombie;
 
-    public Configuración() {
+    public Configuracion() {
     }
 
-    public Configuración(String ruta, int anchura, int altura, String tipo, int piedra, int zombie, int quimera, int rangoVisiónJugador, int defensaJugador, int ataqueCortoJugador, int ataqueLargoJugador, int retrocesoJugador, int rangoJugador, int defensaQuimera, int ataqueCortoQuimera, int ataqueLargoQuimera, int retrocesoQuimera, int rangoQuimera, int defensaZombie, int ataqueCortoZombie, int retrocesoZombie, int rangoZombie) {
+    public Configuracion(String ruta, int anchura, int altura, String tipo, int piedra, int zombie, int quimera, int defensaJugador, int ataqueCortoJugador, int ataqueLargoJugador, int retrocesoJugador, int rangoJugador, int defensaQuimera, int ataqueCortoQuimera, int ataqueLargoQuimera, int retrocesoQuimera, int rangoQuimera, int defensaZombie, int ataqueCortoZombie, int retrocesoZombie, int rangoZombie) {
         this.ruta = ruta;
         this.anchura = anchura;
         this.altura = altura;
@@ -41,7 +40,7 @@ public class Configuración {
         this.piedra = piedra;
         this.zombie = zombie;
         this.quimera = quimera;
-        this.rangoVisiónJugador = rangoVisiónJugador;
+
         this.defensaJugador = defensaJugador;
         this.ataqueCortoJugador = ataqueCortoJugador;
         this.ataqueLargoJugador = ataqueLargoJugador;
@@ -156,19 +155,6 @@ public class Configuración {
         this.quimera = quimera;
     }
 
-    /**
-     * @return the rangoVisiónJugador
-     */
-    public int getRangoVisiónJugador() {
-        return rangoVisiónJugador;
-    }
-
-    /**
-     * @param rangoVisiónJugador the rangoVisiónJugador to set
-     */
-    public void setRangoVisiónJugador(int rangoVisiónJugador) {
-        this.rangoVisiónJugador = rangoVisiónJugador;
-    }
 
     /**
      * @return the defensaJugador
@@ -369,7 +355,7 @@ public class Configuración {
     @Override
     public String toString() {
         return "Configuraci\u00f3n{" + "ruta=" + ruta + ", anchura=" + anchura + ", altura=" + altura + ", tipo=" + tipo + ", piedra=" + 
-                piedra + ", zombie=" + zombie + ", quimera=" + quimera + ", rangoVisi\u00f3nJugador=" + rangoVisiónJugador + ", defensaJugador=" + 
+                piedra + ", zombie=" + zombie + ", quimera=" + quimera + ", defensaJugador=" + 
                 defensaJugador + ", ataqueCortoJugador=" + ataqueCortoJugador + ", ataqueLargoJugador=" + ataqueLargoJugador + ", retrocesoJugador=" + 
                 retrocesoJugador + ", rangoJugador=" + rangoJugador + ", defensaQuimera=" + defensaQuimera + ", ataqueCortoQuimera=" +
                 ataqueCortoQuimera + ", ataqueLargoQuimera=" + ataqueLargoQuimera + ", retrocesoQuimera=" + retrocesoQuimera + ", rangoQuimera=" +
