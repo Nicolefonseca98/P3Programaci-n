@@ -61,7 +61,9 @@ public class CuevaController extends Personaje implements Initializable {
     public static ArrayList<Zombie> arrayListZombie = new ArrayList<>();
     public static ArrayList<Personaje> arrayListPersonaje = new ArrayList<>();
     public static ArrayList<Cueva> arrayListTierra = new ArrayList<>();
-
+    AudioClip mainSong;
+    AudioClip gameOver;
+    
     //Hilo principal
     public void run() {
 
@@ -119,8 +121,8 @@ public class CuevaController extends Personaje implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Audio
-        AudioClip note = new AudioClip(this.getClass().getResource("/music/contra.mp3").toString());
-        note.play();
+       mainSong = new AudioClip(this.getClass().getResource("/music/contra.mp3").toString());
+        mainSong.play();
  
         //Imagen de fondo
         cueva = new Image("/cueva/cueva1.png");
@@ -232,7 +234,11 @@ public Boolean colision() throws FileNotFoundException, InterruptedException, IO
                         corazon3.setImage(corazonVacio);
                         graphicsContext.setStroke(Color.WHITE);
                         graphicsContext.strokeText("Juego terminado", 350, 150);
+                         mainSong.stop();
+                         gameOver = new AudioClip(this.getClass().getResource("/music/gameOver.mp3").toString());
+                         gameOver.play();
                         Thread.sleep(10000000);
+                       
 
                         break;
                 }
