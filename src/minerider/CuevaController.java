@@ -62,7 +62,7 @@ public class CuevaController extends Personaje implements Initializable {
     public static ArrayList<Personaje> arrayListPersonaje = new ArrayList<>();
     public static ArrayList<Cueva> arrayListTierra = new ArrayList<>();
     AudioClip mainSong;
-    AudioClip gameOver;
+    AudioClip winEnd;
 
     //Hilo principal
     public void run() {
@@ -136,7 +136,7 @@ public class CuevaController extends Personaje implements Initializable {
         try {
 
             int x = 600;
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 3; i++) {
                 animacionQuimera = new AnimacionQuimera(x, 310);
                 Thread threadQuimera = new Thread(animacionQuimera);
                 threadQuimera.setName("Quimera " + i);
@@ -146,7 +146,7 @@ public class CuevaController extends Personaje implements Initializable {
             }
 
             int xZombie = 0;
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 3; i++) {
                 animacionZombie = new AnimacionZombie(xZombie, 300);
                 Thread threadZombie = new Thread(animacionZombie);
                 threadZombie.setName("Zombie " + i);
@@ -155,7 +155,7 @@ public class CuevaController extends Personaje implements Initializable {
                 xZombie += 190;
             }
 
-            for (int i = 0; i < 8; i++) {
+            for (int i = 0; i < 5; i++) {
                 Image image = new Image("/cueva/tierra.png");
                 cuevaTierra = new Cueva(random(), 325, image);
                 arrayListTierra.add(cuevaTierra);
@@ -232,8 +232,8 @@ public class CuevaController extends Personaje implements Initializable {
                         graphicsContext.setStroke(Color.WHITE);
                         graphicsContext.strokeText("Juego terminado", 350, 150);
                         mainSong.stop();
-                        gameOver = new AudioClip(this.getClass().getResource("/music/gameOver.mp3").toString());
-                        gameOver.play();
+                        winEnd = new AudioClip(this.getClass().getResource("/music/gameOver.mp3").toString());
+                        winEnd.play();
                         Thread.sleep(10000000);
 
                         break;
@@ -277,6 +277,8 @@ public class CuevaController extends Personaje implements Initializable {
                 if (arrayListQuimera.isEmpty() & arrayListZombie.isEmpty()) {
                     graphicsContext.setStroke(Color.WHITE);
                     graphicsContext.strokeText("¡¡¡Ha ganado!!!", 350, 150);
+                    winEnd = new AudioClip(this.getClass().getResource("/music/win.mp3").toString());
+                    winEnd.play();
                     Thread.sleep(10000000);
                 }
             }
